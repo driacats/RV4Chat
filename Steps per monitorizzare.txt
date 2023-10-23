@@ -1,0 +1,17 @@
+Steps per monitorizzare un Agente Dialogflow
+
+	1. In agent.json:																		[x]
+		a. salvare l'url presente															[x]
+		b. inserire il nuovo url															[x]
+	2. Per ciascun intent:																	[x]
+		a. se WebHookUsed inserire il nome dell'intent in una lista							[x]
+		b. flaggare in ogni caso webHookUsed												[x]
+		c. inserire tutti i nomi degli intent in una lista									[x]
+	3. Zippare il contenuto nuovamente														[x]
+	4. Generare una policy che:																[ ]
+		a. contenga il webhook url che era stato inserito dall'utente						[ ]
+		b. riceva le richieste da Dialogflow												[ ]
+		c. per ogni messaggio ne prenda l'intent e:											[ ]
+			- se era flaggato con il webHook proceda ad eseguire la richiesta				[ ]
+			- altrimenti non risponda nulla													[ ]
+			- NB la policy ritorna qualcosa solo in caso di errore							[ ]
