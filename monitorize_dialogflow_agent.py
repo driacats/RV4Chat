@@ -44,8 +44,17 @@ class Monitorizer:
             self.output_zip.writestr(name, json.dumps(intent))
 
     def generate_policy(self):
-        pass
+        policy_in = open("policy_base.py", 'r').read()
+        intent_list = "["
+        for intent in [intent for intent in self.intents if self.intents[intent]]:
+            intent_list += "\"" + intent + "\", "
+        intent_list = intent_list[:-2]
+        intent_list += "]"
+        policy_in = policy_in.replace("INTENT_LIST", intent_list)
+        policy_in = policy_in.replace("YOUR_URL", "\"" + self.webHook + "\"")
+        policy_out = open("policy.py", "w+")
+        policy_out.write(policy_in)
                 
 
-monitorizer = Monitorizer("./RV4DiagHelloWorld.zip", "./output.zip", "MY_NEW_URL")
+monitorizer = Monitorizer("./RV4DiagHelloWorld.zip", "./output.zip", "https://0f99-130-251-61-251.ngrok-free.app")
 monitorizer.run()

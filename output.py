@@ -1,3 +1,5 @@
+# Modificato da estendi_classe.py
+
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
 
@@ -28,4 +30,4 @@ def run(PORT):
 	httpd = HTTPServer(("", PORT), WebHookResponder)
 	httpd.serve_forever()
 
-run(8080)
+# run(8080)
