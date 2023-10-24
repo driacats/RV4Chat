@@ -22,8 +22,6 @@ class WebHookResponder(BaseHTTPRequestHandler):
 		if message["intent"]["displayName"] in INTENT_LIST:
 			self.wfile.write(bytes(requests.post(YOUR_URL, message)))
 
-
-
 def run(PORT):
 	print("Server launch...")
 	httpd = HTTPServer(("", PORT), WebHookResponder)
@@ -32,7 +30,7 @@ def run(PORT):
 run(8080)
 """
 
-    def __init__(self, input_zip, output_zip, URL):
+    def __init__(self, input_zip, output_zip, URL, level=1):
         self.input_zip = ZipFile(input_zip)
         self.output_zip = ZipFile(output_zip, 'w')
         self.intents = {}
@@ -40,6 +38,7 @@ run(8080)
         self.json_package = None
         self.json_intents = []
         self.webHook = ""
+        self.level = level
         self.URL = URL
     
     def run(self):
@@ -117,6 +116,7 @@ def main():
     parser.add_argument("-i", metavar="input.zip", help="Input file, it should be an exported Dialogflow agent.", required=True)
     parser.add_argument("-o", metavar="output.zip", help="The name of the output zip file for the agent", required=True)
     parser.add_argument("-url", metavar="https://example.address", help="URL of the policy server", required=True)
+    parser.add_argument("-level", metavar="n", help="Level of monitoring to gain. 1 for user messages, 2 for user and chatbot messages.", default=1)
     args = parser.parse_args()
 
     if not args.i.endswith(".zip") or not args.o.endswith(".zip"):
@@ -126,7 +126,7 @@ def main():
     if not bool(url_pattern.match(args.url)):
         print("The url is not valid (does not start with 'http(s)://' )")
         sys.exit(1)
-    monitorizer = Monitorizer(args.i, args.o, args.url)
+    monitorizer = Monitorizer(args.i, args.o, args.url, arg.level)
     monitorizer.run()
 
 if __name__ == "__main__":
