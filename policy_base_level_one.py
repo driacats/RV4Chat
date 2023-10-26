@@ -17,8 +17,8 @@ class WebHookResponder(BaseHTTPRequestHandler):
 			message = "{\"fulfillmentMessages\":[{\"text\":{\"text\":[\"Text response from webhook\"]}}]}"
 			self.wfile.write(bytes(message, 'utf8'))
 		# If the intent needs a webhook answer the request is performed
-		if message["intent"]["displayName"] in ["Default Welcome Intent", "Webhook"]:
-			self.wfile.write(bytes(requests.post("https://a522-130-251-61-251.ngrok-free.app", message)))
+		if message["intent"]["displayName"] in INTENT_LIST:
+			self.wfile.write(bytes(requests.post(YOUR_URL, message)))
 
 
 
