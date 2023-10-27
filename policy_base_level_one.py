@@ -12,10 +12,12 @@ class WebHookResponder(BaseHTTPRequestHandler):
 		self.send_header('Content-type', 'text/html')
 		self.end_headers()
 		# Send the message to the monitor
-		if "Hello" in message["queryResult"]["queryText"]:
+		oracle = requests.post(MONITOR_URL, json=message)
+		if not oracle:
 			# Answer Dialogflow if the monitor returns true
-			message = "{\"fulfillmentMessages\":[{\"text\":{\"text\":[\"Text response from webhook\"]}}]}"
+			message = "{\"fulfillmentMessages\":[{\"text\":{\"text\":[\"Error message from monitor\"]}}]}"
 			self.wfile.write(bytes(message, 'utf8'))
+			return
 		# If the intent needs a webhook answer the request is performed
 		if message["intent"]["displayName"] in INTENT_LIST:
 			self.wfile.write(bytes(requests.post(YOUR_URL, message)))

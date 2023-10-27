@@ -14,11 +14,12 @@ class Monitorizer:
     answers = {}
     webHook = ""
 
-    def __init__(self, input_zip, output_zip, URL, level=1):
+    def __init__(self, input_zip, output_zip, URL, MONITOR_URL, level=1):
         self.input_zip = ZipFile(input_zip)
         self.output_zip = ZipFile(output_zip, 'w')
         self.level = level
         self.URL = URL
+        self.MONITOR_URL = MONITOR_URL
         if level == self.LEVEL_ONE:
             self.policy_string = open("policy_base_level_one.py", 'r').read()
         elif level == self.LEVEL_TWO:
@@ -96,21 +97,27 @@ class Monitorizer:
         intent_list = intent_list[:-2]
         intent_list += "]"
         # If the intent is one of the original webHookUsed ones we need to forward the request
-        self.policy_string = self.policy_string.replace("INTENT_LIST", intent_list)
+        self.policy_string = self.policy_string.replace("INTENT_LIST_PLACEHOLDER", intent_list)
+        self.policy_string = self.policy_string.replace("MONITOR_URL_PLACEHOLDER", "\"" + self.MONITOR_URL + "\"")
         # We set the webHook original URL for the forwarding
-        self.policy_string = self.policy_string.replace("YOUR_URL", "\"" + self.webHook + "\"")
+        self.policy_string = self.policy_string.replace("YOUR_URL_PLACEHOLDER", "\"" + self.webHook + "\"")
         if self.level == self.LEVEL_TWO:
             answer_functions = ""
             call_functions = ""
             for intent_answer in self.answers:
                 answer_functions += "\tdef " + intent_answer.replace(" ", "_").lower() + "_answer(self):\n"
-                answer_functions += "\t\tmessage = \"{\\\"fulfillmentMessages\\\":[{\\\"text\\\":[\\\"" + random.choice(self.answers[intent_answer]) + "\\\"]}]}\"\n"
+                answer_functions += "\t\tavailable_answers = " + str(self.answers[intent_answer]) + "\n"
+                answer_functions += "\t\tmessage = \"{\\\"fulfillmentMessages\\\":[{\\\"text\\\":[\\\"\" + random.choice(available_answers) + \"\\\"]}]}\"\n"
+                answer_functions += "\t\toracle = requests.post(self.MONITOR_URL, json=message)\n"
+                answer_functions += "\t\tif not oracle:\n"
+                answer_functions += "\t\t\tself.send_error_message()\n"
+                answer_functions += "\t\t\treturn\n"
                 answer_functions += "\t\tself.wfile.write(bytes(message, \'utf8\'))\n\n"
 
-                call_functions += "\t\tif message[\"intent\"][\"displayName\"] == \"" + intent_answer + "\":\n"
+                call_functions += "\t\tif message[\"queryResult\"][\"intent\"][\"displayName\"] == \"" + intent_answer + "\":\n"
                 call_functions += "\t\t\tself." + intent_answer.replace(" ", "_").lower() + "_answer()\n"
-            self.policy_string = self.policy_string.replace("CALL_ANSWER_FUNCTIONS", call_functions)
-            self.policy_string = self.policy_string.replace("ANSWER_FUNCTIONS", answer_functions)
+            self.policy_string = self.policy_string.replace("CALL_ANSWER_FUNCTIONS_PLACEHOLDER", call_functions)
+            self.policy_string = self.policy_string.replace("ANSWER_FUNCTIONS_PLACEHOLDER", answer_functions)
         # print(call_functions)
         # print(answer_functions)
         policy = open("policy.py", "w+")
@@ -122,6 +129,7 @@ def main():
     parser.add_argument("-i", metavar="input.zip", help="Input file, it should be an exported Dialogflow agent.", required=True)
     parser.add_argument("-o", metavar="output.zip", help="The name of the output zip file for the agent", required=True)
     parser.add_argument("-url", metavar="https://example.address", help="URL of the policy server", required=True)
+    parser.add_argument("-murl", metavar="https://monitor.address", help="URL of the monitor to query", required=True)
     parser.add_argument("-level", metavar="n", type=int, help="Level of monitoring to gain. 1 for user messages, 2 for user and chatbot messages.", default=1)
     args = parser.parse_args()
 
@@ -132,10 +140,13 @@ def main():
     if not bool(url_pattern.match(args.url)):
         print("The url is not valid (does not start with 'http(s)://' )")
         sys.exit(1)
+    if not bool(url_pattern.match(args.murl)):
+        print("The monitor url is not valid (does not start with 'http(s)://' )")
+        sys.exit(1)
     if args.level not in (1, 2):
         print("The provided level is not admissible. It should wither 1 or 2.")
         sys.exit(1)
-    monitorizer = Monitorizer(args.i, args.o, args.url, args.level)
+    monitorizer = Monitorizer(args.i, args.o, args.url, args.murl, args.level)
     monitorizer.run()
 
 if __name__ == "__main__":
