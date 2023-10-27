@@ -1,4 +1,4 @@
-import json, io, argparse, sys, re, random
+import json, io, argparse, sys, re, random, datetime
 from zipfile import ZipFile
 from tqdm import tqdm
 
@@ -118,6 +118,15 @@ class Monitorizer:
                 call_functions += "\t\t\tself." + intent_answer.replace(" ", "_").lower() + "_answer()\n"
             self.policy_string = self.policy_string.replace("CALL_ANSWER_FUNCTIONS_PLACEHOLDER", call_functions)
             self.policy_string = self.policy_string.replace("ANSWER_FUNCTIONS_PLACEHOLDER", answer_functions)
+
+            header = "# File generated automatically on " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M") + " by monitorize_dialogflow_agent.py\n"
+            header += "#  - Agent: " + self.json_agent["displayName"] + "\n"
+            header += "#  - Input zip: " + self.input_zip.filename + "\n"
+            header += "#  - Output zip: " + self.output_zip.filename + "\n"
+            header += "#  - WebHook URL: " + self.URL + "\n"
+            header += "#  - Monitor URL: " + self.MONITOR_URL + "\n"
+            header += "#  - Monitoring Level: " + str(self.level) + "\n"
+            self.policy_string = header + "\n\n" + self.policy_string
         # print(call_functions)
         # print(answer_functions)
         policy = open("policy.py", "w+")

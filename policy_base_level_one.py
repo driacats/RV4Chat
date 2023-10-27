@@ -1,7 +1,10 @@
-from http.server import BaseHTTPRequestHandler, HTTPServer
-import json, requests
-
 class WebHookResponder(BaseHTTPRequestHandler):
+
+	MONITOR_URL = MONITOR_URL_PLACEHOLDER
+
+	def send_error_message(self):
+		message = "{\"fulfillmentMessages\":[{\"text\":{\"text\":[\"Error thrwon from the monitor!\"]}}]}"
+		self.wfile.write(bytes(message, 'utf8'))
 
 	def do_POST(self):
 		# Accept the request
@@ -12,17 +15,14 @@ class WebHookResponder(BaseHTTPRequestHandler):
 		self.send_header('Content-type', 'text/html')
 		self.end_headers()
 		# Send the message to the monitor
-		oracle = requests.post(MONITOR_URL, json=message)
+		oracle = requests.post(self.MONITOR_URL, json=message).text
 		if not oracle:
-			# Answer Dialogflow if the monitor returns true
-			message = "{\"fulfillmentMessages\":[{\"text\":{\"text\":[\"Error message from monitor\"]}}]}"
-			self.wfile.write(bytes(message, 'utf8'))
+			# If an error occurred then an error message is sent back
+			self.send_error_message()
 			return
 		# If the intent needs a webhook answer the request is performed
-		if message["intent"]["displayName"] in INTENT_LIST:
-			self.wfile.write(bytes(requests.post(YOUR_URL, message)))
-
-
+		if message["queryResult"]["intent"]["displayName"] in INTENT_LIST_PLACEHOLDER:
+			self.wfile.write(bytes(requests.post(YOUR_URL_PLACEHOLDER, message)))
 
 def run(PORT):
 	print("Server launch...")
