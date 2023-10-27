@@ -1,4 +1,4 @@
-import json, io, argparse, sys, re, random, datetime
+import json, io, argparse, sys, re, random, datetime, os
 from zipfile import ZipFile
 from tqdm import tqdm
 
@@ -127,8 +127,7 @@ class Monitorizer:
             header += "#  - Monitor URL: " + self.MONITOR_URL + "\n"
             header += "#  - Monitoring Level: " + str(self.level) + "\n"
             self.policy_string = header + "\n\n" + self.policy_string
-        # print(call_functions)
-        # print(answer_functions)
+
         policy = open("policy.py", "w+")
         policy.write(self.policy_string)
                 
