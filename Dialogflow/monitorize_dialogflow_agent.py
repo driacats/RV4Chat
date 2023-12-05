@@ -12,6 +12,7 @@ class Monitorizer:
     json_intents = []
     intents = {}
     answers = {}
+    intent_to_answer = {}
     webHook = ""
 
     def __init__(self, input_zip, output_zip, URL, MONITOR_URL, level=1):
@@ -68,7 +69,10 @@ class Monitorizer:
                     if self.level == self.LEVEL_TWO:
                         if "speech" in intent["responses"][0]["messages"][0]:
                             # self.answers[name[8:-5].replace(" ", "_")] = [answer for answer in intent["responses"][0]["messages"][0]["speech"]]
-                            self.answers[intent["name"]] = [answer for answer in intent["responses"][0]["messages"][0]["speech"]]
+                            answer_name = intent["responses"][0]["action"].replace(".", "_")
+                            print(answer_name)
+                            self.intent_to_answer[intent["name"]] = answer_name
+                            self.answers[answer_name] = [answer for answer in intent["responses"][0]["messages"][0]["speech"]]
                         # else:
                         #     self.answers[name[8:-5].replace(" ", "_")] = []
                 # We append to the intents list the name of the file and the corresponding json
@@ -104,10 +108,12 @@ class Monitorizer:
         if self.level == self.LEVEL_TWO:
             answer_functions = ""
             call_functions = ""
-            for intent_answer in self.answers:
-                answer_functions += "\tdef " + intent_answer.replace(" ", "_").lower() + "_answer(self):\n"
-                answer_functions += "\t\tavailable_answers = " + str(self.answers[intent_answer]) + "\n"
+            print(self.intent_to_answer)
+            for intent_answer in self.intent_to_answer:
+                answer_functions += "\tdef " + self.intent_to_answer[intent_answer].replace(" ", "_").lower() + "_answer(self):\n"
+                answer_functions += "\t\tavailable_answers = " + str(self.answers[self.intent_to_answer[intent_answer]]) + "\n"
                 answer_functions += "\t\tmessage = \"{\\\"fulfillmentMessages\\\":[{\\\"text\\\":[\\\"\" + random.choice(available_answers) + \"\\\"]}]}\"\n"
+                answer_functions += "\t\toracle_message = \"{\\\"answer\\\": \\\"" + str(self.intent_to_answer[intent_answer]) + "\\\"}\"\n"
                 answer_functions += "\t\toracle = requests.post(self.MONITOR_URL, json=message)\n"
                 answer_functions += "\t\tif not oracle:\n"
                 answer_functions += "\t\t\tself.send_error_message()\n"
