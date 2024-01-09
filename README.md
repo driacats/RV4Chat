@@ -3,7 +3,7 @@
 ## Dialogflow
 
 ```bash
-python monitorize_dialogflow_agent.py -i input.zip -o output.zip -url https://webhook.address -murl http://monitor.address [-level N]
+python interpreter.py -i input.zip -o output.zip -url https://webhook.address -murl http://monitor.address [-level N]
 ```
 It produces
  - A new zip that makes the given agent monitorizable (it should be uploaded to Dialofgflow);

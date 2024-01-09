@@ -15,30 +15,45 @@ class Monitorizer:
     intent_to_answer = {}
     webHook = ""
 
-    def __init__(self, input_zip, output_zip, URL, MONITOR_URL, level=1):
+    # The __init__ function:
+    #   - loads the Dialogflow agent zip exported
+    #   - creates the output instrumented Dialogflow agent zip
+    #   - stores the level, the URL that will be used by the output policy and the one that will be used by the monitor
+    #   - loads the template corresponding to the level
+    def __init__(self, input_zip, output_zip, URL, MONITOR_URL, level=LEVEL_ONE):
         self.input_zip = ZipFile(input_zip)
         self.output_zip = ZipFile(output_zip, 'w')
         self.level = level
         self.URL = URL
         self.MONITOR_URL = MONITOR_URL
         if level == self.LEVEL_ONE:
-            self.policy_string = open("policy_base_level_one.py", 'r').read()
+            self.policy_string = open("templates/policy_base_level_one.py", 'r').read()
         elif level == self.LEVEL_TWO:
-            self.policy_string = open("policy_base_level_two.py", 'r').read()
+            self.policy_string = open("templates/policy_base_level_two.py", 'r').read()
         else:
             raise ValueError("The inserted level value is not correct. The admissible values are 1 or 2.")
     
+    # The function run manages the main workflow of the class:
+    #   - it instruments the Dialogflow agent
+    #   - if writes the instrumented agent on the output zip
+    #   - it generates the policy
     def run(self):
         with tqdm(total=4, desc="Progresso") as progress_bar:
             progress_bar.update(1)
             progress_bar.set_description("Loading Dialogflow agent...")
+
             self.monitorize()
+
             progress_bar.update(1)
             progress_bar.set_description("Creating monitorized Dialogflow agent...")
+
             self.write()
+
             progress_bar.update(1)
             progress_bar.set_description("Generating policy...")
+
             self.generate_policy()
+
             progress_bar.update(1)
             progress_bar.set_description("Generated correctly.")
 
@@ -106,24 +121,27 @@ class Monitorizer:
         # We set the webHook original URL for the forwarding
         self.policy_string = self.policy_string.replace("YOUR_URL_PLACEHOLDER", "\"" + self.webHook + "\"")
         if self.level == self.LEVEL_TWO:
-            answer_functions = ""
+            intent_functions = ""
+            intent_function = open("templates/intent_function.py", "r").read()
             call_functions = ""
+            call_function = open("templates/call_function.py", "r").read()
             print(self.intent_to_answer)
             for intent_answer in self.intent_to_answer:
-                answer_functions += "\tdef " + self.intent_to_answer[intent_answer].replace(" ", "_").lower() + "_answer(self):\n"
-                answer_functions += "\t\tavailable_answers = " + str(self.answers[self.intent_to_answer[intent_answer]]) + "\n"
-                answer_functions += "\t\tmessage = \"{\\\"fulfillmentMessages\\\":[{\\\"text\\\":[\\\"\" + random.choice(available_answers) + \"\\\"]}]}\"\n"
-                answer_functions += "\t\toracle_message = \"{\\\"answer\\\": \\\"" + str(self.intent_to_answer[intent_answer]) + "\\\"}\"\n"
-                answer_functions += "\t\toracle = requests.post(self.MONITOR_URL, json=message)\n"
-                answer_functions += "\t\tif not oracle:\n"
-                answer_functions += "\t\t\tself.send_error_message()\n"
-                answer_functions += "\t\t\treturn\n"
-                answer_functions += "\t\tself.wfile.write(bytes(message, \'utf8\'))\n\n"
+                intent = self.intent_to_answer[intent_answer]
+                print("intent: ", intent,"\nintent_answer: ", intent_answer)
+                new_if = intent_function
+                new_if = new_if.replace("INTENT_FUNCTION", intent.replace(" ", "_").lower())
+                new_if = new_if.replace("AVAILABLE_ANSWERS", str(self.answers[intent]))
+                new_if = new_if.replace("INTENT_ORACLE", intent)
+                intent_functions += new_if
+                intent_functions += "\n"
 
-                call_functions += "\t\tif message[\"queryResult\"][\"intent\"][\"displayName\"] == \"" + intent_answer + "\":\n"
-                call_functions += "\t\t\tself." + intent_answer.replace(" ", "_").lower() + "_answer()\n"
+                new_cf = call_function
+                new_cf = new_cf.replace("INTENT_FUNCTION", intent.replace(" ", "_").lower())
+                new_cf = new_cf.replace("INTENT", intent_answer)
+
             self.policy_string = self.policy_string.replace("CALL_ANSWER_FUNCTIONS_PLACEHOLDER", call_functions)
-            self.policy_string = self.policy_string.replace("ANSWER_FUNCTIONS_PLACEHOLDER", answer_functions)
+            self.policy_string = self.policy_string.replace("ANSWER_FUNCTIONS_PLACEHOLDER", new_if)
 
             header = "# File generated automatically on " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M") + " by monitorize_dialogflow_agent.py\n"
             header += "#  - Agent: " + self.json_agent["displayName"] + "\n"

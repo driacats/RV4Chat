@@ -1,0 +1,15 @@
+{
+  "receiver": {"bot","user"},
+  "sender": {"bot", "user"},
+  "entities": {
+    "object": _,
+    "horizontal": _,
+    "vertical": _,
+    "relative": _,
+    "relName": _
+  },
+  "intent": {
+    "confidence": _,
+    "name": _
+  }
+}
