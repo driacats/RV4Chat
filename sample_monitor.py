@@ -11,16 +11,18 @@ class Monitor(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header('Content-type', 'text/html')
         self.end_headers()
-        if "queryResult" in message:
-            print("user said: ", message["queryResult"]["queryText"])
-            if "e" in message["queryResult"]["queryText"]:
-                print("False!")
-                self.wfile.write(bytes(False))
-            else:
-                print("True!")
-                self.wfile.write(bytes(True))
-        else:
-            print(message)
+        print("[LOG]", message)
+        self.wfile.write(bytes(True))
+        # if "queryResult" in message:
+        #     print("user said: ", message["queryResult"]["queryText"])
+        #     if "e" in message["queryResult"]["queryText"]:
+        #         print("False!")
+        #         self.wfile.write(bytes(False))
+        #     else:
+        #         print("True!")
+        #         self.wfile.write(bytes(True))
+        # else:
+        #     print(message)
 
 def run(PORT):
     print("Server launch...")

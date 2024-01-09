@@ -22,7 +22,7 @@ class Monitorizer:
     #   - loads the template corresponding to the level
     def __init__(self, input_zip, output_zip, URL, MONITOR_URL, level=LEVEL_ONE):
         self.input_zip = ZipFile(input_zip)
-        self.output_zip = ZipFile(output_zip, 'w')
+        self.output_zip = ZipFile(os.path.join("output", output_zip), 'w')
         self.level = level
         self.URL = URL
         self.MONITOR_URL = MONITOR_URL
@@ -85,7 +85,7 @@ class Monitorizer:
                         if "speech" in intent["responses"][0]["messages"][0]:
                             # self.answers[name[8:-5].replace(" ", "_")] = [answer for answer in intent["responses"][0]["messages"][0]["speech"]]
                             answer_name = intent["responses"][0]["action"].replace(".", "_")
-                            print(answer_name)
+                            # print(answer_name)
                             self.intent_to_answer[intent["name"]] = answer_name
                             self.answers[answer_name] = [answer for answer in intent["responses"][0]["messages"][0]["speech"]]
                         # else:
@@ -121,29 +121,29 @@ class Monitorizer:
         # We set the webHook original URL for the forwarding
         self.policy_string = self.policy_string.replace("YOUR_URL_PLACEHOLDER", "\"" + self.webHook + "\"")
         if self.level == self.LEVEL_TWO:
-            intent_functions = ""
-            intent_function = open("templates/intent_function.py", "r").read()
+            bot_event_functions = ""
+            bot_event_function = open("templates/intent_function.py", "r").read()
             call_functions = ""
             call_function = open("templates/call_function.py", "r").read()
-            print(self.intent_to_answer)
             for intent_answer in self.intent_to_answer:
-                intent = self.intent_to_answer[intent_answer]
-                print("intent: ", intent,"\nintent_answer: ", intent_answer)
-                new_if = intent_function
-                new_if = new_if.replace("INTENT_FUNCTION", intent.replace(" ", "_").lower())
-                new_if = new_if.replace("AVAILABLE_ANSWERS", str(self.answers[intent]))
-                new_if = new_if.replace("INTENT_ORACLE", intent)
-                intent_functions += new_if
-                intent_functions += "\n"
+                next_action = self.intent_to_answer[intent_answer]
+                new_bef = bot_event_function
+                new_bef = new_bef.replace("INTENT_FUNCTION", next_action.replace(" ", "_").lower())
+                new_bef = new_bef.replace("AVAILABLE_ANSWERS", str(self.answers[next_action]))
+                new_bef = new_bef.replace("NEXT_ACTION", next_action)
+                bot_event_functions += new_bef
+                bot_event_functions += "\n"
 
                 new_cf = call_function
-                new_cf = new_cf.replace("INTENT_FUNCTION", intent.replace(" ", "_").lower())
+                new_cf = new_cf.replace("NEXT_ACTION", next_action.replace(" ", "_").lower())
                 new_cf = new_cf.replace("INTENT", intent_answer)
+                call_functions += new_cf
+                call_functions += "\n"
 
             self.policy_string = self.policy_string.replace("CALL_ANSWER_FUNCTIONS_PLACEHOLDER", call_functions)
-            self.policy_string = self.policy_string.replace("ANSWER_FUNCTIONS_PLACEHOLDER", new_if)
+            self.policy_string = self.policy_string.replace("ANSWER_FUNCTIONS_PLACEHOLDER", bot_event_functions)
 
-            header = "# File generated automatically on " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M") + " by monitorize_dialogflow_agent.py\n"
+            header = "# File generated automatically on " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M") + " by " + sys.argv[0] + "\n"
             header += "#  - Agent: " + self.json_agent["displayName"] + "\n"
             header += "#  - Input zip: " + self.input_zip.filename + "\n"
             header += "#  - Output zip: " + self.output_zip.filename + "\n"
@@ -152,7 +152,7 @@ class Monitorizer:
             header += "#  - Monitoring Level: " + str(self.level) + "\n"
             self.policy_string = header + "\n\n" + self.policy_string
 
-        policy = open("policy.py", "w+")
+        policy = open("output/policy.py", "w+")
         policy.write(self.policy_string)
                 
 
