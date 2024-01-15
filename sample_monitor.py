@@ -11,7 +11,7 @@ class Monitor(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header('Content-type', 'text/html')
         self.end_headers()
-        print("[LOG]", message)
+        print("[LOG]", json.dumps(message, indent=2))
         self.wfile.write(bytes(True))
         # if "queryResult" in message:
         #     print("user said: ", message["queryResult"]["queryText"])

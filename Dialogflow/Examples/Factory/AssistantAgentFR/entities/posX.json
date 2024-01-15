@@ -1,0 +1,9 @@
+{
+  "id": "82debe69-a5b1-48d5-b3f3-a903340e0b0c",
+  "name": "posX",
+  "isOverridable": true,
+  "isEnum": false,
+  "isRegexp": false,
+  "automatedExpansion": false,
+  "allowFuzzyExtraction": false
+}

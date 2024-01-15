@@ -1,0 +1,9 @@
+{
+  "id": "796debcd-64c4-4716-b08e-d5274aa4bddf",
+  "name": "Object",
+  "isOverridable": true,
+  "isEnum": true,
+  "isRegexp": false,
+  "automatedExpansion": false,
+  "allowFuzzyExtraction": false
+}

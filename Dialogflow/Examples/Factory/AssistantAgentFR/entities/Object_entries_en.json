@@ -1,0 +1,26 @@
+[
+  {
+    "value": "table",
+    "synonyms": [
+      "table"
+    ]
+  },
+  {
+    "value": "chair",
+    "synonyms": [
+      "chair"
+    ]
+  },
+  {
+    "value": "box",
+    "synonyms": [
+      "box"
+    ]
+  },
+  {
+    "value": "cube",
+    "synonyms": [
+      "cube"
+    ]
+  }
+]

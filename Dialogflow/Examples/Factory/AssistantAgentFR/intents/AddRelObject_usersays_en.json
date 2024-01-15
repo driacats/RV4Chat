@@ -1,0 +1,80 @@
+[
+  {
+    "id": "06792a8a-2005-4404-9156-0cf8c70ab052",
+    "data": [
+      {
+        "text": "Add a ",
+        "userDefined": false
+      },
+      {
+        "text": "robot",
+        "meta": "@Object",
+        "alias": "Object",
+        "userDefined": true
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "left of",
+        "meta": "@relPos",
+        "alias": "relPos",
+        "userDefined": true
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "box1",
+        "meta": "@relName",
+        "alias": "relName",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "ea5ba41a-f2e8-4bfe-883e-07f21c7badca",
+    "data": [
+      {
+        "text": "Add a ",
+        "userDefined": false
+      },
+      {
+        "text": "box",
+        "meta": "@Object",
+        "alias": "Object",
+        "userDefined": true
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "right of",
+        "meta": "@relPos",
+        "alias": "relPos",
+        "userDefined": true
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "table0",
+        "meta": "@relName",
+        "alias": "relName",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  }
+]
