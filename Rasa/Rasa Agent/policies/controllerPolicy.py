@@ -47,35 +47,41 @@ class ControllerPolicy(Policy):
 		intent = {}
 		intent["name"] = tracker.latest_message.intent
 		msg_obj["intent"] = intent
+		entities = []
+		for slot in slot_dict:
+			if slot_dict[slot]:
+				entities.append({slot: slot_dict[slot]})
+		msg_obj["entities"] = entities
 		print(json.dumps(msg_obj))
-		# message = "{\n"
-		# message += "\"sender\": \"user\", \"receiver\": \"bot\","
-		# # 1. Text
-		# message += "\"text\": " + json.dumps(str(tracker.latest_message.text)) + ", "
-		# # 2. Intents
-		# message += "\"intent\":" + json.dumps(str(tracker.latest_message.intent))[1:-1] + ", "
-		# # 3. Entities
-		# # message += "\"entities\": ["
-		# # for entity in tracker.latest_message.entities:
-		# # 	message += json.dumps(str(entity)) + ", "
-		# # message = message[:-2]
-		# # message += "],"
-		# # 4. Events
-		# message += "\"events\": ["
-		# for event in tracker.events:
-		# 	message += json.dumps(str(event)) + ", "
+		# FROM HERE
+		message = "{\n"
+		message += "\"sender\": \"user\", \"receiver\": \"bot\","
+		# 1. Text
+		message += "\"text\": " + json.dumps(str(tracker.latest_message.text)) + ", "
+		# 2. Intents
+		message += "\"intent\":" + json.dumps(str(tracker.latest_message.intent))[1:-1] + ", "
+		# 3. Entities
+		# message += "\"entities\": ["
+		# for entity in tracker.latest_message.entities:
+		# 	message += json.dumps(str(entity)) + ", "
 		# message = message[:-2]
-		# message += "], "
-		# # 5. Slots
-		# message += "\"slots\": {"
-		# slot_dict = tracker.current_slot_values()
-		# for slot in slot_dict:
-		# 	message += json.dumps(str(slot)) + ": " + json.dumps(str(slot_dict[slot])) + ", "
-		# message = message[:-2]
-		# message += "},"
-		# # 6. Latest Action Name
-		# message += "\"latest_action_name\": " + json.dumps(tracker.latest_action_name) + "\n}"
-		# return message
+		# message += "],"
+		# 4. Events
+		message += "\"events\": ["
+		for event in tracker.events:
+			message += json.dumps(str(event)) + ", "
+		message = message[:-2]
+		message += "], "
+		# 5. Slots
+		message += "\"slots\": {"
+		slot_dict = tracker.current_slot_values()
+		for slot in slot_dict:
+			message += json.dumps(str(slot)) + ": " + json.dumps(str(slot_dict[slot])) + ", "
+		message = message[:-2]
+		message += "},"
+		# 6. Latest Action Name
+		message += "\"latest_action_name\": " + json.dumps(tracker.latest_action_name) + "\n}"
+		return message
 
 	# The function predict_action_probabilities is called when a message arrives to rasa and returns a prediction.
 	def predict_action_probabilities(self, tracker:DialogueStateTracker, domain:Domain, **kwargs:Any) -> PolicyPrediction:

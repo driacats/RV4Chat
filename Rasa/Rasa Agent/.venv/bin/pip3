@@ -1,5 +1,5 @@
 #!/bin/sh
-'''exec' "/home/andrea/GitHub/RV4Chat/Rasa/Rasa Agent/.venv/bin/python" "$0" "$@"
+'''exec' "/home/andrea/GitHub/RV4Chat/Rasa/Rasa Agent/.venv/bin/python3.10" "$0" "$@"
 ' '''
 # -*- coding: utf-8 -*-
 import re

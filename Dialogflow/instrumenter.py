@@ -10,6 +10,7 @@ class Monitorizer:
     json_agent = None
     json_package = None
     json_intents = []
+    json_entities = []
     intents = {}
     answers = {}
     intent_to_answer = {}
@@ -62,7 +63,7 @@ class Monitorizer:
     def monitorize(self):
         # We open the Agent file and take out the webhook url inserted by the user
         self.json_agent = json.loads(self.input_zip.open("agent.json").read())
-        self.webHook = self.json_agent["webhook"]["url"]
+        self.webHook = self.json_agent["webhook"]["url"].replace("https", "http")
         # In any case, the new webhook URL is the one provided to the monitorizer
         self.json_agent["webhook"]["url"] = self.URL
 
@@ -83,17 +84,14 @@ class Monitorizer:
                         self.intents[intent["name"]] = False
                     if self.level == self.LEVEL_TWO:
                         if "speech" in intent["responses"][0]["messages"][0]:
-                            # self.answers[name[8:-5].replace(" ", "_")] = [answer for answer in intent["responses"][0]["messages"][0]["speech"]]
                             answer_name = intent["responses"][0]["action"].replace(".", "_")
-                            # print(answer_name)
                             self.intent_to_answer[intent["name"]] = answer_name
                             self.answers[answer_name] = [answer for answer in intent["responses"][0]["messages"][0]["speech"]]
-                        # else:
-                        #     self.answers[name[8:-5].replace(" ", "_")] = []
                 # We append to the intents list the name of the file and the corresponding json
                 self.json_intents.append((name, intent))
-
-        # print(self.answers)
+            if "entities" in name:
+                entity = json.loads(self.input_zip.open(name).read())
+                self.json_entities.append((name, entity))
 
     # The function write takes the new agent and writes it down inside a new Zip file
     # that can be imported in Dialogflow
@@ -102,6 +100,8 @@ class Monitorizer:
         self.output_zip.writestr("package.json", json.dumps(self.json_package))
         for (name, intent) in self.json_intents:
             self.output_zip.writestr(name, json.dumps(intent))
+        for (name, entity) in self.json_entities:
+            self.output_zip.writestr(name, json.dumps(entity))
 
     # The function generate_policy generates a policy that :
     #  - monitorize the Dialogflow flow
@@ -126,19 +126,20 @@ class Monitorizer:
             call_functions = ""
             call_function = open("templates/call_function.py", "r").read()
             for intent_answer in self.intent_to_answer:
-                next_action = self.intent_to_answer[intent_answer]
-                new_bef = bot_event_function
-                new_bef = new_bef.replace("INTENT_FUNCTION", next_action.replace(" ", "_").lower())
-                new_bef = new_bef.replace("AVAILABLE_ANSWERS", str(self.answers[next_action]))
-                new_bef = new_bef.replace("NEXT_ACTION", next_action)
-                bot_event_functions += new_bef
-                bot_event_functions += "\n"
+                if intent_answer not in intent_list:
+                    next_action = self.intent_to_answer[intent_answer]
+                    new_bef = bot_event_function
+                    new_bef = new_bef.replace("INTENT_FUNCTION", next_action.replace(" ", "_").lower())
+                    new_bef = new_bef.replace("AVAILABLE_ANSWERS", str(self.answers[next_action]))
+                    new_bef = new_bef.replace("NEXT_ACTION", next_action)
+                    bot_event_functions += new_bef
+                    bot_event_functions += "\n"
 
-                new_cf = call_function
-                new_cf = new_cf.replace("NEXT_ACTION", next_action.replace(" ", "_").lower())
-                new_cf = new_cf.replace("INTENT", intent_answer)
-                call_functions += new_cf
-                call_functions += "\n"
+                    new_cf = call_function
+                    new_cf = new_cf.replace("NEXT_ACTION", next_action.replace(" ", "_").lower())
+                    new_cf = new_cf.replace("INTENT", intent_answer)
+                    call_functions += new_cf
+                    call_functions += "\n"
 
             self.policy_string = self.policy_string.replace("CALL_ANSWER_FUNCTIONS_PLACEHOLDER", call_functions)
             self.policy_string = self.policy_string.replace("ANSWER_FUNCTIONS_PLACEHOLDER", bot_event_functions)
@@ -161,7 +162,7 @@ def main():
     parser.add_argument("-i", metavar="input.zip", help="Input file, it should be an exported Dialogflow agent.", required=True)
     parser.add_argument("-o", metavar="output.zip", help="The name of the output zip file for the agent", required=True)
     parser.add_argument("-url", metavar="https://example.address", help="URL of the policy server", required=True)
-    parser.add_argument("-murl", metavar="https://monitor.address", help="URL of the monitor to query", required=True)
+    parser.add_argument("-murl", metavar="ws://monitor.address", help="URL of the monitor to query", required=True)
     parser.add_argument("-level", metavar="n", type=int, help="Level of monitoring to gain. 1 for user messages, 2 for user and chatbot messages.", default=1)
     args = parser.parse_args()
 
@@ -169,10 +170,11 @@ def main():
         print("Input and/or output file should be .zip files!")
         sys.exit(1)
     url_pattern = re.compile(r'https?://\S+')
+    murl_pattern = re.compile(r'ws://\S+')
     if not bool(url_pattern.match(args.url)):
         print("The url is not valid (does not start with 'http(s)://' )")
         sys.exit(1)
-    if not bool(url_pattern.match(args.murl)):
+    if not bool(murl_pattern.match(args.murl)):
         print("The monitor url is not valid (does not start with 'http(s)://' )")
         sys.exit(1)
     if args.level not in (1, 2):

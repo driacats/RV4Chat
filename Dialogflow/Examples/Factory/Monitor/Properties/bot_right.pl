@@ -4,7 +4,7 @@ match(_event, msg_user_to_bot) :- deep_subdict(_{'sender':"user",'receiver':"bot
 match(_event, msg_bot_to_user) :- deep_subdict(_{'sender':"bot",'receiver':"user"}, _event).
 match(_event, add_object) :- deep_subdict(_{'intent': {'name': "add_object", 'confidence': _}}, _event).
 match(_event, add_relative_object(Obj)) :- deep_subdict(_{'intent': {'name': "add_relative_object", 'confidence': _},'entities':{_,'relName': Obj}}, _event).
-match(_event, add_relative_object(Obj)) :- deep_subdict(_{'intent': {'name': "add_relative_object", 'confidence': _},'entities':{_,'relName': Obj}}, _event).
+match(_event, remove_object(Obj)) :- deep_subdict(_{'intent': {'name': "remove_object", 'confidence': _},'entities':{_,'relName': Obj}}, _event).
 match(_event, object_added(Obj)) :- deep_subdict(_{'bot_action': "utter_add_object"},{'aux':{'name': Obj}}, _event).
 match(_event, object_added_rel(Obj)) :- deep_subdict(_{'bot_action': "utter_add_relative_object"},{'aux':{'name': Obj}}, _event).
 match(_event, object_removed) :- deep_subdict(_{'bot_action': "utter_remove_object"}, _event).

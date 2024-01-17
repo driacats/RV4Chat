@@ -3,7 +3,7 @@ import json, requests
 
 class FactoryWebHook(BaseHTTPRequestHandler):
 
-    answer = "{\"fulfillmentMessages\":[{\"text\":{\"text\":[\"MESSAGE\"]}}], \"event\": \"EVENT\"}"
+    answer = "{\"fulfillmentMessages\":[{\"text\":{\"text\":[\"MESSAGE\"]}}], \"bot_action\": \"EVENT\", \"aux\": {AUX}}"
     positions = [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]]
     objects = {}
     counter = {"table": 0, "box": 0, "robot": 0}
@@ -208,22 +208,39 @@ class FactoryWebHook(BaseHTTPRequestHandler):
             entities[entity] = message["queryResult"]["parameters"][entity]
 
         # Add object intent
-        if intent == "AddObject":
+        if intent == "add_object":
             if self.add_object(entities["Object"], entities["posX"], entities["posY"]):
-                answer = self.answer.replace("MESSAGE", "Object added correctly! You can refer to it as " + entities["Object"] + str(self.counter[entities["Object"]]))
-                answer = answer.replace("EVENT", "object_added")
+                obj_name = entities["Object"] + str(self.counter[entities["Object"]])
+                answer = self.answer.replace("MESSAGE", "Object added correctly! You can refer to it as " + obj_name)
+                answer = answer.replace("EVENT", "utter_add_object")
+                answer = answer.replace("AUX", "\"name\": \"" + obj_name + "\"")
+            else:
+                answer = self.answer.replace("MESSAGE", "Error adding object.")
+                answer = answer.replace("EVENT", "utter_object_not_added")
+                answer = answer.replace(", \"aux\": {AUX}", "")
 
         # Remove object intent
-        elif intent == "RemoveObject":
+        elif intent == "remove_object":
             if self.remove_object(entities["relname"]):
                 answer = self.answer.replace("MESSAGE", "Object removed correctly!")
-                answer = answer.replace("EVENT", "object_removed")
+                answer = answer.replace("EVENT", "utter_remove_object")
+                answer = answer.replace(", \"aux\": {AUX}", "")
+            else:
+                answer = self.answer.replace("MESSAGE", "Error removing object.")
+                answer = answer.replace("EVENT", "object_not_removed")
+                answer = answer.replace(", \"aux\": {AUX}", "")
         
         # Add relative object
-        elif intent == "AddRelObject":
+        elif intent == "add_relative_object":
             if self.add_relative_object(entities["Object"], entities["relName"], entities["relPos"]):
-                answer = self.answer.replace("MESSAGE", "Object added correctly! You can refer to it as " + entities["Object"] + str(self.counter[entities["Object"]]))
-                answer = answer.replace("EVENT", "object_added")
+                obj_name = entities["Object"] + str(self.counter[entities["Object"]])
+                answer = self.answer.replace("MESSAGE", "Object added correctly! You can refer to it as " + obj_name)
+                answer = answer.replace("EVENT", "utter_add_relative_object")
+                answer = answer.replace("AUX", "\"name\": \"" + obj_name + "\"")
+            else:
+                answer = self.answer.replace("MESSAGE", "Error adding object.")
+                answer = answer.replace("EVENT", "utter_object_not_added")
+                answer = answer.replace(", \"aux\": {AUX}", "")
 
         # Error
         else:

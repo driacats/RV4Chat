@@ -1,9 +1,9 @@
 msg_user_to_bot matches { sender:'user', receiver:'bot' };
 msg_bot_to_user matches { sender:'bot', receiver:'user' };
-add_object matches { intent: { name: 'add_object', confidence: _ }, slots: { horizontal: _, vertical: _, object: _, relative: 'None', relName: 'None', session_started_metadata: _} };
-add_object_rel(obj) matches { intent: { name: 'add_relative_object', confidence: _ }, slots: {object: _, vertical: _, horizontal: _, relative: _, relName: obj, session_started_metadata: _} };
-remove_object(obj) matches {intent: { name: 'remove_object', confidence: _ }, slots: {object: _, vertical: _, horizontal: _, relative: _, relName: obj, session_started_metadata: _} };
-object_added(obj) matches { next_action: 'utter_add_object', name: obj };
+add_object matches { intent: { name: 'add_object', confidence: _ }};
+add_object_rel(obj) matches { intent: { name: 'add_relative_object', confidence: _ }, entities: {relName: obj} };
+remove_object(obj) matches {intent: { name: 'remove_object', confidence: _ }, entities: {relName: obj} };
+object_added(obj) matches { bot_action: 'utter_add_object', aux: {name: obj} };
 object_added_rel(obj) matches { next_action: 'utter_add_relative_object', name: obj };
 object_removed matches { next_action: 'utter_remove_object' };
 

@@ -1,20 +1,21 @@
-# File generated automatically on 2024-01-15 20:07 by instrumenter.py
+# File generated automatically on 2024-01-16 12:41 by instrumenter.py
 #  - Agent: AssistantAgent
-#  - Input zip: Examples/Factory/AssistantAgentFR.zip
+#  - Input zip: Examples/Factory/AssistantAgent.zip
 #  - Output zip: output/AssistantAgentMonitored.zip
-#  - WebHook URL: https://fff7-79-30-45-250.ngrok-free.app
-#  - Monitor URL: http://localhost:8081
+#  - WebHook URL: https://7540-130-251-61-251.ngrok-free.app
+#  - Monitor URL: ws://localhost:8081
 #  - Monitoring Level: 2
 
 
 # IMPORTS
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import json, requests, random
+from websocket import create_connection
 
 class WebHookResponder(BaseHTTPRequestHandler):
 
 	# The url on which the monitor is listening
-	MONITOR_URL = "http://localhost:8081"
+	MONITOR_URL = "ws://localhost:8081"
 
 	# The function simply sends an error message back to Dialogflow
 	def send_error_message(self):
@@ -41,7 +42,7 @@ class WebHookResponder(BaseHTTPRequestHandler):
 		return json.dumps(json_obj)
 
 	def question_oracle(self, event_str):
-		ws = create_connection("ws://localhost:5052")
+		ws = create_connection(self.MONITOR_URL)
 		# We send it to the monitor and wait for the answer.
 		ws.send(event_str)
 		oracle = json.loads(ws.recv())
@@ -65,38 +66,13 @@ class WebHookResponder(BaseHTTPRequestHandler):
 		# Send the user input event to the monitor
 		if not self.question_oracle(user_event):
 			return
-		if message["queryResult"]["intent"]["displayName"] == "AddObject":
-			self.add_object()
-		if message["queryResult"]["intent"]["displayName"] == "AddRelObject":
-			self.add_rel_object()
 
 		# If the intent needs a webhook answer the request is performed
-		if message["queryResult"]["intent"]["displayName"] in ["AddObject", "RemoveObject", "AddRelObject"]:
-			self.wfile.write(bytes(requests.post("https://localhost:8082", message)))
-
-	def add_object(self):
-		available_answers = ['No answer from the server.']
-		message = "{\"fulfillmentMessages\": [{\"text\": [\"" + random.choice(available_answers)+ "\"]}]}"
-		oracle_message = {}
-		oracle_message["sender"] = "bot"
-		oracle_message["receiver"] = "user"
-		oracle_message["bot_action"] = "add_object"
-		oracle_message = json.dumps(oracle_message)
-		if not self.question_oracle(oracle_message):
-			return
-		self.wfile.write(bytes(message, 'utf8')) 
-
-	def add_rel_object(self):
-		available_answers = ['No answer from the server.']
-		message = "{\"fulfillmentMessages\": [{\"text\": [\"" + random.choice(available_answers)+ "\"]}]}"
-		oracle_message = {}
-		oracle_message["sender"] = "bot"
-		oracle_message["receiver"] = "user"
-		oracle_message["bot_action"] = "add_rel_object"
-		oracle_message = json.dumps(oracle_message)
-		if not self.question_oracle(oracle_message):
-			return
-		self.wfile.write(bytes(message, 'utf8')) 
+		if message["queryResult"]["intent"]["displayName"] in ["add_object", "remove_object", "add_relative_object"]:
+			webhook_answer = requests.post("http://localhost:8082", json=message)
+			if not self.question_oracle(webhook_answer.text):
+				return
+			self.wfile.write(bytes(webhook_answer.text, 'utf8'))
 
 
 

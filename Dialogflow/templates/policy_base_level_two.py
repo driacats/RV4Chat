@@ -1,6 +1,7 @@
 # IMPORTS
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import json, requests, random
+from websocket import create_connection
 
 class WebHookResponder(BaseHTTPRequestHandler):
 
@@ -32,7 +33,7 @@ class WebHookResponder(BaseHTTPRequestHandler):
 		return json.dumps(json_obj)
 
 	def question_oracle(self, event_str):
-		ws = create_connection("ws://localhost:5052")
+		ws = create_connection(self.MONITOR_URL)
 		# We send it to the monitor and wait for the answer.
 		ws.send(event_str)
 		oracle = json.loads(ws.recv())
@@ -59,7 +60,10 @@ class WebHookResponder(BaseHTTPRequestHandler):
 CALL_ANSWER_FUNCTIONS_PLACEHOLDER
 		# If the intent needs a webhook answer the request is performed
 		if message["queryResult"]["intent"]["displayName"] in INTENT_LIST_PLACEHOLDER:
-			self.wfile.write(bytes(requests.post(YOUR_URL_PLACEHOLDER, message)))
+			webhook_answer = requests.post(YOUR_URL_PLACEHOLDER, json=message)
+			if not self.question_oracle(webhook_answer.text):
+				return
+			self.wfile.write(bytes(webhook_answer.text, 'utf8'))
 
 ANSWER_FUNCTIONS_PLACEHOLDER
 
