@@ -1,5 +1,8 @@
 version: "3.1"
 
+entities:
+  - name
+
 intents:
   - greet
   - goodbye
@@ -8,6 +11,7 @@ intents:
   - mood_great
   - mood_unhappy
   - bot_challenge
+  - introduce
 
 responses:
   utter_greet:

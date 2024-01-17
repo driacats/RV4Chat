@@ -1,0 +1,6 @@
+[
+  {
+    "name": "name",
+    "pattern": "[A-Z][a-z]+"
+  }
+]

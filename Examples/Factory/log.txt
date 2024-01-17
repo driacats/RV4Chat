@@ -1,0 +1,8 @@
+{"sender": "user", "receiver": "bot", "intent": {"name": "add_object", "confidence": 1.0}, "entities": {"Object": "table", "posX": "", "posY": ""}}
+{"fulfillmentMessages": [{"text": {"text": ["Object added correctly! You can refer to it as table1"]}}], "bot_action": "utter_add_object", "aux": {"name": "table1"}, "sender": "bot", "receiver": "user"}
+{"sender": "user", "receiver": "bot", "intent": {"name": "add_object", "confidence": 1.0}, "entities": {"Object": "box", "posX": "right", "posY": "front"}}
+{"fulfillmentMessages": [{"text": {"text": ["Object added correctly! You can refer to it as box1"]}}], "bot_action": "utter_add_object", "aux": {"name": "box1"}, "sender": "bot", "receiver": "user"}
+{"sender": "user", "receiver": "bot", "intent": {"name": "add_relative_object", "confidence": 1.0}, "entities": {"relName": "table1", "Object": "robot", "relPos": "right of"}}
+{"fulfillmentMessages": [{"text": {"text": ["Object added correctly! You can refer to it as robot0"]}}], "bot_action": "utter_add_relative_object", "aux": {"name": "robot0"}, "sender": "bot", "receiver": "user"}
+{"sender": "user", "receiver": "bot", "intent": {"name": "remove_object", "confidence": 1.0}, "entities": {"relname": "box1"}}
+{"fulfillmentMessages": [{"text": {"text": ["Object removed correctly!"]}}], "bot_action": "utter_remove_object", "sender": "bot", "receiver": "user"}

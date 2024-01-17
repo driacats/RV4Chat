@@ -61,9 +61,12 @@ CALL_ANSWER_FUNCTIONS_PLACEHOLDER
 		# If the intent needs a webhook answer the request is performed
 		if message["queryResult"]["intent"]["displayName"] in INTENT_LIST_PLACEHOLDER:
 			webhook_answer = requests.post(YOUR_URL_PLACEHOLDER, json=message)
-			if not self.question_oracle(webhook_answer.text):
+			webhook_answer = json.loads(webhook_answer.text)
+			webhook_answer["sender"] = "bot"
+			webhook_answer["receiver"] = "user"
+			if not self.question_oracle(json.dumps(webhook_answer)):
 				return
-			self.wfile.write(bytes(webhook_answer.text, 'utf8'))
+			self.wfile.write(bytes(json.dumps(webhook_answer), 'utf8'))
 
 ANSWER_FUNCTIONS_PLACEHOLDER
 
