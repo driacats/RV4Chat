@@ -1,2 +1,13 @@
 Rasa/Rasa Agent/.venv
+Rasa/Rasa Agent/.rasa
+Rasa/Rasa Agent/.rasa/cache
+Rasa/Rasa Agent/models
+Rasa/Rasa Agent/actions/__pycache__
+Rasa/Rasa Agent/policies/__pycache__
 Examples/Factory/Rasa/.venv
+Examples/Factory/Rasa/.rasa
+Examples/Factory/Rasa/.rasa/cache
+Examples/Factory/Rasa/models
+Examples/Factory/Rasa/actions/__pycache__
+Examples/Factory/Rasa/policies/__pycache__
+**/.DS_Store

@@ -8,6 +8,61 @@ intents:
   - mood_great
   - mood_unhappy
   - bot_challenge
+  - add_object
+  - add_relative_object
+  - add_actor
+  - remove_object
+  - actor_name
+
+entities:
+  - object
+  - vertical
+  - horizontal
+  - relative
+  - relName
+  - actorName
+
+slots:
+  object:
+    type: text
+    influence_conversation: False
+    mappings:
+      - type: from_entity
+        entity: object
+  vertical:
+    type: text
+    influence_conversation: False
+    mappings:
+      - type: from_entity
+        entity: vertical 
+  horizontal:
+    type: text
+    influence_conversation: False
+    mappings:
+      - type: from_entity
+        entity: horizontal
+  relative:
+    type: text
+    influence_conversation: False
+    mappings:
+      - type: from_entity
+        entity: relative
+  relName:
+    type: text
+    influence_conversation: False
+    mappings:
+      - type: from_entity
+        entity: relName
+  actorName:
+    type: text
+    influence_conversation: False
+    mappings:
+      - type: from_entity
+        entity: actorName
+  
+actions:
+  - action_reset_all_slots
+  - send_info
 
 responses:
   utter_greet:
@@ -28,6 +83,24 @@ responses:
 
   utter_iamabot:
   - text: "I am a bot, powered by Rasa."
+  
+  utter_add_object:
+  - text: "Add object intent here, received: {object}, horizontal: {horizontal}, vertical: {vertical}!"
+
+  utter_add_relative_object:
+  - text: "Add relative object intent here, received: {object}, relative: {relative}, relative name: {relName}!"
+
+  utter_remove_object:
+  - text: "Remove object intent here, received: {relName}"
+
+  utter_add_actor:
+  - text: "Add actor intent here, received: {actorName}"
+
+  utter_error_message:
+  - text: "Error!"
+
+  utter_ask_name:
+  - text: "What is the actor name?"
 
 session_config:
   session_expiration_time: 60
