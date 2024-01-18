@@ -63,6 +63,7 @@ slots:
 actions:
   - action_reset_all_slots
   - send_info
+  - get_time
 
 responses:
   utter_greet:

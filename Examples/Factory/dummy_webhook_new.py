@@ -160,7 +160,7 @@ class Factory():
     def add_relative_object(self, obj, relObj, relPos):
         print("[LOG] called add relative object")
         # If the object is not in the objects dictionary exit
-        if relObj[0] not in self.factory.objects:
+        if relObj[0] not in self.objects:
             print("[LOG] Reference object not found")
             return False
         # Otherwise look for the object position
@@ -168,7 +168,7 @@ class Factory():
             for j, column in enumerate(row):
                 if relObj[0] in column:
                     # Add the new object to the objects dictionary
-                    self.factory.objects[obj[0]] = obj
+                    self.objects[obj[0]] = obj
                     # Adds the object in the position string correctly following the pattern at line 10
                     if relPos == "left of":
                         if "|" in column:
@@ -287,7 +287,7 @@ def FactoryWebHookWebSocket():
                         answer = "Error in adding object"
                 if message["intent"] == "remove_object":
                     if factory.remove_object(message["relName"]):
-                        answer = "Object added, you can refer to as " + obj_name
+                        answer = "Object removed"
                     else:
                         answer = "Error in adding object"
 

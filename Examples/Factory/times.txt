@@ -38,12 +38,21 @@ The d field instead seems more interesting as the results follow the pattern I w
 
 		--- Dialogflow with monitor with ngrok latency 24ms ---
 	ms	d		ms	d		ms	d		ms	d		ms	d		~ms		~d
-1 
-2 
-3 
-4 
-5 
-6 
+1	
+2	
+3	
+4	
+5	
+6	
 
 					=========== Rasa ===========
+For the Rasa time I inserted a new custom action get_time that logs the time after the intent recognition, before and after the execution of all the core actions (and policies).
 
+		--- Rasa without monitor ---
+	ms		ms		ms		ms		ms		~ms	
+1	90.56	84.60	81.31	80.49	82.48	83.888
+2	99.58	88.79	89.69	90.79	92.09	92.188
+3	96.49	96.89	90.47	106.64	90.15	96.128
+4	97.14	92.26	99.76	93.84	93.65	95.330
+5	96.29	93.42	92.94	91.47	101.31	95.086
+6	98.48	92.36	95.90	93.39	92.43	94.512

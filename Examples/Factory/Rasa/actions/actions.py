@@ -11,7 +11,7 @@ from rasa_sdk import Action
 from rasa_sdk.events import AllSlotsReset
 #from rasa_sdk.executor import CollectingDispatcher
 #import socket
-import json
+import json, time
 from websocket import create_connection
 
 class ActionResetAllSlots(Action):
@@ -41,7 +41,7 @@ class SendInfo(Action):
             instruction['posY'] = 'center'
         else:
             instruction['posY'] = tracker.get_slot('vertical')
-        instruction['relative'] = tracker.get_slot('relative')
+        instruction['relPos'] = tracker.get_slot('relative')
         instruction['relName'] = tracker.get_slot('relName')
         instruction['actorName'] = tracker.get_slot('actorName')
         ws = create_connection(self.mas_server)
@@ -51,3 +51,11 @@ class SendInfo(Action):
         result = ws.recv()
         print("getting the result: ", result)
         ws.close()
+
+class GetTime(Action):
+
+    def name(self):
+        return "get_time"
+
+    def run(self, dispatcher, tracker, domain):
+        print("[LOG] ", time.time() * 1000)
