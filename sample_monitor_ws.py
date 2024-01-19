@@ -1,22 +1,23 @@
-import asyncio
-import websockets
+import asyncio, websockets, time
 
 async def echo(websocket, path):
     # Print a message when a new connection is established
-    print(f"New connection from {websocket.remote_address}")
+    # print(f"New connection from {websocket.remote_address}")
+    start_time = time.time() * 1000
 
     try:
         # Loop to handle messages received from the connection
         async for message in websocket:
             # Print the received message
-            print(f"Received message: {message}")
+            print(f"[LOG] {message}")
 
             # Respond always with "true"
             response = "{\"verdict\": true}"
 
             # Send the response back to the client
             await websocket.send(response)
-            print(f"Sent response: {response}")
+            print(f"[TIME] {time.time() * 1000 - start_time}")
+            print(f"[LOG] {response}")
 
     except websockets.exceptions.ConnectionClosed:
         # Handle connection closure

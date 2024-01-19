@@ -1,5 +1,5 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
-import json, requests, argparse, asyncio, websockets
+import json, requests, argparse, asyncio, websockets, time
 
 class Factory():
 
@@ -194,14 +194,15 @@ class FactoryWebHookHttp(BaseHTTPRequestHandler):
     answer = "{\"fulfillmentMessages\":[{\"text\":{\"text\":[\"MESSAGE\"]}}], \"bot_action\": \"EVENT\", \"aux\": {AUX}}"
 
     def do_POST(self):
-
+        start_time = time.time() * 1000
         # Accept the request
         content_length = int(self.headers['Content-Length'])
         post_data = self.rfile.read(content_length)
         message = json.loads(post_data)
-        self.send_response(200)
-        self.send_header('Content-type', 'text/html')
-        self.end_headers()
+        time.sleep(0.02)
+        # self.send_response(200)
+        # self.send_header('Content-type', 'text/html')
+        # self.end_headers()
 
         if not "queryResult" in message:
              print("[LOG] Message not valid.")
@@ -254,8 +255,12 @@ class FactoryWebHookHttp(BaseHTTPRequestHandler):
             answer = answer.replace("EVENT", "error")
 
         # Send the answer
+        self.send_response(200)
+        self.send_header('Content-type', 'text/html')
+        self.end_headers()
         self.wfile.write(bytes(answer, 'utf8'))
         # Print the factory
+        print("[TIME]", time.time() * 1000 - start_time)
         self.factory.print_factory()
 
 def FactoryWebHookWebSocket():
