@@ -60,6 +60,7 @@ class ControllerPolicy(Policy):
 
 	# The function predict_action_probabilities is called when a message arrives to rasa and returns a prediction.
 	def predict_action_probabilities(self, tracker:DialogueStateTracker, domain:Domain, **kwargs:Any) -> PolicyPrediction:
+
 		# We start with the default predictions (all zeros)
 		prediction = self._default_predictions(domain)
 		# If the latest action executed was the error one, we have to stop and wait for a user input

@@ -52,10 +52,10 @@ class SendInfo(Action):
         print("getting the result: ", result)
         ws.close()
 
-class GetTime(Action):
+# class GetTime(Action):
 
-    def name(self):
-        return "get_time"
+#     def name(self):
+#         return "get_time"
 
-    def run(self, dispatcher, tracker, domain):
-        print("[LOG] ", time.time() * 1000)
+#     def run(self, dispatcher, tracker, domain):
+#         print("[LOG] ", time.time() * 1000)

@@ -52,8 +52,8 @@ class WebHookResponder(BaseHTTPRequestHandler):
 	def question_oracle(self, event_str):
 		# ws = create_connection(self.MONITOR_URL)
 		# We send it to the monitor and wait for the answer.
-		print("[LOG] " + event_str)
-		self.ws.send(event_str)
+		print("[LOG] " + event_str.replace("\'", "\""))
+		self.ws.send(event_str.replace("\'", "\""))
 		oracle = json.loads(self.ws.recv())
 		# self.ws.close()
 		# print("[EVENT]", event_str)
@@ -79,7 +79,7 @@ class WebHookResponder(BaseHTTPRequestHandler):
 		times.append(round(time.time() * 1000 - start_time, 2))
 		# Send the user input event to the monitor
 		if not self.question_oracle(user_event):
-			return
+			print("[LOG] Errore riportato dal monitor.")
 		# print("[TIME] Oracle user", round(time.time() * 1000 - start_time, 2))
 		times.append(round(time.time() * 1000 - start_time, 2))
 

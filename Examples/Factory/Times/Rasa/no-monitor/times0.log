@@ -1,0 +1,1177 @@
+2024-01-23 16:16:49,428 [DEBUG]  Sanic-CORS: Configuring CORS with resources: {'/*': {'origins': [''], 'methods': 'DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT', 'allow_headers': ['.*'], 'expose_headers': 'filename', 'supports_credentials': True, 'max_age': None, 'send_wildcard': False, 'automatic_options': True, 'vary_header': True, 'resources': {'/*': {'origins': ''}}, 'intercept_exceptions': True, 'always_send': True}}
+2024-01-23 16:16:49,430 [DEBUG]  Available web server routes: 
+/webhooks/rest                                     GET                            rasa_core_no_api.custom_webhook_CmdlineInput.health
+/webhooks/rest/webhook                             POST                           rasa_core_no_api.custom_webhook_CmdlineInput.receive
+/                                                  GET                            rasa_core_no_api.hello
+2024-01-23 16:16:49,430 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2024-01-23 16:16:49,430 [DEBUG]  Using the default number of Sanic workers (1).
+2024-01-23 16:16:49,674 [DEBUG]  Skipping telemetry reporting: no license hash found.
+2024-01-23 16:16:49,692 [DEBUG]  Connected to InMemoryTrackerStore.
+2024-01-23 16:16:49,693 [DEBUG]  Connected to lock store 'InMemoryLockStore'.
+2024-01-23 16:16:49,693 [DEBUG]  Instantiated NLG to 'TemplatedNaturalLanguageGenerator'.
+2024-01-23 16:16:49,693 [INFO ]  Loading model models/20240123-153626-primary-bourbon.tar.gz...
+2024-01-23 16:16:49,927 [DEBUG]  Extracted model to '/tmp/tmpmj33qwr4'.
+2024-01-23 16:16:49,928 [DEBUG]  Node 'nlu_message_converter' loading 'NLUMessageConverter.load' and kwargs: '{}'.
+2024-01-23 16:16:49,928 [DEBUG]  Node 'run_WhitespaceTokenizer0' loading 'WhitespaceTokenizer.load' and kwargs: '{}'.
+2024-01-23 16:16:49,930 [DEBUG]  Node 'run_RegexFeaturizer1' loading 'RegexFeaturizer.load' and kwargs: '{}'.
+2024-01-23 16:16:49,931 [DEBUG]  Resource 'train_RegexFeaturizer1' was requested for reading.
+2024-01-23 16:16:49,931 [DEBUG]  Node 'run_RegexEntityExtractor2' loading 'RegexEntityExtractor.load' and kwargs: '{}'.
+2024-01-23 16:16:49,931 [DEBUG]  Resource 'train_RegexEntityExtractor2' was requested for reading.
+2024-01-23 16:16:49,931 [DEBUG]  Node 'run_LexicalSyntacticFeaturizer3' loading 'LexicalSyntacticFeaturizer.load' and kwargs: '{}'.
+2024-01-23 16:16:49,931 [DEBUG]  Resource 'train_LexicalSyntacticFeaturizer3' was requested for reading.
+2024-01-23 16:16:49,932 [DEBUG]  Node 'run_CountVectorsFeaturizer4' loading 'CountVectorsFeaturizer.load' and kwargs: '{}'.
+2024-01-23 16:16:49,932 [DEBUG]  Resource 'train_CountVectorsFeaturizer4' was requested for reading.
+2024-01-23 16:16:49,933 [DEBUG]  Node 'run_CountVectorsFeaturizer5' loading 'CountVectorsFeaturizer.load' and kwargs: '{}'.
+2024-01-23 16:16:49,933 [DEBUG]  Resource 'train_CountVectorsFeaturizer5' was requested for reading.
+2024-01-23 16:16:49,934 [DEBUG]  Node 'run_DIETClassifier6' loading 'DIETClassifier.load' and kwargs: '{}'.
+2024-01-23 16:16:49,934 [DEBUG]  Resource 'train_DIETClassifier6' was requested for reading.
+2024-01-23 16:16:49,934 [DEBUG]  Loading the model from /tmp/tmpxn5co8_l/train_DIETClassifier6/DIETClassifier.tf_model with finetune_mode=False...
+2024-01-23 16:16:49,980 [DEBUG]  Following metrics will be logged during training: 
+2024-01-23 16:16:49,980 [DEBUG]    t_loss (total loss)
+2024-01-23 16:16:49,980 [DEBUG]    i_acc (intent acc)
+2024-01-23 16:16:49,980 [DEBUG]    i_loss (intent loss)
+2024-01-23 16:16:49,981 [DEBUG]    e_f1 (entity f1)
+2024-01-23 16:16:49,981 [DEBUG]    e_loss (entity loss)
+2024-01-23 16:17:09,522 [DEBUG]  Finished loading the model.
+2024-01-23 16:17:09,523 [DEBUG]  Node 'run_EntitySynonymMapper7' loading 'EntitySynonymMapper.load' and kwargs: '{}'.
+2024-01-23 16:17:09,523 [DEBUG]  Resource 'train_EntitySynonymMapper7' was requested for reading.
+2024-01-23 16:17:09,523 [DEBUG]  Node 'run_FallbackClassifier8' loading 'FallbackClassifier.load' and kwargs: '{}'.
+2024-01-23 16:17:09,523 [DEBUG]  Node 'run_RegexMessageHandler' loading 'RegexMessageHandler.load' and kwargs: '{}'.
+2024-01-23 16:17:09,523 [DEBUG]  Node 'domain_provider' loading 'DomainProvider.load' and kwargs: '{}'.
+2024-01-23 16:17:09,523 [DEBUG]  Resource 'domain_provider' was requested for reading.
+2024-01-23 16:17:09,548 [DEBUG]  Node 'run_RulePolicy0' loading 'RulePolicy.load' and kwargs: '{}'.
+2024-01-23 16:17:09,548 [DEBUG]  Resource 'train_RulePolicy0' was requested for reading.
+2024-01-23 16:17:09,549 [DEBUG]  Node 'run_AugmentedMemoizationPolicy1' loading 'AugmentedMemoizationPolicy.load' and kwargs: '{}'.
+2024-01-23 16:17:09,549 [DEBUG]  Resource 'train_AugmentedMemoizationPolicy1' was requested for reading.
+2024-01-23 16:17:09,549 [DEBUG]  Node 'run_TEDPolicy2' loading 'TEDPolicy.load' and kwargs: '{}'.
+2024-01-23 16:17:09,549 [DEBUG]  Resource 'train_TEDPolicy2' was requested for reading.
+2024-01-23 16:17:09,550 [DEBUG]  Loading the model from /tmp/tmpxn5co8_l/train_TEDPolicy2/ted_policy.tf_model with finetune_mode=False...
+2024-01-23 16:17:16,432 [DEBUG]  Finished loading the model.
+2024-01-23 16:17:16,432 [DEBUG]  Node 'rule_only_data_provider' loading 'RuleOnlyDataProvider.load' and kwargs: '{}'.
+2024-01-23 16:17:16,432 [DEBUG]  Resource 'train_RulePolicy0' was requested for reading.
+2024-01-23 16:17:16,433 [DEBUG]  Node 'select_prediction' loading 'DefaultPolicyPredictionEnsemble.load' and kwargs: '{}'.
+2024-01-23 16:17:16,435 [INFO ]  Rasa server is up and running.
+2024-01-23 16:17:16,436 [INFO ]  Enabling coroutine debugging. Loop id 94349262504528.
+2024-01-23 16:17:20,312 [DEBUG]  Issuing ticket for conversation '0883c4f833d94ee99d88c889d315438d'.
+2024-01-23 16:17:20,312 [DEBUG]  Acquiring lock for conversation '0883c4f833d94ee99d88c889d315438d'.
+2024-01-23 16:17:20,313 [DEBUG]  Acquired lock for conversation '0883c4f833d94ee99d88c889d315438d'.
+2024-01-23 16:17:20,313 [DEBUG]  Could not find tracker for conversation ID '0883c4f833d94ee99d88c889d315438d'.
+2024-01-23 16:17:20,313 [DEBUG]  No event broker configured. Skipping streaming events.
+2024-01-23 16:17:20,313 [DEBUG]  Starting a new session for conversation ID '0883c4f833d94ee99d88c889d315438d'.
+2024-01-23 16:17:20,314 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.policy_prediction[0m [36mprediction_events[0m=[35m[][0m
+2024-01-23 16:17:20,314 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.log         [0m [36maction_name[0m=[35maction_session_start[0m [36mrasa_events[0m=[35m[<rasa.shared.core.events.SessionStarted object at 0x7f55d3821870>, ActionExecuted(action: action_listen, policy: None, confidence: None)][0m
+2024-01-23 16:17:20,314 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.slots.log           [0m [36mslot_values[0m=[35m	object: None
+	vertical: None
+	horizontal: None
+	relative: None
+	relName: None
+	actorName: None
+	session_started_metadata: None[0m
+2024-01-23 16:17:20,315 [DEBUG]  Running graph with inputs: {'__message__': [<rasa.core.channels.channel.UserMessage object at 0x7f55d3a7a9b0>], '__tracker__': <rasa.shared.core.trackers.DialogueStateTracker object at 0x7f55d39dbbe0>}, targets: ['run_RegexMessageHandler'] and ExecutionContext(model_id='8e4a254725e44aeaaadcf36ce1b310f3', should_add_diagnostic_data=False, is_finetuning=False, node_name=None).
+2024-01-23 16:17:20,315 [DEBUG]  Node 'nlu_message_converter' running 'NLUMessageConverter.convert_user_message'.
+2024-01-23 16:17:20,315 [DEBUG]  Node 'run_WhitespaceTokenizer0' running 'WhitespaceTokenizer.process'.
+2024-01-23 16:17:20,316 [DEBUG]  Node 'run_RegexFeaturizer1' running 'RegexFeaturizer.process'.
+2024-01-23 16:17:20,317 [DEBUG]  Node 'run_RegexEntityExtractor2' running 'RegexEntityExtractor.process'.
+2024-01-23 16:17:20,318 [DEBUG]  Node 'run_LexicalSyntacticFeaturizer3' running 'LexicalSyntacticFeaturizer.process'.
+2024-01-23 16:17:20,318 [DEBUG]  Node 'run_CountVectorsFeaturizer4' running 'CountVectorsFeaturizer.process'.
+2024-01-23 16:17:20,318 [DEBUG]  Node 'run_CountVectorsFeaturizer5' running 'CountVectorsFeaturizer.process'.
+2024-01-23 16:17:20,319 [DEBUG]  Node 'run_DIETClassifier6' running 'DIETClassifier.process'.
+2024-01-23 16:17:20,523 [DEBUG]  Node 'run_EntitySynonymMapper7' running 'EntitySynonymMapper.process'.
+2024-01-23 16:17:20,523 [DEBUG]  Node 'run_FallbackClassifier8' running 'FallbackClassifier.process'.
+2024-01-23 16:17:20,523 [DEBUG]  Node 'domain_provider' running 'DomainProvider.provide_inference'.
+2024-01-23 16:17:20,523 [DEBUG]  Node 'run_RegexMessageHandler' running 'RegexMessageHandler.process'.
+2024-01-23 16:17:20,524 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.message.parse       [0m [36mparse_data_entities[0m=[35m[{'entity': 'actorName', 'start': 0, 'end': 3, 'value': 'Add', 'extractor': 'RegexEntityExtractor'}, {'entity': 'actorName', 'start': 6, 'end': 11, 'value': 'table', 'extractor': 'RegexEntityExtractor', 'processors': ['EntitySynonymMapper']}, {'entity': 'object', 'start': 6, 'end': 11, 'value': 'table', 'extractor': 'RegexEntityExtractor', 'processors': ['EntitySynonymMapper']}, {'entity': 'object', 'start': 6, 'end': 11, 'confidence_entity': 0.9983378648757935, 'value': 'table', 'extractor': 'DIETClassifier', 'processors': ['EntitySynonymMapper']}][0m [36mparse_data_intent[0m=[35m{'name': 'add_object', 'confidence': 0.9899651408195496}[0m [36mparse_data_text[0m=[35mAdd a table[0m
+2024-01-23 16:17:20,524 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.slots.log           [0m [36mslot_values[0m=[35m	object: None
+	vertical: None
+	horizontal: None
+	relative: None
+	relName: None
+	actorName: None
+	session_started_metadata: None[0m
+2024-01-23 16:17:20,524 [DEBUG]  Logged UserUtterance - tracker now has 4 events.
+2024-01-23 16:17:20,525 [DEBUG]  Validating extracted slots: object
+actorName
+2024-01-23 16:17:20,525 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.extract.slots       [0m [36maction_extract_slot[0m=[35maction_extract_slots[0m [36mlen_extraction_events[0m=[35m2[0m [36mrasa_events[0m=[35m[SlotSet(key: object, value: table), SlotSet(key: actorName, value: table)][0m
+2024-01-23 16:17:20,525 [DEBUG]  Running graph with inputs: {'__tracker__': <rasa.shared.core.trackers.DialogueStateTracker object at 0x7f55d39dbbe0>}, targets: ['select_prediction'] and ExecutionContext(model_id='8e4a254725e44aeaaadcf36ce1b310f3', should_add_diagnostic_data=False, is_finetuning=False, node_name=None).
+2024-01-23 16:17:20,525 [DEBUG]  Node 'rule_only_data_provider' running 'RuleOnlyDataProvider.provide'.
+2024-01-23 16:17:20,525 [DEBUG]  Node 'domain_provider' running 'DomainProvider.provide_inference'.
+2024-01-23 16:17:20,525 [DEBUG]  Node 'run_AugmentedMemoizationPolicy1' running 'AugmentedMemoizationPolicy.predict_action_probabilities'.
+2024-01-23 16:17:20,526 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.predict.actions   [0m [36mtracker_states[0m=[35m[{}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'object')}, 'prev_action': {'action_name': 'action_listen'}}][0m
+2024-01-23 16:17:20,526 [DEBUG]  Launch DeLorean...
+2024-01-23 16:17:20,526 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.states_recall     [0m [36mold_states[0m=[35m[{}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'object')}, 'prev_action': {'action_name': 'action_listen'}}][0m
+2024-01-23 16:17:20,526 [DEBUG]  There is no memorised next action
+2024-01-23 16:17:20,526 [DEBUG]  Node 'run_RulePolicy0' running 'RulePolicy.predict_action_probabilities'.
+2024-01-23 16:17:20,527 [DEBUG]  [[32m[1mdebug    [0m] [1mrule_policy.actions.find      [0m [36mcurrent_states[0m=[35m
+[state 1] user text: Add a table | previous action name: action_listen[0m
+2024-01-23 16:17:20,527 [DEBUG]  There is no applicable rule.
+2024-01-23 16:17:20,527 [DEBUG]  [[32m[1mdebug    [0m] [1mrule_policy.actions.find      [0m [36mcurrent_states[0m=[35m
+[state 1] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_listen[0m
+2024-01-23 16:17:20,527 [DEBUG]  There is no applicable rule.
+2024-01-23 16:17:20,527 [DEBUG]  Node 'run_TEDPolicy2' running 'TEDPolicy.predict_action_probabilities'.
+2024-01-23 16:17:20,530 [DEBUG]  TED predicted 'utter_add_object' based on user intent.
+2024-01-23 16:17:20,530 [DEBUG]  Node 'select_prediction' running 'DefaultPolicyPredictionEnsemble.combine_predictions_from_kwargs'.
+2024-01-23 16:17:20,530 [DEBUG]  Made prediction using user intent.
+2024-01-23 16:17:20,530 [DEBUG]  Added `DefinePrevUserUtteredFeaturization(False)` event.
+2024-01-23 16:17:20,530 [DEBUG]  Predicted next action using TEDPolicy.
+2024-01-23 16:17:20,530 [DEBUG]  Predicted next action 'utter_add_object' with confidence 0.98.
+2024-01-23 16:17:20,531 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.policy_prediction[0m [36mprediction_events[0m=[35m[<rasa.shared.core.events.DefinePrevUserUtteredFeaturization object at 0x7f55d38221a0>][0m
+2024-01-23 16:17:20,531 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.log         [0m [36maction_name[0m=[35mutter_add_object[0m [36mrasa_events[0m=[35m[BotUttered('Add object intent here, received: table, horizontal: None, vertical: None!', {"elements": null, "quick_replies": null, "buttons": null, "attachment": null, "image": null, "custom": null}, {"utter_action": "utter_add_object"}, 1706023040.5312526)][0m
+2024-01-23 16:17:20,531 [DEBUG]  Running graph with inputs: {'__tracker__': <rasa.shared.core.trackers.DialogueStateTracker object at 0x7f55d39dbbe0>}, targets: ['select_prediction'] and ExecutionContext(model_id='8e4a254725e44aeaaadcf36ce1b310f3', should_add_diagnostic_data=False, is_finetuning=False, node_name=None).
+2024-01-23 16:17:20,531 [DEBUG]  Node 'rule_only_data_provider' running 'RuleOnlyDataProvider.provide'.
+2024-01-23 16:17:20,532 [DEBUG]  Node 'domain_provider' running 'DomainProvider.provide_inference'.
+2024-01-23 16:17:20,532 [DEBUG]  Node 'run_AugmentedMemoizationPolicy1' running 'AugmentedMemoizationPolicy.predict_action_probabilities'.
+2024-01-23 16:17:20,532 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.predict.actions   [0m [36mtracker_states[0m=[35m[{}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'object')}, 'prev_action': {'action_name': 'action_listen'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'object')}, 'prev_action': {'action_name': 'utter_add_object'}}][0m
+2024-01-23 16:17:20,532 [DEBUG]  Launch DeLorean...
+2024-01-23 16:17:20,532 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.states_recall     [0m [36mold_states[0m=[35m[{}, {'prev_action': {'action_name': 'utter_add_object'}}][0m
+2024-01-23 16:17:20,532 [DEBUG]  There is no memorised next action
+2024-01-23 16:17:20,533 [DEBUG]  Node 'run_RulePolicy0' running 'RulePolicy.predict_action_probabilities'.
+2024-01-23 16:17:20,533 [DEBUG]  [[32m[1mdebug    [0m] [1mrule_policy.actions.find      [0m [36mcurrent_states[0m=[35m
+[state 1] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_listen
+[state 2] user intent: add_object | user entities: ('actorName', 'object') | previous action name: utter_add_object[0m
+2024-01-23 16:17:20,533 [DEBUG]  There is no applicable rule.
+2024-01-23 16:17:20,533 [DEBUG]  Node 'run_TEDPolicy2' running 'TEDPolicy.predict_action_probabilities'.
+2024-01-23 16:17:20,535 [DEBUG]  TED predicted 'send_info' based on user intent.
+2024-01-23 16:17:20,536 [DEBUG]  Node 'select_prediction' running 'DefaultPolicyPredictionEnsemble.combine_predictions_from_kwargs'.
+2024-01-23 16:17:20,536 [DEBUG]  Predicted next action using TEDPolicy.
+2024-01-23 16:17:20,536 [DEBUG]  Predicted next action 'send_info' with confidence 1.00.
+2024-01-23 16:17:20,536 [DEBUG]  Calling action endpoint to run action 'send_info'.
+2024-01-23 16:17:20,563 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.policy_prediction[0m [36mprediction_events[0m=[35m[][0m
+2024-01-23 16:17:20,563 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.log         [0m [36maction_name[0m=[35msend_info[0m [36mrasa_events[0m=[35m[][0m
+2024-01-23 16:17:20,563 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.slots.log           [0m [36mslot_values[0m=[35m	object: table
+	vertical: None
+	horizontal: None
+	relative: None
+	relName: None
+	actorName: table
+	session_started_metadata: None[0m
+2024-01-23 16:17:20,563 [DEBUG]  Running graph with inputs: {'__tracker__': <rasa.shared.core.trackers.DialogueStateTracker object at 0x7f55d39dbbe0>}, targets: ['select_prediction'] and ExecutionContext(model_id='8e4a254725e44aeaaadcf36ce1b310f3', should_add_diagnostic_data=False, is_finetuning=False, node_name=None).
+2024-01-23 16:17:20,563 [DEBUG]  Node 'rule_only_data_provider' running 'RuleOnlyDataProvider.provide'.
+2024-01-23 16:17:20,564 [DEBUG]  Node 'domain_provider' running 'DomainProvider.provide_inference'.
+2024-01-23 16:17:20,564 [DEBUG]  Node 'run_AugmentedMemoizationPolicy1' running 'AugmentedMemoizationPolicy.predict_action_probabilities'.
+2024-01-23 16:17:20,564 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.predict.actions   [0m [36mtracker_states[0m=[35m[{}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'object')}, 'prev_action': {'action_name': 'action_listen'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'object')}, 'prev_action': {'action_name': 'utter_add_object'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'object')}, 'prev_action': {'action_name': 'send_info'}}][0m
+2024-01-23 16:17:20,564 [DEBUG]  Launch DeLorean...
+2024-01-23 16:17:20,565 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.states_recall     [0m [36mold_states[0m=[35m[{}, {'prev_action': {'action_name': 'send_info'}}][0m
+2024-01-23 16:17:20,565 [DEBUG]  There is no memorised next action
+2024-01-23 16:17:20,565 [DEBUG]  Node 'run_RulePolicy0' running 'RulePolicy.predict_action_probabilities'.
+2024-01-23 16:17:20,565 [DEBUG]  [[32m[1mdebug    [0m] [1mrule_policy.actions.find      [0m [36mcurrent_states[0m=[35m
+[state 1] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_listen
+[state 2] user intent: add_object | user entities: ('actorName', 'object') | previous action name: utter_add_object
+[state 3] user intent: add_object | user entities: ('actorName', 'object') | previous action name: send_info[0m
+2024-01-23 16:17:20,565 [DEBUG]  There is no applicable rule.
+2024-01-23 16:17:20,566 [DEBUG]  Node 'run_TEDPolicy2' running 'TEDPolicy.predict_action_probabilities'.
+2024-01-23 16:17:20,569 [DEBUG]  TED predicted 'action_reset_all_slots' based on user intent.
+2024-01-23 16:17:20,569 [DEBUG]  Node 'select_prediction' running 'DefaultPolicyPredictionEnsemble.combine_predictions_from_kwargs'.
+2024-01-23 16:17:20,569 [DEBUG]  Predicted next action using TEDPolicy.
+2024-01-23 16:17:20,569 [DEBUG]  Predicted next action 'action_reset_all_slots' with confidence 1.00.
+2024-01-23 16:17:20,569 [DEBUG]  Calling action endpoint to run action 'action_reset_all_slots'.
+2024-01-23 16:17:20,592 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.policy_prediction[0m [36mprediction_events[0m=[35m[][0m
+2024-01-23 16:17:20,592 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.log         [0m [36maction_name[0m=[35maction_reset_all_slots[0m [36mrasa_events[0m=[35m[<rasa.shared.core.events.AllSlotsReset object at 0x7f55d38238b0>][0m
+2024-01-23 16:17:20,592 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.slots.log           [0m [36mslot_values[0m=[35m	object: None
+	vertical: None
+	horizontal: None
+	relative: None
+	relName: None
+	actorName: None
+	session_started_metadata: None[0m
+2024-01-23 16:17:20,592 [DEBUG]  Running graph with inputs: {'__tracker__': <rasa.shared.core.trackers.DialogueStateTracker object at 0x7f55d39dbbe0>}, targets: ['select_prediction'] and ExecutionContext(model_id='8e4a254725e44aeaaadcf36ce1b310f3', should_add_diagnostic_data=False, is_finetuning=False, node_name=None).
+2024-01-23 16:17:20,592 [DEBUG]  Node 'rule_only_data_provider' running 'RuleOnlyDataProvider.provide'.
+2024-01-23 16:17:20,592 [DEBUG]  Node 'domain_provider' running 'DomainProvider.provide_inference'.
+2024-01-23 16:17:20,593 [DEBUG]  Node 'run_AugmentedMemoizationPolicy1' running 'AugmentedMemoizationPolicy.predict_action_probabilities'.
+2024-01-23 16:17:20,593 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.predict.actions   [0m [36mtracker_states[0m=[35m[{}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'object')}, 'prev_action': {'action_name': 'action_listen'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'object')}, 'prev_action': {'action_name': 'utter_add_object'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'object')}, 'prev_action': {'action_name': 'send_info'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'object')}, 'prev_action': {'action_name': 'action_reset_all_slots'}}][0m
+2024-01-23 16:17:20,593 [DEBUG]  Launch DeLorean...
+2024-01-23 16:17:20,594 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.states_recall     [0m [36mold_states[0m=[35m[{}, {'prev_action': {'action_name': 'action_reset_all_slots'}}][0m
+2024-01-23 16:17:20,594 [DEBUG]  There is no memorised next action
+2024-01-23 16:17:20,594 [DEBUG]  Node 'run_RulePolicy0' running 'RulePolicy.predict_action_probabilities'.
+2024-01-23 16:17:20,594 [DEBUG]  [[32m[1mdebug    [0m] [1mrule_policy.actions.find      [0m [36mcurrent_states[0m=[35m
+[state 1] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_listen
+[state 2] user intent: add_object | user entities: ('actorName', 'object') | previous action name: utter_add_object
+[state 3] user intent: add_object | user entities: ('actorName', 'object') | previous action name: send_info
+[state 4] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_reset_all_slots[0m
+2024-01-23 16:17:20,594 [DEBUG]  There is no applicable rule.
+2024-01-23 16:17:20,594 [DEBUG]  Node 'run_TEDPolicy2' running 'TEDPolicy.predict_action_probabilities'.
+2024-01-23 16:17:20,597 [DEBUG]  TED predicted 'action_listen' based on user intent.
+2024-01-23 16:17:20,597 [DEBUG]  Node 'select_prediction' running 'DefaultPolicyPredictionEnsemble.combine_predictions_from_kwargs'.
+2024-01-23 16:17:20,598 [DEBUG]  Predicted next action using TEDPolicy.
+2024-01-23 16:17:20,598 [DEBUG]  Predicted next action 'action_listen' with confidence 1.00.
+2024-01-23 16:17:20,598 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.policy_prediction[0m [36mprediction_events[0m=[35m[][0m
+2024-01-23 16:17:20,598 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.log         [0m [36maction_name[0m=[35maction_listen[0m [36mrasa_events[0m=[35m[][0m
+2024-01-23 16:17:20,598 [DEBUG]  No event broker configured. Skipping streaming events.
+2024-01-23 16:17:20,598 [DEBUG]  Deleted lock for conversation '0883c4f833d94ee99d88c889d315438d'.
+2024-01-23 16:17:24,922 [DEBUG]  Issuing ticket for conversation '0883c4f833d94ee99d88c889d315438d'.
+2024-01-23 16:17:24,923 [DEBUG]  Acquiring lock for conversation '0883c4f833d94ee99d88c889d315438d'.
+2024-01-23 16:17:24,923 [DEBUG]  Acquired lock for conversation '0883c4f833d94ee99d88c889d315438d'.
+2024-01-23 16:17:24,923 [DEBUG]  Recreating tracker for id '0883c4f833d94ee99d88c889d315438d'
+2024-01-23 16:17:24,926 [DEBUG]  Running graph with inputs: {'__message__': [<rasa.core.channels.channel.UserMessage object at 0x7f55d364e980>], '__tracker__': <rasa.shared.core.trackers.DialogueStateTracker object at 0x7f55d36701c0>}, targets: ['run_RegexMessageHandler'] and ExecutionContext(model_id='8e4a254725e44aeaaadcf36ce1b310f3', should_add_diagnostic_data=False, is_finetuning=False, node_name=None).
+2024-01-23 16:17:24,927 [DEBUG]  Node 'nlu_message_converter' running 'NLUMessageConverter.convert_user_message'.
+2024-01-23 16:17:24,928 [DEBUG]  Node 'run_WhitespaceTokenizer0' running 'WhitespaceTokenizer.process'.
+2024-01-23 16:17:24,928 [DEBUG]  Node 'run_RegexFeaturizer1' running 'RegexFeaturizer.process'.
+2024-01-23 16:17:24,930 [DEBUG]  Node 'run_RegexEntityExtractor2' running 'RegexEntityExtractor.process'.
+2024-01-23 16:17:24,930 [DEBUG]  Node 'run_LexicalSyntacticFeaturizer3' running 'LexicalSyntacticFeaturizer.process'.
+2024-01-23 16:17:24,931 [DEBUG]  Node 'run_CountVectorsFeaturizer4' running 'CountVectorsFeaturizer.process'.
+2024-01-23 16:17:24,933 [DEBUG]  Node 'run_CountVectorsFeaturizer5' running 'CountVectorsFeaturizer.process'.
+2024-01-23 16:17:24,934 [DEBUG]  Node 'run_DIETClassifier6' running 'DIETClassifier.process'.
+2024-01-23 16:17:24,945 [DEBUG]  Node 'run_EntitySynonymMapper7' running 'EntitySynonymMapper.process'.
+2024-01-23 16:17:24,945 [DEBUG]  Node 'run_FallbackClassifier8' running 'FallbackClassifier.process'.
+2024-01-23 16:17:24,945 [DEBUG]  Node 'domain_provider' running 'DomainProvider.provide_inference'.
+2024-01-23 16:17:24,946 [DEBUG]  Node 'run_RegexMessageHandler' running 'RegexMessageHandler.process'.
+2024-01-23 16:17:24,946 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.message.parse       [0m [36mparse_data_entities[0m=[35m[{'entity': 'actorName', 'start': 0, 'end': 3, 'value': 'Add', 'extractor': 'RegexEntityExtractor'}, {'entity': 'actorName', 'start': 6, 'end': 9, 'value': 'box', 'extractor': 'RegexEntityExtractor'}, {'entity': 'actorName', 'start': 10, 'end': 15, 'value': 'right', 'extractor': 'RegexEntityExtractor', 'processors': ['EntitySynonymMapper']}, {'entity': 'actorName', 'start': 16, 'end': 18, 'value': 'of', 'extractor': 'RegexEntityExtractor'}, {'entity': 'actorName', 'start': 19, 'end': 25, 'value': 'table1', 'extractor': 'RegexEntityExtractor'}, {'entity': 'relName', 'start': 19, 'end': 25, 'value': 'table1', 'extractor': 'RegexEntityExtractor'}, {'entity': 'object', 'start': 6, 'end': 9, 'value': 'box', 'extractor': 'RegexEntityExtractor'}, {'entity': 'horizontal', 'start': 10, 'end': 15, 'value': 'right', 'extractor': 'RegexEntityExtractor', 'processors': ['EntitySynonymMapper']}, {'entity': 'relative', 'start': 10, 'end': 18, 'value': 'right of', 'extractor': 'RegexEntityExtractor', 'processors': ['EntitySynonymMapper']}, {'entity': 'relative', 'start': 10, 'end': 18, 'confidence_entity': 0.9810534715652466, 'value': 'right of', 'extractor': 'DIETClassifier', 'processors': ['EntitySynonymMapper']}, {'entity': 'relName', 'start': 19, 'end': 25, 'confidence_entity': 0.8017914891242981, 'value': 'table1', 'extractor': 'DIETClassifier'}][0m [36mparse_data_intent[0m=[35m{'name': 'add_relative_object', 'confidence': 0.9897624850273132}[0m [36mparse_data_text[0m=[35mAdd a box right of table1[0m
+2024-01-23 16:17:24,947 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.slots.log           [0m [36mslot_values[0m=[35m	object: None
+	vertical: None
+	horizontal: None
+	relative: None
+	relName: None
+	actorName: None
+	session_started_metadata: None[0m
+2024-01-23 16:17:24,947 [DEBUG]  Logged UserUtterance - tracker now has 14 events.
+2024-01-23 16:17:24,947 [DEBUG]  Validating extracted slots: object
+horizontal
+relative
+relName
+actorName
+2024-01-23 16:17:24,948 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.extract.slots       [0m [36maction_extract_slot[0m=[35maction_extract_slots[0m [36mlen_extraction_events[0m=[35m5[0m [36mrasa_events[0m=[35m[SlotSet(key: object, value: box), SlotSet(key: horizontal, value: right), SlotSet(key: relative, value: right of), SlotSet(key: relName, value: table1), SlotSet(key: actorName, value: table1)][0m
+2024-01-23 16:17:24,948 [DEBUG]  Running graph with inputs: {'__tracker__': <rasa.shared.core.trackers.DialogueStateTracker object at 0x7f55d36701c0>}, targets: ['select_prediction'] and ExecutionContext(model_id='8e4a254725e44aeaaadcf36ce1b310f3', should_add_diagnostic_data=False, is_finetuning=False, node_name=None).
+2024-01-23 16:17:24,948 [DEBUG]  Node 'rule_only_data_provider' running 'RuleOnlyDataProvider.provide'.
+2024-01-23 16:17:24,949 [DEBUG]  Node 'domain_provider' running 'DomainProvider.provide_inference'.
+2024-01-23 16:17:24,949 [DEBUG]  Node 'run_AugmentedMemoizationPolicy1' running 'AugmentedMemoizationPolicy.predict_action_probabilities'.
+2024-01-23 16:17:24,950 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.predict.actions   [0m [36mtracker_states[0m=[35m[{}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'object')}, 'prev_action': {'action_name': 'action_listen'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'object')}, 'prev_action': {'action_name': 'utter_add_object'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'object')}, 'prev_action': {'action_name': 'send_info'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'object')}, 'prev_action': {'action_name': 'action_reset_all_slots'}}, {'user': {'intent': 'add_relative_object', 'entities': ('actorName', 'horizontal', 'object', 'relName', 'relative')}, 'prev_action': {'action_name': 'action_listen'}}][0m
+2024-01-23 16:17:24,950 [DEBUG]  Launch DeLorean...
+2024-01-23 16:17:24,952 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.states_recall     [0m [36mold_states[0m=[35m[{}, {'user': {'intent': 'add_relative_object', 'entities': ('actorName', 'horizontal', 'object', 'relName', 'relative')}, 'prev_action': {'action_name': 'action_listen'}}][0m
+2024-01-23 16:17:24,952 [DEBUG]  There is no memorised next action
+2024-01-23 16:17:24,952 [DEBUG]  Node 'run_RulePolicy0' running 'RulePolicy.predict_action_probabilities'.
+2024-01-23 16:17:24,952 [DEBUG]  [[32m[1mdebug    [0m] [1mrule_policy.actions.find      [0m [36mcurrent_states[0m=[35m
+[state 1] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_listen
+[state 2] user intent: add_object | user entities: ('actorName', 'object') | previous action name: utter_add_object
+[state 3] user intent: add_object | user entities: ('actorName', 'object') | previous action name: send_info
+[state 4] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_reset_all_slots
+[state 5] user text: Add a box right of table1 | previous action name: action_listen[0m
+2024-01-23 16:17:24,953 [DEBUG]  There is no applicable rule.
+2024-01-23 16:17:24,953 [DEBUG]  [[32m[1mdebug    [0m] [1mrule_policy.actions.find      [0m [36mcurrent_states[0m=[35m
+[state 1] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_listen
+[state 2] user intent: add_object | user entities: ('actorName', 'object') | previous action name: utter_add_object
+[state 3] user intent: add_object | user entities: ('actorName', 'object') | previous action name: send_info
+[state 4] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_reset_all_slots
+[state 5] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_listen[0m
+2024-01-23 16:17:24,953 [DEBUG]  There is no applicable rule.
+2024-01-23 16:17:24,953 [DEBUG]  Node 'run_TEDPolicy2' running 'TEDPolicy.predict_action_probabilities'.
+2024-01-23 16:17:24,958 [DEBUG]  TED predicted 'utter_add_relative_object' based on user intent.
+2024-01-23 16:17:24,958 [DEBUG]  Node 'select_prediction' running 'DefaultPolicyPredictionEnsemble.combine_predictions_from_kwargs'.
+2024-01-23 16:17:24,958 [DEBUG]  Made prediction using user intent.
+2024-01-23 16:17:24,958 [DEBUG]  Added `DefinePrevUserUtteredFeaturization(False)` event.
+2024-01-23 16:17:24,958 [DEBUG]  Predicted next action using TEDPolicy.
+2024-01-23 16:17:24,958 [DEBUG]  Predicted next action 'utter_add_relative_object' with confidence 0.99.
+2024-01-23 16:17:24,959 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.policy_prediction[0m [36mprediction_events[0m=[35m[<rasa.shared.core.events.DefinePrevUserUtteredFeaturization object at 0x7f55d36717b0>][0m
+2024-01-23 16:17:24,959 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.log         [0m [36maction_name[0m=[35mutter_add_relative_object[0m [36mrasa_events[0m=[35m[BotUttered('Add relative object intent here, received: box, relative: right of, relative name: table1!', {"elements": null, "quick_replies": null, "buttons": null, "attachment": null, "image": null, "custom": null}, {"utter_action": "utter_add_relative_object"}, 1706023044.9591498)][0m
+2024-01-23 16:17:24,959 [DEBUG]  Running graph with inputs: {'__tracker__': <rasa.shared.core.trackers.DialogueStateTracker object at 0x7f55d36701c0>}, targets: ['select_prediction'] and ExecutionContext(model_id='8e4a254725e44aeaaadcf36ce1b310f3', should_add_diagnostic_data=False, is_finetuning=False, node_name=None).
+2024-01-23 16:17:24,959 [DEBUG]  Node 'rule_only_data_provider' running 'RuleOnlyDataProvider.provide'.
+2024-01-23 16:17:24,960 [DEBUG]  Node 'domain_provider' running 'DomainProvider.provide_inference'.
+2024-01-23 16:17:24,960 [DEBUG]  Node 'run_AugmentedMemoizationPolicy1' running 'AugmentedMemoizationPolicy.predict_action_probabilities'.
+2024-01-23 16:17:24,960 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.predict.actions   [0m [36mtracker_states[0m=[35m[{'user': {'intent': 'add_object', 'entities': ('actorName', 'object')}, 'prev_action': {'action_name': 'action_listen'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'object')}, 'prev_action': {'action_name': 'utter_add_object'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'object')}, 'prev_action': {'action_name': 'send_info'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'object')}, 'prev_action': {'action_name': 'action_reset_all_slots'}}, {'user': {'intent': 'add_relative_object', 'entities': ('actorName', 'horizontal', 'object', 'relName', 'relative')}, 'prev_action': {'action_name': 'action_listen'}}, {'user': {'intent': 'add_relative_object', 'entities': ('actorName', 'horizontal', 'object', 'relName', 'relative')}, 'prev_action': {'action_name': 'utter_add_relative_object'}}][0m
+2024-01-23 16:17:24,960 [DEBUG]  Launch DeLorean...
+2024-01-23 16:17:24,962 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.states_recall     [0m [36mold_states[0m=[35m[{}, {'prev_action': {'action_name': 'utter_add_relative_object'}}][0m
+2024-01-23 16:17:24,962 [DEBUG]  There is no memorised next action
+2024-01-23 16:17:24,962 [DEBUG]  Node 'run_RulePolicy0' running 'RulePolicy.predict_action_probabilities'.
+2024-01-23 16:17:24,962 [DEBUG]  [[32m[1mdebug    [0m] [1mrule_policy.actions.find      [0m [36mcurrent_states[0m=[35m
+[state 1] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_listen
+[state 2] user intent: add_object | user entities: ('actorName', 'object') | previous action name: utter_add_object
+[state 3] user intent: add_object | user entities: ('actorName', 'object') | previous action name: send_info
+[state 4] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_reset_all_slots
+[state 5] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_listen
+[state 6] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: utter_add_relative_object[0m
+2024-01-23 16:17:24,962 [DEBUG]  There is no applicable rule.
+2024-01-23 16:17:24,963 [DEBUG]  Node 'run_TEDPolicy2' running 'TEDPolicy.predict_action_probabilities'.
+2024-01-23 16:17:24,966 [DEBUG]  TED predicted 'send_info' based on user intent.
+2024-01-23 16:17:24,966 [DEBUG]  Node 'select_prediction' running 'DefaultPolicyPredictionEnsemble.combine_predictions_from_kwargs'.
+2024-01-23 16:17:24,966 [DEBUG]  Predicted next action using TEDPolicy.
+2024-01-23 16:17:24,966 [DEBUG]  Predicted next action 'send_info' with confidence 1.00.
+2024-01-23 16:17:24,966 [DEBUG]  Calling action endpoint to run action 'send_info'.
+2024-01-23 16:17:24,991 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.policy_prediction[0m [36mprediction_events[0m=[35m[][0m
+2024-01-23 16:17:24,991 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.log         [0m [36maction_name[0m=[35msend_info[0m [36mrasa_events[0m=[35m[][0m
+2024-01-23 16:17:24,991 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.slots.log           [0m [36mslot_values[0m=[35m	object: box
+	vertical: None
+	horizontal: right
+	relative: right of
+	relName: table1
+	actorName: table1
+	session_started_metadata: None[0m
+2024-01-23 16:17:24,991 [DEBUG]  Running graph with inputs: {'__tracker__': <rasa.shared.core.trackers.DialogueStateTracker object at 0x7f55d36701c0>}, targets: ['select_prediction'] and ExecutionContext(model_id='8e4a254725e44aeaaadcf36ce1b310f3', should_add_diagnostic_data=False, is_finetuning=False, node_name=None).
+2024-01-23 16:17:24,991 [DEBUG]  Node 'rule_only_data_provider' running 'RuleOnlyDataProvider.provide'.
+2024-01-23 16:17:24,991 [DEBUG]  Node 'domain_provider' running 'DomainProvider.provide_inference'.
+2024-01-23 16:17:24,991 [DEBUG]  Node 'run_AugmentedMemoizationPolicy1' running 'AugmentedMemoizationPolicy.predict_action_probabilities'.
+2024-01-23 16:17:24,992 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.predict.actions   [0m [36mtracker_states[0m=[35m[{'user': {'intent': 'add_object', 'entities': ('actorName', 'object')}, 'prev_action': {'action_name': 'utter_add_object'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'object')}, 'prev_action': {'action_name': 'send_info'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'object')}, 'prev_action': {'action_name': 'action_reset_all_slots'}}, {'user': {'intent': 'add_relative_object', 'entities': ('actorName', 'horizontal', 'object', 'relName', 'relative')}, 'prev_action': {'action_name': 'action_listen'}}, {'user': {'intent': 'add_relative_object', 'entities': ('actorName', 'horizontal', 'object', 'relName', 'relative')}, 'prev_action': {'action_name': 'utter_add_relative_object'}}, {'user': {'intent': 'add_relative_object', 'entities': ('actorName', 'horizontal', 'object', 'relName', 'relative')}, 'prev_action': {'action_name': 'send_info'}}][0m
+2024-01-23 16:17:24,992 [DEBUG]  Launch DeLorean...
+2024-01-23 16:17:24,994 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.states_recall     [0m [36mold_states[0m=[35m[{}, {'prev_action': {'action_name': 'send_info'}}][0m
+2024-01-23 16:17:24,994 [DEBUG]  There is no memorised next action
+2024-01-23 16:17:24,994 [DEBUG]  Node 'run_RulePolicy0' running 'RulePolicy.predict_action_probabilities'.
+2024-01-23 16:17:24,994 [DEBUG]  [[32m[1mdebug    [0m] [1mrule_policy.actions.find      [0m [36mcurrent_states[0m=[35m
+[state 1] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_listen
+[state 2] user intent: add_object | user entities: ('actorName', 'object') | previous action name: utter_add_object
+[state 3] user intent: add_object | user entities: ('actorName', 'object') | previous action name: send_info
+[state 4] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_reset_all_slots
+[state 5] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_listen
+[state 6] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: utter_add_relative_object
+[state 7] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: send_info[0m
+2024-01-23 16:17:24,994 [DEBUG]  There is no applicable rule.
+2024-01-23 16:17:24,994 [DEBUG]  Node 'run_TEDPolicy2' running 'TEDPolicy.predict_action_probabilities'.
+2024-01-23 16:17:24,998 [DEBUG]  TED predicted 'action_reset_all_slots' based on user intent.
+2024-01-23 16:17:24,998 [DEBUG]  Node 'select_prediction' running 'DefaultPolicyPredictionEnsemble.combine_predictions_from_kwargs'.
+2024-01-23 16:17:24,998 [DEBUG]  Predicted next action using TEDPolicy.
+2024-01-23 16:17:24,999 [DEBUG]  Predicted next action 'action_reset_all_slots' with confidence 1.00.
+2024-01-23 16:17:24,999 [DEBUG]  Calling action endpoint to run action 'action_reset_all_slots'.
+2024-01-23 16:17:25,030 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.policy_prediction[0m [36mprediction_events[0m=[35m[][0m
+2024-01-23 16:17:25,030 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.log         [0m [36maction_name[0m=[35maction_reset_all_slots[0m [36mrasa_events[0m=[35m[<rasa.shared.core.events.AllSlotsReset object at 0x7f55d364ea10>][0m
+2024-01-23 16:17:25,030 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.slots.log           [0m [36mslot_values[0m=[35m	object: None
+	vertical: None
+	horizontal: None
+	relative: None
+	relName: None
+	actorName: None
+	session_started_metadata: None[0m
+2024-01-23 16:17:25,030 [DEBUG]  Running graph with inputs: {'__tracker__': <rasa.shared.core.trackers.DialogueStateTracker object at 0x7f55d36701c0>}, targets: ['select_prediction'] and ExecutionContext(model_id='8e4a254725e44aeaaadcf36ce1b310f3', should_add_diagnostic_data=False, is_finetuning=False, node_name=None).
+2024-01-23 16:17:25,030 [DEBUG]  Node 'rule_only_data_provider' running 'RuleOnlyDataProvider.provide'.
+2024-01-23 16:17:25,030 [DEBUG]  Node 'domain_provider' running 'DomainProvider.provide_inference'.
+2024-01-23 16:17:25,031 [DEBUG]  Node 'run_AugmentedMemoizationPolicy1' running 'AugmentedMemoizationPolicy.predict_action_probabilities'.
+2024-01-23 16:17:25,031 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.predict.actions   [0m [36mtracker_states[0m=[35m[{'user': {'intent': 'add_object', 'entities': ('actorName', 'object')}, 'prev_action': {'action_name': 'send_info'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'object')}, 'prev_action': {'action_name': 'action_reset_all_slots'}}, {'user': {'intent': 'add_relative_object', 'entities': ('actorName', 'horizontal', 'object', 'relName', 'relative')}, 'prev_action': {'action_name': 'action_listen'}}, {'user': {'intent': 'add_relative_object', 'entities': ('actorName', 'horizontal', 'object', 'relName', 'relative')}, 'prev_action': {'action_name': 'utter_add_relative_object'}}, {'user': {'intent': 'add_relative_object', 'entities': ('actorName', 'horizontal', 'object', 'relName', 'relative')}, 'prev_action': {'action_name': 'send_info'}}, {'user': {'intent': 'add_relative_object', 'entities': ('actorName', 'horizontal', 'object', 'relName', 'relative')}, 'prev_action': {'action_name': 'action_reset_all_slots'}}][0m
+2024-01-23 16:17:25,031 [DEBUG]  Launch DeLorean...
+2024-01-23 16:17:25,034 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.states_recall     [0m [36mold_states[0m=[35m[{}, {'prev_action': {'action_name': 'action_reset_all_slots'}}][0m
+2024-01-23 16:17:25,034 [DEBUG]  There is no memorised next action
+2024-01-23 16:17:25,034 [DEBUG]  Node 'run_RulePolicy0' running 'RulePolicy.predict_action_probabilities'.
+2024-01-23 16:17:25,034 [DEBUG]  [[32m[1mdebug    [0m] [1mrule_policy.actions.find      [0m [36mcurrent_states[0m=[35m
+[state 1] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_listen
+[state 2] user intent: add_object | user entities: ('actorName', 'object') | previous action name: utter_add_object
+[state 3] user intent: add_object | user entities: ('actorName', 'object') | previous action name: send_info
+[state 4] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_reset_all_slots
+[state 5] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_listen
+[state 6] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: utter_add_relative_object
+[state 7] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: send_info
+[state 8] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_reset_all_slots[0m
+2024-01-23 16:17:25,034 [DEBUG]  There is no applicable rule.
+2024-01-23 16:17:25,035 [DEBUG]  Node 'run_TEDPolicy2' running 'TEDPolicy.predict_action_probabilities'.
+2024-01-23 16:17:25,038 [DEBUG]  TED predicted 'action_listen' based on user intent.
+2024-01-23 16:17:25,038 [DEBUG]  Node 'select_prediction' running 'DefaultPolicyPredictionEnsemble.combine_predictions_from_kwargs'.
+2024-01-23 16:17:25,038 [DEBUG]  Predicted next action using TEDPolicy.
+2024-01-23 16:17:25,038 [DEBUG]  Predicted next action 'action_listen' with confidence 1.00.
+2024-01-23 16:17:25,038 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.policy_prediction[0m [36mprediction_events[0m=[35m[][0m
+2024-01-23 16:17:25,039 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.log         [0m [36maction_name[0m=[35maction_listen[0m [36mrasa_events[0m=[35m[][0m
+2024-01-23 16:17:25,039 [DEBUG]  No event broker configured. Skipping streaming events.
+2024-01-23 16:17:25,039 [DEBUG]  Deleted lock for conversation '0883c4f833d94ee99d88c889d315438d'.
+2024-01-23 16:17:31,066 [DEBUG]  Issuing ticket for conversation '0883c4f833d94ee99d88c889d315438d'.
+2024-01-23 16:17:31,066 [DEBUG]  Acquiring lock for conversation '0883c4f833d94ee99d88c889d315438d'.
+2024-01-23 16:17:31,066 [DEBUG]  Acquired lock for conversation '0883c4f833d94ee99d88c889d315438d'.
+2024-01-23 16:17:31,066 [DEBUG]  Recreating tracker for id '0883c4f833d94ee99d88c889d315438d'
+2024-01-23 16:17:31,068 [DEBUG]  Running graph with inputs: {'__message__': [<rasa.core.channels.channel.UserMessage object at 0x7f55d33d6410>], '__tracker__': <rasa.shared.core.trackers.DialogueStateTracker object at 0x7f55d33d5b40>}, targets: ['run_RegexMessageHandler'] and ExecutionContext(model_id='8e4a254725e44aeaaadcf36ce1b310f3', should_add_diagnostic_data=False, is_finetuning=False, node_name=None).
+2024-01-23 16:17:31,069 [DEBUG]  Node 'nlu_message_converter' running 'NLUMessageConverter.convert_user_message'.
+2024-01-23 16:17:31,069 [DEBUG]  Node 'run_WhitespaceTokenizer0' running 'WhitespaceTokenizer.process'.
+2024-01-23 16:17:31,069 [DEBUG]  Node 'run_RegexFeaturizer1' running 'RegexFeaturizer.process'.
+2024-01-23 16:17:31,069 [DEBUG]  Node 'run_RegexEntityExtractor2' running 'RegexEntityExtractor.process'.
+2024-01-23 16:17:31,070 [DEBUG]  Node 'run_LexicalSyntacticFeaturizer3' running 'LexicalSyntacticFeaturizer.process'.
+2024-01-23 16:17:31,070 [DEBUG]  Node 'run_CountVectorsFeaturizer4' running 'CountVectorsFeaturizer.process'.
+2024-01-23 16:17:31,070 [DEBUG]  Node 'run_CountVectorsFeaturizer5' running 'CountVectorsFeaturizer.process'.
+2024-01-23 16:17:31,071 [DEBUG]  Node 'run_DIETClassifier6' running 'DIETClassifier.process'.
+2024-01-23 16:17:31,078 [DEBUG]  Node 'run_EntitySynonymMapper7' running 'EntitySynonymMapper.process'.
+2024-01-23 16:17:31,078 [DEBUG]  Node 'run_FallbackClassifier8' running 'FallbackClassifier.process'.
+2024-01-23 16:17:31,078 [DEBUG]  Node 'domain_provider' running 'DomainProvider.provide_inference'.
+2024-01-23 16:17:31,078 [DEBUG]  Node 'run_RegexMessageHandler' running 'RegexMessageHandler.process'.
+2024-01-23 16:17:31,078 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.message.parse       [0m [36mparse_data_entities[0m=[35m[{'entity': 'actorName', 'start': 0, 'end': 3, 'value': 'Add', 'extractor': 'RegexEntityExtractor'}, {'entity': 'actorName', 'start': 6, 'end': 11, 'value': 'robot', 'extractor': 'RegexEntityExtractor'}, {'entity': 'actorName', 'start': 12, 'end': 14, 'value': 'in', 'extractor': 'RegexEntityExtractor'}, {'entity': 'actorName', 'start': 15, 'end': 20, 'value': 'front', 'extractor': 'RegexEntityExtractor', 'processors': ['EntitySynonymMapper']}, {'entity': 'actorName', 'start': 21, 'end': 23, 'value': 'on', 'extractor': 'RegexEntityExtractor'}, {'entity': 'actorName', 'start': 24, 'end': 27, 'value': 'the', 'extractor': 'RegexEntityExtractor'}, {'entity': 'actorName', 'start': 28, 'end': 32, 'value': 'left', 'extractor': 'RegexEntityExtractor', 'processors': ['EntitySynonymMapper']}, {'entity': 'object', 'start': 6, 'end': 11, 'value': 'robot', 'extractor': 'RegexEntityExtractor'}, {'entity': 'horizontal', 'start': 28, 'end': 32, 'value': 'left', 'extractor': 'RegexEntityExtractor', 'processors': ['EntitySynonymMapper']}, {'entity': 'vertical', 'start': 15, 'end': 20, 'value': 'front', 'extractor': 'RegexEntityExtractor', 'processors': ['EntitySynonymMapper']}, {'entity': 'vertical', 'start': 15, 'end': 20, 'confidence_entity': 0.9032772779464722, 'value': 'front', 'extractor': 'DIETClassifier', 'processors': ['EntitySynonymMapper']}, {'entity': 'horizontal', 'start': 28, 'end': 32, 'confidence_entity': 0.9982119798660278, 'value': 'left', 'extractor': 'DIETClassifier', 'processors': ['EntitySynonymMapper']}][0m [36mparse_data_intent[0m=[35m{'name': 'add_object', 'confidence': 0.9617677927017212}[0m [36mparse_data_text[0m=[35mAdd a robot in front on the left[0m
+2024-01-23 16:17:31,078 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.slots.log           [0m [36mslot_values[0m=[35m	object: None
+	vertical: None
+	horizontal: None
+	relative: None
+	relName: None
+	actorName: None
+	session_started_metadata: None[0m
+2024-01-23 16:17:31,079 [DEBUG]  Logged UserUtterance - tracker now has 27 events.
+2024-01-23 16:17:31,079 [DEBUG]  Validating extracted slots: object
+vertical
+horizontal
+actorName
+2024-01-23 16:17:31,079 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.extract.slots       [0m [36maction_extract_slot[0m=[35maction_extract_slots[0m [36mlen_extraction_events[0m=[35m4[0m [36mrasa_events[0m=[35m[SlotSet(key: object, value: robot), SlotSet(key: vertical, value: front), SlotSet(key: horizontal, value: left), SlotSet(key: actorName, value: left)][0m
+2024-01-23 16:17:31,079 [DEBUG]  Running graph with inputs: {'__tracker__': <rasa.shared.core.trackers.DialogueStateTracker object at 0x7f55d33d5b40>}, targets: ['select_prediction'] and ExecutionContext(model_id='8e4a254725e44aeaaadcf36ce1b310f3', should_add_diagnostic_data=False, is_finetuning=False, node_name=None).
+2024-01-23 16:17:31,079 [DEBUG]  Node 'rule_only_data_provider' running 'RuleOnlyDataProvider.provide'.
+2024-01-23 16:17:31,079 [DEBUG]  Node 'domain_provider' running 'DomainProvider.provide_inference'.
+2024-01-23 16:17:31,079 [DEBUG]  Node 'run_AugmentedMemoizationPolicy1' running 'AugmentedMemoizationPolicy.predict_action_probabilities'.
+2024-01-23 16:17:31,080 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.predict.actions   [0m [36mtracker_states[0m=[35m[{'user': {'intent': 'add_object', 'entities': ('actorName', 'object')}, 'prev_action': {'action_name': 'action_reset_all_slots'}}, {'user': {'intent': 'add_relative_object', 'entities': ('actorName', 'horizontal', 'object', 'relName', 'relative')}, 'prev_action': {'action_name': 'action_listen'}}, {'user': {'intent': 'add_relative_object', 'entities': ('actorName', 'horizontal', 'object', 'relName', 'relative')}, 'prev_action': {'action_name': 'utter_add_relative_object'}}, {'user': {'intent': 'add_relative_object', 'entities': ('actorName', 'horizontal', 'object', 'relName', 'relative')}, 'prev_action': {'action_name': 'send_info'}}, {'user': {'intent': 'add_relative_object', 'entities': ('actorName', 'horizontal', 'object', 'relName', 'relative')}, 'prev_action': {'action_name': 'action_reset_all_slots'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'action_listen'}}][0m
+2024-01-23 16:17:31,080 [DEBUG]  Launch DeLorean...
+2024-01-23 16:17:31,082 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.states_recall     [0m [36mold_states[0m=[35m[{}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'action_listen'}}][0m
+2024-01-23 16:17:31,082 [DEBUG]  There is no memorised next action
+2024-01-23 16:17:31,083 [DEBUG]  Node 'run_RulePolicy0' running 'RulePolicy.predict_action_probabilities'.
+2024-01-23 16:17:31,083 [DEBUG]  [[32m[1mdebug    [0m] [1mrule_policy.actions.find      [0m [36mcurrent_states[0m=[35m
+[state 1] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_listen
+[state 2] user intent: add_object | user entities: ('actorName', 'object') | previous action name: utter_add_object
+[state 3] user intent: add_object | user entities: ('actorName', 'object') | previous action name: send_info
+[state 4] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_reset_all_slots
+[state 5] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_listen
+[state 6] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: utter_add_relative_object
+[state 7] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: send_info
+[state 8] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_reset_all_slots
+[state 9] user text: Add a robot in front on the left | previous action name: action_listen[0m
+2024-01-23 16:17:31,083 [DEBUG]  There is no applicable rule.
+2024-01-23 16:17:31,084 [DEBUG]  [[32m[1mdebug    [0m] [1mrule_policy.actions.find      [0m [36mcurrent_states[0m=[35m
+[state 1] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_listen
+[state 2] user intent: add_object | user entities: ('actorName', 'object') | previous action name: utter_add_object
+[state 3] user intent: add_object | user entities: ('actorName', 'object') | previous action name: send_info
+[state 4] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_reset_all_slots
+[state 5] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_listen
+[state 6] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: utter_add_relative_object
+[state 7] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: send_info
+[state 8] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_reset_all_slots
+[state 9] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_listen[0m
+2024-01-23 16:17:31,084 [DEBUG]  There is no applicable rule.
+2024-01-23 16:17:31,084 [DEBUG]  Node 'run_TEDPolicy2' running 'TEDPolicy.predict_action_probabilities'.
+2024-01-23 16:17:31,087 [DEBUG]  TED predicted 'utter_add_object' based on user intent.
+2024-01-23 16:17:31,088 [DEBUG]  Node 'select_prediction' running 'DefaultPolicyPredictionEnsemble.combine_predictions_from_kwargs'.
+2024-01-23 16:17:31,088 [DEBUG]  Made prediction using user intent.
+2024-01-23 16:17:31,088 [DEBUG]  Added `DefinePrevUserUtteredFeaturization(False)` event.
+2024-01-23 16:17:31,088 [DEBUG]  Predicted next action using TEDPolicy.
+2024-01-23 16:17:31,088 [DEBUG]  Predicted next action 'utter_add_object' with confidence 0.99.
+2024-01-23 16:17:31,088 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.policy_prediction[0m [36mprediction_events[0m=[35m[<rasa.shared.core.events.DefinePrevUserUtteredFeaturization object at 0x7f55d3434a60>][0m
+2024-01-23 16:17:31,089 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.log         [0m [36maction_name[0m=[35mutter_add_object[0m [36mrasa_events[0m=[35m[BotUttered('Add object intent here, received: robot, horizontal: left, vertical: front!', {"elements": null, "quick_replies": null, "buttons": null, "attachment": null, "image": null, "custom": null}, {"utter_action": "utter_add_object"}, 1706023051.0887651)][0m
+2024-01-23 16:17:31,089 [DEBUG]  Running graph with inputs: {'__tracker__': <rasa.shared.core.trackers.DialogueStateTracker object at 0x7f55d33d5b40>}, targets: ['select_prediction'] and ExecutionContext(model_id='8e4a254725e44aeaaadcf36ce1b310f3', should_add_diagnostic_data=False, is_finetuning=False, node_name=None).
+2024-01-23 16:17:31,089 [DEBUG]  Node 'rule_only_data_provider' running 'RuleOnlyDataProvider.provide'.
+2024-01-23 16:17:31,089 [DEBUG]  Node 'domain_provider' running 'DomainProvider.provide_inference'.
+2024-01-23 16:17:31,089 [DEBUG]  Node 'run_AugmentedMemoizationPolicy1' running 'AugmentedMemoizationPolicy.predict_action_probabilities'.
+2024-01-23 16:17:31,090 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.predict.actions   [0m [36mtracker_states[0m=[35m[{'user': {'intent': 'add_relative_object', 'entities': ('actorName', 'horizontal', 'object', 'relName', 'relative')}, 'prev_action': {'action_name': 'action_listen'}}, {'user': {'intent': 'add_relative_object', 'entities': ('actorName', 'horizontal', 'object', 'relName', 'relative')}, 'prev_action': {'action_name': 'utter_add_relative_object'}}, {'user': {'intent': 'add_relative_object', 'entities': ('actorName', 'horizontal', 'object', 'relName', 'relative')}, 'prev_action': {'action_name': 'send_info'}}, {'user': {'intent': 'add_relative_object', 'entities': ('actorName', 'horizontal', 'object', 'relName', 'relative')}, 'prev_action': {'action_name': 'action_reset_all_slots'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'action_listen'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'utter_add_object'}}][0m
+2024-01-23 16:17:31,090 [DEBUG]  Launch DeLorean...
+2024-01-23 16:17:31,093 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.states_recall     [0m [36mold_states[0m=[35m[{}, {'prev_action': {'action_name': 'utter_add_object'}}][0m
+2024-01-23 16:17:31,093 [DEBUG]  There is no memorised next action
+2024-01-23 16:17:31,093 [DEBUG]  Node 'run_RulePolicy0' running 'RulePolicy.predict_action_probabilities'.
+2024-01-23 16:17:31,093 [DEBUG]  [[32m[1mdebug    [0m] [1mrule_policy.actions.find      [0m [36mcurrent_states[0m=[35m
+[state 1] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_listen
+[state 2] user intent: add_object | user entities: ('actorName', 'object') | previous action name: utter_add_object
+[state 3] user intent: add_object | user entities: ('actorName', 'object') | previous action name: send_info
+[state 4] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_reset_all_slots
+[state 5] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_listen
+[state 6] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: utter_add_relative_object
+[state 7] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: send_info
+[state 8] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_reset_all_slots
+[state 9] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_listen
+[state 10] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: utter_add_object[0m
+2024-01-23 16:17:31,093 [DEBUG]  There is no applicable rule.
+2024-01-23 16:17:31,093 [DEBUG]  Node 'run_TEDPolicy2' running 'TEDPolicy.predict_action_probabilities'.
+2024-01-23 16:17:31,097 [DEBUG]  TED predicted 'send_info' based on user intent.
+2024-01-23 16:17:31,097 [DEBUG]  Node 'select_prediction' running 'DefaultPolicyPredictionEnsemble.combine_predictions_from_kwargs'.
+2024-01-23 16:17:31,097 [DEBUG]  Predicted next action using TEDPolicy.
+2024-01-23 16:17:31,097 [DEBUG]  Predicted next action 'send_info' with confidence 1.00.
+2024-01-23 16:17:31,097 [DEBUG]  Calling action endpoint to run action 'send_info'.
+2024-01-23 16:17:31,121 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.policy_prediction[0m [36mprediction_events[0m=[35m[][0m
+2024-01-23 16:17:31,121 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.log         [0m [36maction_name[0m=[35msend_info[0m [36mrasa_events[0m=[35m[][0m
+2024-01-23 16:17:31,121 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.slots.log           [0m [36mslot_values[0m=[35m	object: robot
+	vertical: front
+	horizontal: left
+	relative: None
+	relName: None
+	actorName: left
+	session_started_metadata: None[0m
+2024-01-23 16:17:31,121 [DEBUG]  Running graph with inputs: {'__tracker__': <rasa.shared.core.trackers.DialogueStateTracker object at 0x7f55d33d5b40>}, targets: ['select_prediction'] and ExecutionContext(model_id='8e4a254725e44aeaaadcf36ce1b310f3', should_add_diagnostic_data=False, is_finetuning=False, node_name=None).
+2024-01-23 16:17:31,122 [DEBUG]  Node 'rule_only_data_provider' running 'RuleOnlyDataProvider.provide'.
+2024-01-23 16:17:31,122 [DEBUG]  Node 'domain_provider' running 'DomainProvider.provide_inference'.
+2024-01-23 16:17:31,122 [DEBUG]  Node 'run_AugmentedMemoizationPolicy1' running 'AugmentedMemoizationPolicy.predict_action_probabilities'.
+2024-01-23 16:17:31,122 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.predict.actions   [0m [36mtracker_states[0m=[35m[{'user': {'intent': 'add_relative_object', 'entities': ('actorName', 'horizontal', 'object', 'relName', 'relative')}, 'prev_action': {'action_name': 'utter_add_relative_object'}}, {'user': {'intent': 'add_relative_object', 'entities': ('actorName', 'horizontal', 'object', 'relName', 'relative')}, 'prev_action': {'action_name': 'send_info'}}, {'user': {'intent': 'add_relative_object', 'entities': ('actorName', 'horizontal', 'object', 'relName', 'relative')}, 'prev_action': {'action_name': 'action_reset_all_slots'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'action_listen'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'utter_add_object'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'send_info'}}][0m
+2024-01-23 16:17:31,122 [DEBUG]  Launch DeLorean...
+2024-01-23 16:17:31,124 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.states_recall     [0m [36mold_states[0m=[35m[{}, {'prev_action': {'action_name': 'send_info'}}][0m
+2024-01-23 16:17:31,124 [DEBUG]  There is no memorised next action
+2024-01-23 16:17:31,124 [DEBUG]  Node 'run_RulePolicy0' running 'RulePolicy.predict_action_probabilities'.
+2024-01-23 16:17:31,124 [DEBUG]  [[32m[1mdebug    [0m] [1mrule_policy.actions.find      [0m [36mcurrent_states[0m=[35m
+[state 1] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_listen
+[state 2] user intent: add_object | user entities: ('actorName', 'object') | previous action name: utter_add_object
+[state 3] user intent: add_object | user entities: ('actorName', 'object') | previous action name: send_info
+[state 4] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_reset_all_slots
+[state 5] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_listen
+[state 6] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: utter_add_relative_object
+[state 7] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: send_info
+[state 8] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_reset_all_slots
+[state 9] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_listen
+[state 10] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: utter_add_object
+[state 11] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: send_info[0m
+2024-01-23 16:17:31,124 [DEBUG]  There is no applicable rule.
+2024-01-23 16:17:31,125 [DEBUG]  Node 'run_TEDPolicy2' running 'TEDPolicy.predict_action_probabilities'.
+2024-01-23 16:17:31,128 [DEBUG]  TED predicted 'action_reset_all_slots' based on user intent.
+2024-01-23 16:17:31,128 [DEBUG]  Node 'select_prediction' running 'DefaultPolicyPredictionEnsemble.combine_predictions_from_kwargs'.
+2024-01-23 16:17:31,128 [DEBUG]  Predicted next action using TEDPolicy.
+2024-01-23 16:17:31,129 [DEBUG]  Predicted next action 'action_reset_all_slots' with confidence 1.00.
+2024-01-23 16:17:31,129 [DEBUG]  Calling action endpoint to run action 'action_reset_all_slots'.
+2024-01-23 16:17:31,151 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.policy_prediction[0m [36mprediction_events[0m=[35m[][0m
+2024-01-23 16:17:31,151 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.log         [0m [36maction_name[0m=[35maction_reset_all_slots[0m [36mrasa_events[0m=[35m[<rasa.shared.core.events.AllSlotsReset object at 0x7f55d3436470>][0m
+2024-01-23 16:17:31,151 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.slots.log           [0m [36mslot_values[0m=[35m	object: None
+	vertical: None
+	horizontal: None
+	relative: None
+	relName: None
+	actorName: None
+	session_started_metadata: None[0m
+2024-01-23 16:17:31,151 [DEBUG]  Running graph with inputs: {'__tracker__': <rasa.shared.core.trackers.DialogueStateTracker object at 0x7f55d33d5b40>}, targets: ['select_prediction'] and ExecutionContext(model_id='8e4a254725e44aeaaadcf36ce1b310f3', should_add_diagnostic_data=False, is_finetuning=False, node_name=None).
+2024-01-23 16:17:31,152 [DEBUG]  Node 'rule_only_data_provider' running 'RuleOnlyDataProvider.provide'.
+2024-01-23 16:17:31,152 [DEBUG]  Node 'domain_provider' running 'DomainProvider.provide_inference'.
+2024-01-23 16:17:31,152 [DEBUG]  Node 'run_AugmentedMemoizationPolicy1' running 'AugmentedMemoizationPolicy.predict_action_probabilities'.
+2024-01-23 16:17:31,152 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.predict.actions   [0m [36mtracker_states[0m=[35m[{'user': {'intent': 'add_relative_object', 'entities': ('actorName', 'horizontal', 'object', 'relName', 'relative')}, 'prev_action': {'action_name': 'send_info'}}, {'user': {'intent': 'add_relative_object', 'entities': ('actorName', 'horizontal', 'object', 'relName', 'relative')}, 'prev_action': {'action_name': 'action_reset_all_slots'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'action_listen'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'utter_add_object'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'send_info'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'action_reset_all_slots'}}][0m
+2024-01-23 16:17:31,152 [DEBUG]  Launch DeLorean...
+2024-01-23 16:17:31,154 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.states_recall     [0m [36mold_states[0m=[35m[{}, {'prev_action': {'action_name': 'action_reset_all_slots'}}][0m
+2024-01-23 16:17:31,154 [DEBUG]  There is no memorised next action
+2024-01-23 16:17:31,154 [DEBUG]  Node 'run_RulePolicy0' running 'RulePolicy.predict_action_probabilities'.
+2024-01-23 16:17:31,155 [DEBUG]  [[32m[1mdebug    [0m] [1mrule_policy.actions.find      [0m [36mcurrent_states[0m=[35m
+[state 1] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_listen
+[state 2] user intent: add_object | user entities: ('actorName', 'object') | previous action name: utter_add_object
+[state 3] user intent: add_object | user entities: ('actorName', 'object') | previous action name: send_info
+[state 4] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_reset_all_slots
+[state 5] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_listen
+[state 6] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: utter_add_relative_object
+[state 7] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: send_info
+[state 8] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_reset_all_slots
+[state 9] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_listen
+[state 10] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: utter_add_object
+[state 11] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: send_info
+[state 12] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_reset_all_slots[0m
+2024-01-23 16:17:31,155 [DEBUG]  There is no applicable rule.
+2024-01-23 16:17:31,155 [DEBUG]  Node 'run_TEDPolicy2' running 'TEDPolicy.predict_action_probabilities'.
+2024-01-23 16:17:31,158 [DEBUG]  TED predicted 'action_listen' based on user intent.
+2024-01-23 16:17:31,158 [DEBUG]  Node 'select_prediction' running 'DefaultPolicyPredictionEnsemble.combine_predictions_from_kwargs'.
+2024-01-23 16:17:31,159 [DEBUG]  Predicted next action using TEDPolicy.
+2024-01-23 16:17:31,159 [DEBUG]  Predicted next action 'action_listen' with confidence 1.00.
+2024-01-23 16:17:31,159 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.policy_prediction[0m [36mprediction_events[0m=[35m[][0m
+2024-01-23 16:17:31,159 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.log         [0m [36maction_name[0m=[35maction_listen[0m [36mrasa_events[0m=[35m[][0m
+2024-01-23 16:17:31,159 [DEBUG]  No event broker configured. Skipping streaming events.
+2024-01-23 16:17:31,159 [DEBUG]  Deleted lock for conversation '0883c4f833d94ee99d88c889d315438d'.
+2024-01-23 16:17:35,300 [DEBUG]  Issuing ticket for conversation '0883c4f833d94ee99d88c889d315438d'.
+2024-01-23 16:17:35,300 [DEBUG]  Acquiring lock for conversation '0883c4f833d94ee99d88c889d315438d'.
+2024-01-23 16:17:35,301 [DEBUG]  Acquired lock for conversation '0883c4f833d94ee99d88c889d315438d'.
+2024-01-23 16:17:35,301 [DEBUG]  Recreating tracker for id '0883c4f833d94ee99d88c889d315438d'
+2024-01-23 16:17:35,308 [DEBUG]  Running graph with inputs: {'__message__': [<rasa.core.channels.channel.UserMessage object at 0x7f55d317e4a0>], '__tracker__': <rasa.shared.core.trackers.DialogueStateTracker object at 0x7f55d317df00>}, targets: ['run_RegexMessageHandler'] and ExecutionContext(model_id='8e4a254725e44aeaaadcf36ce1b310f3', should_add_diagnostic_data=False, is_finetuning=False, node_name=None).
+2024-01-23 16:17:35,309 [DEBUG]  Node 'nlu_message_converter' running 'NLUMessageConverter.convert_user_message'.
+2024-01-23 16:17:35,310 [DEBUG]  Node 'run_WhitespaceTokenizer0' running 'WhitespaceTokenizer.process'.
+2024-01-23 16:17:35,310 [DEBUG]  Node 'run_RegexFeaturizer1' running 'RegexFeaturizer.process'.
+2024-01-23 16:17:35,312 [DEBUG]  Node 'run_RegexEntityExtractor2' running 'RegexEntityExtractor.process'.
+2024-01-23 16:17:35,312 [DEBUG]  Node 'run_LexicalSyntacticFeaturizer3' running 'LexicalSyntacticFeaturizer.process'.
+2024-01-23 16:17:35,313 [DEBUG]  Node 'run_CountVectorsFeaturizer4' running 'CountVectorsFeaturizer.process'.
+2024-01-23 16:17:35,314 [DEBUG]  Node 'run_CountVectorsFeaturizer5' running 'CountVectorsFeaturizer.process'.
+2024-01-23 16:17:35,315 [DEBUG]  Node 'run_DIETClassifier6' running 'DIETClassifier.process'.
+2024-01-23 16:17:35,326 [DEBUG]  Node 'run_EntitySynonymMapper7' running 'EntitySynonymMapper.process'.
+2024-01-23 16:17:35,327 [DEBUG]  Node 'run_FallbackClassifier8' running 'FallbackClassifier.process'.
+2024-01-23 16:17:35,327 [DEBUG]  Node 'domain_provider' running 'DomainProvider.provide_inference'.
+2024-01-23 16:17:35,327 [DEBUG]  Node 'run_RegexMessageHandler' running 'RegexMessageHandler.process'.
+2024-01-23 16:17:35,327 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.message.parse       [0m [36mparse_data_entities[0m=[35m[{'entity': 'actorName', 'start': 0, 'end': 3, 'value': 'Add', 'extractor': 'RegexEntityExtractor'}, {'entity': 'actorName', 'start': 6, 'end': 11, 'value': 'robot', 'extractor': 'RegexEntityExtractor'}, {'entity': 'actorName', 'start': 12, 'end': 14, 'value': 'in', 'extractor': 'RegexEntityExtractor'}, {'entity': 'actorName', 'start': 15, 'end': 20, 'value': 'front', 'extractor': 'RegexEntityExtractor', 'processors': ['EntitySynonymMapper']}, {'entity': 'actorName', 'start': 21, 'end': 23, 'value': 'on', 'extractor': 'RegexEntityExtractor'}, {'entity': 'actorName', 'start': 24, 'end': 27, 'value': 'the', 'extractor': 'RegexEntityExtractor'}, {'entity': 'actorName', 'start': 28, 'end': 33, 'value': 'right', 'extractor': 'RegexEntityExtractor', 'processors': ['EntitySynonymMapper']}, {'entity': 'object', 'start': 6, 'end': 11, 'value': 'robot', 'extractor': 'RegexEntityExtractor'}, {'entity': 'horizontal', 'start': 28, 'end': 33, 'value': 'right', 'extractor': 'RegexEntityExtractor', 'processors': ['EntitySynonymMapper']}, {'entity': 'vertical', 'start': 15, 'end': 20, 'value': 'front', 'extractor': 'RegexEntityExtractor', 'processors': ['EntitySynonymMapper']}, {'entity': 'vertical', 'start': 15, 'end': 20, 'confidence_entity': 0.9070343971252441, 'value': 'front', 'extractor': 'DIETClassifier', 'processors': ['EntitySynonymMapper']}, {'entity': 'horizontal', 'start': 28, 'end': 33, 'confidence_entity': 0.997204065322876, 'value': 'right', 'extractor': 'DIETClassifier', 'processors': ['EntitySynonymMapper']}][0m [36mparse_data_intent[0m=[35m{'name': 'add_object', 'confidence': 0.9334885478019714}[0m [36mparse_data_text[0m=[35mAdd a robot in front on the right[0m
+2024-01-23 16:17:35,327 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.slots.log           [0m [36mslot_values[0m=[35m	object: None
+	vertical: None
+	horizontal: None
+	relative: None
+	relName: None
+	actorName: None
+	session_started_metadata: None[0m
+2024-01-23 16:17:35,328 [DEBUG]  Logged UserUtterance - tracker now has 39 events.
+2024-01-23 16:17:35,328 [DEBUG]  Validating extracted slots: object
+vertical
+horizontal
+actorName
+2024-01-23 16:17:35,328 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.extract.slots       [0m [36maction_extract_slot[0m=[35maction_extract_slots[0m [36mlen_extraction_events[0m=[35m4[0m [36mrasa_events[0m=[35m[SlotSet(key: object, value: robot), SlotSet(key: vertical, value: front), SlotSet(key: horizontal, value: right), SlotSet(key: actorName, value: right)][0m
+2024-01-23 16:17:35,328 [DEBUG]  Running graph with inputs: {'__tracker__': <rasa.shared.core.trackers.DialogueStateTracker object at 0x7f55d317df00>}, targets: ['select_prediction'] and ExecutionContext(model_id='8e4a254725e44aeaaadcf36ce1b310f3', should_add_diagnostic_data=False, is_finetuning=False, node_name=None).
+2024-01-23 16:17:35,328 [DEBUG]  Node 'rule_only_data_provider' running 'RuleOnlyDataProvider.provide'.
+2024-01-23 16:17:35,328 [DEBUG]  Node 'domain_provider' running 'DomainProvider.provide_inference'.
+2024-01-23 16:17:35,328 [DEBUG]  Node 'run_AugmentedMemoizationPolicy1' running 'AugmentedMemoizationPolicy.predict_action_probabilities'.
+2024-01-23 16:17:35,329 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.predict.actions   [0m [36mtracker_states[0m=[35m[{'user': {'intent': 'add_relative_object', 'entities': ('actorName', 'horizontal', 'object', 'relName', 'relative')}, 'prev_action': {'action_name': 'action_reset_all_slots'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'action_listen'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'utter_add_object'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'send_info'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'action_reset_all_slots'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'action_listen'}}][0m
+2024-01-23 16:17:35,329 [DEBUG]  Launch DeLorean...
+2024-01-23 16:17:35,332 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.states_recall     [0m [36mold_states[0m=[35m[{}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'action_listen'}}][0m
+2024-01-23 16:17:35,332 [DEBUG]  There is no memorised next action
+2024-01-23 16:17:35,332 [DEBUG]  Node 'run_RulePolicy0' running 'RulePolicy.predict_action_probabilities'.
+2024-01-23 16:17:35,332 [DEBUG]  [[32m[1mdebug    [0m] [1mrule_policy.actions.find      [0m [36mcurrent_states[0m=[35m
+[state 1] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_listen
+[state 2] user intent: add_object | user entities: ('actorName', 'object') | previous action name: utter_add_object
+[state 3] user intent: add_object | user entities: ('actorName', 'object') | previous action name: send_info
+[state 4] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_reset_all_slots
+[state 5] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_listen
+[state 6] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: utter_add_relative_object
+[state 7] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: send_info
+[state 8] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_reset_all_slots
+[state 9] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_listen
+[state 10] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: utter_add_object
+[state 11] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: send_info
+[state 12] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_reset_all_slots
+[state 13] user text: Add a robot in front on the right | previous action name: action_listen[0m
+2024-01-23 16:17:35,332 [DEBUG]  There is no applicable rule.
+2024-01-23 16:17:35,333 [DEBUG]  [[32m[1mdebug    [0m] [1mrule_policy.actions.find      [0m [36mcurrent_states[0m=[35m
+[state 1] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_listen
+[state 2] user intent: add_object | user entities: ('actorName', 'object') | previous action name: utter_add_object
+[state 3] user intent: add_object | user entities: ('actorName', 'object') | previous action name: send_info
+[state 4] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_reset_all_slots
+[state 5] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_listen
+[state 6] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: utter_add_relative_object
+[state 7] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: send_info
+[state 8] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_reset_all_slots
+[state 9] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_listen
+[state 10] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: utter_add_object
+[state 11] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: send_info
+[state 12] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_reset_all_slots
+[state 13] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_listen[0m
+2024-01-23 16:17:35,333 [DEBUG]  There is no applicable rule.
+2024-01-23 16:17:35,333 [DEBUG]  Node 'run_TEDPolicy2' running 'TEDPolicy.predict_action_probabilities'.
+2024-01-23 16:17:35,337 [DEBUG]  TED predicted 'utter_add_object' based on user intent.
+2024-01-23 16:17:35,337 [DEBUG]  Node 'select_prediction' running 'DefaultPolicyPredictionEnsemble.combine_predictions_from_kwargs'.
+2024-01-23 16:17:35,337 [DEBUG]  Made prediction using user intent.
+2024-01-23 16:17:35,337 [DEBUG]  Added `DefinePrevUserUtteredFeaturization(False)` event.
+2024-01-23 16:17:35,337 [DEBUG]  Predicted next action using TEDPolicy.
+2024-01-23 16:17:35,337 [DEBUG]  Predicted next action 'utter_add_object' with confidence 0.99.
+2024-01-23 16:17:35,338 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.policy_prediction[0m [36mprediction_events[0m=[35m[<rasa.shared.core.events.DefinePrevUserUtteredFeaturization object at 0x7f55d3204310>][0m
+2024-01-23 16:17:35,338 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.log         [0m [36maction_name[0m=[35mutter_add_object[0m [36mrasa_events[0m=[35m[BotUttered('Add object intent here, received: robot, horizontal: right, vertical: front!', {"elements": null, "quick_replies": null, "buttons": null, "attachment": null, "image": null, "custom": null}, {"utter_action": "utter_add_object"}, 1706023055.3379529)][0m
+2024-01-23 16:17:35,338 [DEBUG]  Running graph with inputs: {'__tracker__': <rasa.shared.core.trackers.DialogueStateTracker object at 0x7f55d317df00>}, targets: ['select_prediction'] and ExecutionContext(model_id='8e4a254725e44aeaaadcf36ce1b310f3', should_add_diagnostic_data=False, is_finetuning=False, node_name=None).
+2024-01-23 16:17:35,338 [DEBUG]  Node 'rule_only_data_provider' running 'RuleOnlyDataProvider.provide'.
+2024-01-23 16:17:35,338 [DEBUG]  Node 'domain_provider' running 'DomainProvider.provide_inference'.
+2024-01-23 16:17:35,338 [DEBUG]  Node 'run_AugmentedMemoizationPolicy1' running 'AugmentedMemoizationPolicy.predict_action_probabilities'.
+2024-01-23 16:17:35,339 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.predict.actions   [0m [36mtracker_states[0m=[35m[{'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'action_listen'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'utter_add_object'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'send_info'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'action_reset_all_slots'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'action_listen'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'utter_add_object'}}][0m
+2024-01-23 16:17:35,339 [DEBUG]  Launch DeLorean...
+2024-01-23 16:17:35,342 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.states_recall     [0m [36mold_states[0m=[35m[{}, {'prev_action': {'action_name': 'utter_add_object'}}][0m
+2024-01-23 16:17:35,342 [DEBUG]  There is no memorised next action
+2024-01-23 16:17:35,342 [DEBUG]  Node 'run_RulePolicy0' running 'RulePolicy.predict_action_probabilities'.
+2024-01-23 16:17:35,342 [DEBUG]  [[32m[1mdebug    [0m] [1mrule_policy.actions.find      [0m [36mcurrent_states[0m=[35m
+[state 1] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_listen
+[state 2] user intent: add_object | user entities: ('actorName', 'object') | previous action name: utter_add_object
+[state 3] user intent: add_object | user entities: ('actorName', 'object') | previous action name: send_info
+[state 4] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_reset_all_slots
+[state 5] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_listen
+[state 6] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: utter_add_relative_object
+[state 7] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: send_info
+[state 8] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_reset_all_slots
+[state 9] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_listen
+[state 10] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: utter_add_object
+[state 11] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: send_info
+[state 12] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_reset_all_slots
+[state 13] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_listen
+[state 14] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: utter_add_object[0m
+2024-01-23 16:17:35,342 [DEBUG]  There is no applicable rule.
+2024-01-23 16:17:35,342 [DEBUG]  Node 'run_TEDPolicy2' running 'TEDPolicy.predict_action_probabilities'.
+2024-01-23 16:17:35,346 [DEBUG]  TED predicted 'send_info' based on user intent.
+2024-01-23 16:17:35,346 [DEBUG]  Node 'select_prediction' running 'DefaultPolicyPredictionEnsemble.combine_predictions_from_kwargs'.
+2024-01-23 16:17:35,346 [DEBUG]  Predicted next action using TEDPolicy.
+2024-01-23 16:17:35,347 [DEBUG]  Predicted next action 'send_info' with confidence 1.00.
+2024-01-23 16:17:35,347 [DEBUG]  Calling action endpoint to run action 'send_info'.
+2024-01-23 16:17:35,371 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.policy_prediction[0m [36mprediction_events[0m=[35m[][0m
+2024-01-23 16:17:35,371 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.log         [0m [36maction_name[0m=[35msend_info[0m [36mrasa_events[0m=[35m[][0m
+2024-01-23 16:17:35,371 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.slots.log           [0m [36mslot_values[0m=[35m	object: robot
+	vertical: front
+	horizontal: right
+	relative: None
+	relName: None
+	actorName: right
+	session_started_metadata: None[0m
+2024-01-23 16:17:35,371 [DEBUG]  Running graph with inputs: {'__tracker__': <rasa.shared.core.trackers.DialogueStateTracker object at 0x7f55d317df00>}, targets: ['select_prediction'] and ExecutionContext(model_id='8e4a254725e44aeaaadcf36ce1b310f3', should_add_diagnostic_data=False, is_finetuning=False, node_name=None).
+2024-01-23 16:17:35,371 [DEBUG]  Node 'rule_only_data_provider' running 'RuleOnlyDataProvider.provide'.
+2024-01-23 16:17:35,371 [DEBUG]  Node 'domain_provider' running 'DomainProvider.provide_inference'.
+2024-01-23 16:17:35,371 [DEBUG]  Node 'run_AugmentedMemoizationPolicy1' running 'AugmentedMemoizationPolicy.predict_action_probabilities'.
+2024-01-23 16:17:35,372 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.predict.actions   [0m [36mtracker_states[0m=[35m[{'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'utter_add_object'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'send_info'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'action_reset_all_slots'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'action_listen'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'utter_add_object'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'send_info'}}][0m
+2024-01-23 16:17:35,372 [DEBUG]  Launch DeLorean...
+2024-01-23 16:17:35,374 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.states_recall     [0m [36mold_states[0m=[35m[{}, {'prev_action': {'action_name': 'send_info'}}][0m
+2024-01-23 16:17:35,374 [DEBUG]  There is no memorised next action
+2024-01-23 16:17:35,374 [DEBUG]  Node 'run_RulePolicy0' running 'RulePolicy.predict_action_probabilities'.
+2024-01-23 16:17:35,374 [DEBUG]  [[32m[1mdebug    [0m] [1mrule_policy.actions.find      [0m [36mcurrent_states[0m=[35m
+[state 1] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_listen
+[state 2] user intent: add_object | user entities: ('actorName', 'object') | previous action name: utter_add_object
+[state 3] user intent: add_object | user entities: ('actorName', 'object') | previous action name: send_info
+[state 4] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_reset_all_slots
+[state 5] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_listen
+[state 6] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: utter_add_relative_object
+[state 7] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: send_info
+[state 8] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_reset_all_slots
+[state 9] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_listen
+[state 10] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: utter_add_object
+[state 11] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: send_info
+[state 12] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_reset_all_slots
+[state 13] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_listen
+[state 14] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: utter_add_object
+[state 15] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: send_info[0m
+2024-01-23 16:17:35,374 [DEBUG]  There is no applicable rule.
+2024-01-23 16:17:35,375 [DEBUG]  Node 'run_TEDPolicy2' running 'TEDPolicy.predict_action_probabilities'.
+2024-01-23 16:17:35,378 [DEBUG]  TED predicted 'action_reset_all_slots' based on user intent.
+2024-01-23 16:17:35,379 [DEBUG]  Node 'select_prediction' running 'DefaultPolicyPredictionEnsemble.combine_predictions_from_kwargs'.
+2024-01-23 16:17:35,379 [DEBUG]  Predicted next action using TEDPolicy.
+2024-01-23 16:17:35,379 [DEBUG]  Predicted next action 'action_reset_all_slots' with confidence 1.00.
+2024-01-23 16:17:35,379 [DEBUG]  Calling action endpoint to run action 'action_reset_all_slots'.
+2024-01-23 16:17:35,402 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.policy_prediction[0m [36mprediction_events[0m=[35m[][0m
+2024-01-23 16:17:35,402 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.log         [0m [36maction_name[0m=[35maction_reset_all_slots[0m [36mrasa_events[0m=[35m[<rasa.shared.core.events.AllSlotsReset object at 0x7f55d3205f60>][0m
+2024-01-23 16:17:35,402 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.slots.log           [0m [36mslot_values[0m=[35m	object: None
+	vertical: None
+	horizontal: None
+	relative: None
+	relName: None
+	actorName: None
+	session_started_metadata: None[0m
+2024-01-23 16:17:35,402 [DEBUG]  Running graph with inputs: {'__tracker__': <rasa.shared.core.trackers.DialogueStateTracker object at 0x7f55d317df00>}, targets: ['select_prediction'] and ExecutionContext(model_id='8e4a254725e44aeaaadcf36ce1b310f3', should_add_diagnostic_data=False, is_finetuning=False, node_name=None).
+2024-01-23 16:17:35,402 [DEBUG]  Node 'rule_only_data_provider' running 'RuleOnlyDataProvider.provide'.
+2024-01-23 16:17:35,402 [DEBUG]  Node 'domain_provider' running 'DomainProvider.provide_inference'.
+2024-01-23 16:17:35,402 [DEBUG]  Node 'run_AugmentedMemoizationPolicy1' running 'AugmentedMemoizationPolicy.predict_action_probabilities'.
+2024-01-23 16:17:35,403 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.predict.actions   [0m [36mtracker_states[0m=[35m[{'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'send_info'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'action_reset_all_slots'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'action_listen'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'utter_add_object'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'send_info'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'action_reset_all_slots'}}][0m
+2024-01-23 16:17:35,403 [DEBUG]  Launch DeLorean...
+2024-01-23 16:17:35,405 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.states_recall     [0m [36mold_states[0m=[35m[{}, {'prev_action': {'action_name': 'action_reset_all_slots'}}][0m
+2024-01-23 16:17:35,405 [DEBUG]  There is no memorised next action
+2024-01-23 16:17:35,405 [DEBUG]  Node 'run_RulePolicy0' running 'RulePolicy.predict_action_probabilities'.
+2024-01-23 16:17:35,405 [DEBUG]  [[32m[1mdebug    [0m] [1mrule_policy.actions.find      [0m [36mcurrent_states[0m=[35m
+[state 1] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_listen
+[state 2] user intent: add_object | user entities: ('actorName', 'object') | previous action name: utter_add_object
+[state 3] user intent: add_object | user entities: ('actorName', 'object') | previous action name: send_info
+[state 4] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_reset_all_slots
+[state 5] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_listen
+[state 6] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: utter_add_relative_object
+[state 7] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: send_info
+[state 8] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_reset_all_slots
+[state 9] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_listen
+[state 10] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: utter_add_object
+[state 11] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: send_info
+[state 12] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_reset_all_slots
+[state 13] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_listen
+[state 14] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: utter_add_object
+[state 15] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: send_info
+[state 16] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_reset_all_slots[0m
+2024-01-23 16:17:35,406 [DEBUG]  There is no applicable rule.
+2024-01-23 16:17:35,406 [DEBUG]  Node 'run_TEDPolicy2' running 'TEDPolicy.predict_action_probabilities'.
+2024-01-23 16:17:35,409 [DEBUG]  TED predicted 'action_listen' based on user intent.
+2024-01-23 16:17:35,410 [DEBUG]  Node 'select_prediction' running 'DefaultPolicyPredictionEnsemble.combine_predictions_from_kwargs'.
+2024-01-23 16:17:35,410 [DEBUG]  Predicted next action using TEDPolicy.
+2024-01-23 16:17:35,410 [DEBUG]  Predicted next action 'action_listen' with confidence 1.00.
+2024-01-23 16:17:35,410 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.policy_prediction[0m [36mprediction_events[0m=[35m[][0m
+2024-01-23 16:17:35,410 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.log         [0m [36maction_name[0m=[35maction_listen[0m [36mrasa_events[0m=[35m[][0m
+2024-01-23 16:17:35,410 [DEBUG]  No event broker configured. Skipping streaming events.
+2024-01-23 16:17:35,411 [DEBUG]  Deleted lock for conversation '0883c4f833d94ee99d88c889d315438d'.
+2024-01-23 16:17:37,780 [DEBUG]  Issuing ticket for conversation '0883c4f833d94ee99d88c889d315438d'.
+2024-01-23 16:17:37,780 [DEBUG]  Acquiring lock for conversation '0883c4f833d94ee99d88c889d315438d'.
+2024-01-23 16:17:37,780 [DEBUG]  Acquired lock for conversation '0883c4f833d94ee99d88c889d315438d'.
+2024-01-23 16:17:37,780 [DEBUG]  Recreating tracker for id '0883c4f833d94ee99d88c889d315438d'
+2024-01-23 16:17:37,782 [DEBUG]  Running graph with inputs: {'__message__': [<rasa.core.channels.channel.UserMessage object at 0x7f55d312b190>], '__tracker__': <rasa.shared.core.trackers.DialogueStateTracker object at 0x7f55d312bd60>}, targets: ['run_RegexMessageHandler'] and ExecutionContext(model_id='8e4a254725e44aeaaadcf36ce1b310f3', should_add_diagnostic_data=False, is_finetuning=False, node_name=None).
+2024-01-23 16:17:37,783 [DEBUG]  Node 'nlu_message_converter' running 'NLUMessageConverter.convert_user_message'.
+2024-01-23 16:17:37,783 [DEBUG]  Node 'run_WhitespaceTokenizer0' running 'WhitespaceTokenizer.process'.
+2024-01-23 16:17:37,783 [DEBUG]  Node 'run_RegexFeaturizer1' running 'RegexFeaturizer.process'.
+2024-01-23 16:17:37,783 [DEBUG]  Node 'run_RegexEntityExtractor2' running 'RegexEntityExtractor.process'.
+2024-01-23 16:17:37,784 [DEBUG]  Node 'run_LexicalSyntacticFeaturizer3' running 'LexicalSyntacticFeaturizer.process'.
+2024-01-23 16:17:37,784 [DEBUG]  Node 'run_CountVectorsFeaturizer4' running 'CountVectorsFeaturizer.process'.
+2024-01-23 16:17:37,784 [DEBUG]  Node 'run_CountVectorsFeaturizer5' running 'CountVectorsFeaturizer.process'.
+2024-01-23 16:17:37,785 [DEBUG]  Node 'run_DIETClassifier6' running 'DIETClassifier.process'.
+2024-01-23 16:17:37,791 [DEBUG]  Node 'run_EntitySynonymMapper7' running 'EntitySynonymMapper.process'.
+2024-01-23 16:17:37,791 [DEBUG]  Node 'run_FallbackClassifier8' running 'FallbackClassifier.process'.
+2024-01-23 16:17:37,791 [DEBUG]  Node 'domain_provider' running 'DomainProvider.provide_inference'.
+2024-01-23 16:17:37,791 [DEBUG]  Node 'run_RegexMessageHandler' running 'RegexMessageHandler.process'.
+2024-01-23 16:17:37,792 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.message.parse       [0m [36mparse_data_entities[0m=[35m[{'entity': 'actorName', 'start': 0, 'end': 6, 'value': 'Remove', 'extractor': 'RegexEntityExtractor'}, {'entity': 'actorName', 'start': 7, 'end': 11, 'value': 'box1', 'extractor': 'RegexEntityExtractor'}, {'entity': 'relName', 'start': 7, 'end': 11, 'value': 'box1', 'extractor': 'RegexEntityExtractor'}][0m [36mparse_data_intent[0m=[35m{'name': 'remove_object', 'confidence': 0.9774671196937561}[0m [36mparse_data_text[0m=[35mRemove box1[0m
+2024-01-23 16:17:37,792 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.slots.log           [0m [36mslot_values[0m=[35m	object: None
+	vertical: None
+	horizontal: None
+	relative: None
+	relName: None
+	actorName: None
+	session_started_metadata: None[0m
+2024-01-23 16:17:37,792 [DEBUG]  Logged UserUtterance - tracker now has 51 events.
+2024-01-23 16:17:37,792 [DEBUG]  Validating extracted slots: relName
+actorName
+2024-01-23 16:17:37,792 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.extract.slots       [0m [36maction_extract_slot[0m=[35maction_extract_slots[0m [36mlen_extraction_events[0m=[35m2[0m [36mrasa_events[0m=[35m[SlotSet(key: relName, value: box1), SlotSet(key: actorName, value: box1)][0m
+2024-01-23 16:17:37,792 [DEBUG]  Running graph with inputs: {'__tracker__': <rasa.shared.core.trackers.DialogueStateTracker object at 0x7f55d312bd60>}, targets: ['select_prediction'] and ExecutionContext(model_id='8e4a254725e44aeaaadcf36ce1b310f3', should_add_diagnostic_data=False, is_finetuning=False, node_name=None).
+2024-01-23 16:17:37,793 [DEBUG]  Node 'rule_only_data_provider' running 'RuleOnlyDataProvider.provide'.
+2024-01-23 16:17:37,793 [DEBUG]  Node 'domain_provider' running 'DomainProvider.provide_inference'.
+2024-01-23 16:17:37,793 [DEBUG]  Node 'run_AugmentedMemoizationPolicy1' running 'AugmentedMemoizationPolicy.predict_action_probabilities'.
+2024-01-23 16:17:37,793 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.predict.actions   [0m [36mtracker_states[0m=[35m[{'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'action_reset_all_slots'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'action_listen'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'utter_add_object'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'send_info'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'action_reset_all_slots'}}, {'user': {'intent': 'remove_object', 'entities': ('actorName', 'relName')}, 'prev_action': {'action_name': 'action_listen'}}][0m
+2024-01-23 16:17:37,793 [DEBUG]  Launch DeLorean...
+2024-01-23 16:17:37,796 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.states_recall     [0m [36mold_states[0m=[35m[{}, {'user': {'intent': 'remove_object', 'entities': ('actorName', 'relName')}, 'prev_action': {'action_name': 'action_listen'}}][0m
+2024-01-23 16:17:37,796 [DEBUG]  There is no memorised next action
+2024-01-23 16:17:37,796 [DEBUG]  Node 'run_RulePolicy0' running 'RulePolicy.predict_action_probabilities'.
+2024-01-23 16:17:37,796 [DEBUG]  [[32m[1mdebug    [0m] [1mrule_policy.actions.find      [0m [36mcurrent_states[0m=[35m
+[state 1] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_listen
+[state 2] user intent: add_object | user entities: ('actorName', 'object') | previous action name: utter_add_object
+[state 3] user intent: add_object | user entities: ('actorName', 'object') | previous action name: send_info
+[state 4] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_reset_all_slots
+[state 5] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_listen
+[state 6] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: utter_add_relative_object
+[state 7] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: send_info
+[state 8] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_reset_all_slots
+[state 9] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_listen
+[state 10] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: utter_add_object
+[state 11] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: send_info
+[state 12] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_reset_all_slots
+[state 13] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_listen
+[state 14] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: utter_add_object
+[state 15] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: send_info
+[state 16] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_reset_all_slots
+[state 17] user text: Remove box1 | previous action name: action_listen[0m
+2024-01-23 16:17:37,796 [DEBUG]  There is no applicable rule.
+2024-01-23 16:17:37,797 [DEBUG]  [[32m[1mdebug    [0m] [1mrule_policy.actions.find      [0m [36mcurrent_states[0m=[35m
+[state 1] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_listen
+[state 2] user intent: add_object | user entities: ('actorName', 'object') | previous action name: utter_add_object
+[state 3] user intent: add_object | user entities: ('actorName', 'object') | previous action name: send_info
+[state 4] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_reset_all_slots
+[state 5] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_listen
+[state 6] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: utter_add_relative_object
+[state 7] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: send_info
+[state 8] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_reset_all_slots
+[state 9] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_listen
+[state 10] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: utter_add_object
+[state 11] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: send_info
+[state 12] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_reset_all_slots
+[state 13] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_listen
+[state 14] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: utter_add_object
+[state 15] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: send_info
+[state 16] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_reset_all_slots
+[state 17] user intent: remove_object | user entities: ('actorName', 'relName') | previous action name: action_listen[0m
+2024-01-23 16:17:37,797 [DEBUG]  There is no applicable rule.
+2024-01-23 16:17:37,798 [DEBUG]  Node 'run_TEDPolicy2' running 'TEDPolicy.predict_action_probabilities'.
+2024-01-23 16:17:37,802 [DEBUG]  TED predicted 'utter_remove_object' based on user intent.
+2024-01-23 16:17:37,802 [DEBUG]  Node 'select_prediction' running 'DefaultPolicyPredictionEnsemble.combine_predictions_from_kwargs'.
+2024-01-23 16:17:37,802 [DEBUG]  Made prediction using user intent.
+2024-01-23 16:17:37,803 [DEBUG]  Added `DefinePrevUserUtteredFeaturization(False)` event.
+2024-01-23 16:17:37,803 [DEBUG]  Predicted next action using TEDPolicy.
+2024-01-23 16:17:37,803 [DEBUG]  Predicted next action 'utter_remove_object' with confidence 0.99.
+2024-01-23 16:17:37,803 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.policy_prediction[0m [36mprediction_events[0m=[35m[<rasa.shared.core.events.DefinePrevUserUtteredFeaturization object at 0x7f55d312bf70>][0m
+2024-01-23 16:17:37,803 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.log         [0m [36maction_name[0m=[35mutter_remove_object[0m [36mrasa_events[0m=[35m[BotUttered('Remove object intent here, received: box1', {"elements": null, "quick_replies": null, "buttons": null, "attachment": null, "image": null, "custom": null}, {"utter_action": "utter_remove_object"}, 1706023057.8035624)][0m
+2024-01-23 16:17:37,803 [DEBUG]  Running graph with inputs: {'__tracker__': <rasa.shared.core.trackers.DialogueStateTracker object at 0x7f55d312bd60>}, targets: ['select_prediction'] and ExecutionContext(model_id='8e4a254725e44aeaaadcf36ce1b310f3', should_add_diagnostic_data=False, is_finetuning=False, node_name=None).
+2024-01-23 16:17:37,804 [DEBUG]  Node 'rule_only_data_provider' running 'RuleOnlyDataProvider.provide'.
+2024-01-23 16:17:37,804 [DEBUG]  Node 'domain_provider' running 'DomainProvider.provide_inference'.
+2024-01-23 16:17:37,804 [DEBUG]  Node 'run_AugmentedMemoizationPolicy1' running 'AugmentedMemoizationPolicy.predict_action_probabilities'.
+2024-01-23 16:17:37,805 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.predict.actions   [0m [36mtracker_states[0m=[35m[{'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'action_listen'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'utter_add_object'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'send_info'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'action_reset_all_slots'}}, {'user': {'intent': 'remove_object', 'entities': ('actorName', 'relName')}, 'prev_action': {'action_name': 'action_listen'}}, {'user': {'intent': 'remove_object', 'entities': ('actorName', 'relName')}, 'prev_action': {'action_name': 'utter_remove_object'}}][0m
+2024-01-23 16:17:37,805 [DEBUG]  Launch DeLorean...
+2024-01-23 16:17:37,807 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.states_recall     [0m [36mold_states[0m=[35m[{}, {'prev_action': {'action_name': 'utter_remove_object'}}][0m
+2024-01-23 16:17:37,807 [DEBUG]  There is no memorised next action
+2024-01-23 16:17:37,807 [DEBUG]  Node 'run_RulePolicy0' running 'RulePolicy.predict_action_probabilities'.
+2024-01-23 16:17:37,808 [DEBUG]  [[32m[1mdebug    [0m] [1mrule_policy.actions.find      [0m [36mcurrent_states[0m=[35m
+[state 1] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_listen
+[state 2] user intent: add_object | user entities: ('actorName', 'object') | previous action name: utter_add_object
+[state 3] user intent: add_object | user entities: ('actorName', 'object') | previous action name: send_info
+[state 4] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_reset_all_slots
+[state 5] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_listen
+[state 6] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: utter_add_relative_object
+[state 7] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: send_info
+[state 8] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_reset_all_slots
+[state 9] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_listen
+[state 10] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: utter_add_object
+[state 11] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: send_info
+[state 12] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_reset_all_slots
+[state 13] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_listen
+[state 14] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: utter_add_object
+[state 15] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: send_info
+[state 16] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_reset_all_slots
+[state 17] user intent: remove_object | user entities: ('actorName', 'relName') | previous action name: action_listen
+[state 18] user intent: remove_object | user entities: ('actorName', 'relName') | previous action name: utter_remove_object[0m
+2024-01-23 16:17:37,808 [DEBUG]  There is no applicable rule.
+2024-01-23 16:17:37,808 [DEBUG]  Node 'run_TEDPolicy2' running 'TEDPolicy.predict_action_probabilities'.
+2024-01-23 16:17:37,812 [DEBUG]  TED predicted 'send_info' based on user intent.
+2024-01-23 16:17:37,812 [DEBUG]  Node 'select_prediction' running 'DefaultPolicyPredictionEnsemble.combine_predictions_from_kwargs'.
+2024-01-23 16:17:37,812 [DEBUG]  Predicted next action using TEDPolicy.
+2024-01-23 16:17:37,812 [DEBUG]  Predicted next action 'send_info' with confidence 1.00.
+2024-01-23 16:17:37,813 [DEBUG]  Calling action endpoint to run action 'send_info'.
+2024-01-23 16:17:37,837 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.policy_prediction[0m [36mprediction_events[0m=[35m[][0m
+2024-01-23 16:17:37,837 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.log         [0m [36maction_name[0m=[35msend_info[0m [36mrasa_events[0m=[35m[][0m
+2024-01-23 16:17:37,837 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.slots.log           [0m [36mslot_values[0m=[35m	object: None
+	vertical: None
+	horizontal: None
+	relative: None
+	relName: box1
+	actorName: box1
+	session_started_metadata: None[0m
+2024-01-23 16:17:37,837 [DEBUG]  Running graph with inputs: {'__tracker__': <rasa.shared.core.trackers.DialogueStateTracker object at 0x7f55d312bd60>}, targets: ['select_prediction'] and ExecutionContext(model_id='8e4a254725e44aeaaadcf36ce1b310f3', should_add_diagnostic_data=False, is_finetuning=False, node_name=None).
+2024-01-23 16:17:37,837 [DEBUG]  Node 'rule_only_data_provider' running 'RuleOnlyDataProvider.provide'.
+2024-01-23 16:17:37,838 [DEBUG]  Node 'domain_provider' running 'DomainProvider.provide_inference'.
+2024-01-23 16:17:37,838 [DEBUG]  Node 'run_AugmentedMemoizationPolicy1' running 'AugmentedMemoizationPolicy.predict_action_probabilities'.
+2024-01-23 16:17:37,838 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.predict.actions   [0m [36mtracker_states[0m=[35m[{'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'utter_add_object'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'send_info'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'action_reset_all_slots'}}, {'user': {'intent': 'remove_object', 'entities': ('actorName', 'relName')}, 'prev_action': {'action_name': 'action_listen'}}, {'user': {'intent': 'remove_object', 'entities': ('actorName', 'relName')}, 'prev_action': {'action_name': 'utter_remove_object'}}, {'user': {'intent': 'remove_object', 'entities': ('actorName', 'relName')}, 'prev_action': {'action_name': 'send_info'}}][0m
+2024-01-23 16:17:37,838 [DEBUG]  Launch DeLorean...
+2024-01-23 16:17:37,840 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.states_recall     [0m [36mold_states[0m=[35m[{}, {'prev_action': {'action_name': 'send_info'}}][0m
+2024-01-23 16:17:37,840 [DEBUG]  There is no memorised next action
+2024-01-23 16:17:37,840 [DEBUG]  Node 'run_RulePolicy0' running 'RulePolicy.predict_action_probabilities'.
+2024-01-23 16:17:37,841 [DEBUG]  [[32m[1mdebug    [0m] [1mrule_policy.actions.find      [0m [36mcurrent_states[0m=[35m
+[state 1] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_listen
+[state 2] user intent: add_object | user entities: ('actorName', 'object') | previous action name: utter_add_object
+[state 3] user intent: add_object | user entities: ('actorName', 'object') | previous action name: send_info
+[state 4] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_reset_all_slots
+[state 5] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_listen
+[state 6] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: utter_add_relative_object
+[state 7] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: send_info
+[state 8] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_reset_all_slots
+[state 9] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_listen
+[state 10] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: utter_add_object
+[state 11] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: send_info
+[state 12] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_reset_all_slots
+[state 13] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_listen
+[state 14] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: utter_add_object
+[state 15] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: send_info
+[state 16] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_reset_all_slots
+[state 17] user intent: remove_object | user entities: ('actorName', 'relName') | previous action name: action_listen
+[state 18] user intent: remove_object | user entities: ('actorName', 'relName') | previous action name: utter_remove_object
+[state 19] user intent: remove_object | user entities: ('actorName', 'relName') | previous action name: send_info[0m
+2024-01-23 16:17:37,841 [DEBUG]  There is no applicable rule.
+2024-01-23 16:17:37,841 [DEBUG]  Node 'run_TEDPolicy2' running 'TEDPolicy.predict_action_probabilities'.
+2024-01-23 16:17:37,845 [DEBUG]  TED predicted 'action_reset_all_slots' based on user intent.
+2024-01-23 16:17:37,845 [DEBUG]  Node 'select_prediction' running 'DefaultPolicyPredictionEnsemble.combine_predictions_from_kwargs'.
+2024-01-23 16:17:37,845 [DEBUG]  Predicted next action using TEDPolicy.
+2024-01-23 16:17:37,845 [DEBUG]  Predicted next action 'action_reset_all_slots' with confidence 1.00.
+2024-01-23 16:17:37,845 [DEBUG]  Calling action endpoint to run action 'action_reset_all_slots'.
+2024-01-23 16:17:37,868 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.policy_prediction[0m [36mprediction_events[0m=[35m[][0m
+2024-01-23 16:17:37,868 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.log         [0m [36maction_name[0m=[35maction_reset_all_slots[0m [36mrasa_events[0m=[35m[<rasa.shared.core.events.AllSlotsReset object at 0x7f55d3129750>][0m
+2024-01-23 16:17:37,868 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.slots.log           [0m [36mslot_values[0m=[35m	object: None
+	vertical: None
+	horizontal: None
+	relative: None
+	relName: None
+	actorName: None
+	session_started_metadata: None[0m
+2024-01-23 16:17:37,868 [DEBUG]  Running graph with inputs: {'__tracker__': <rasa.shared.core.trackers.DialogueStateTracker object at 0x7f55d312bd60>}, targets: ['select_prediction'] and ExecutionContext(model_id='8e4a254725e44aeaaadcf36ce1b310f3', should_add_diagnostic_data=False, is_finetuning=False, node_name=None).
+2024-01-23 16:17:37,869 [DEBUG]  Node 'rule_only_data_provider' running 'RuleOnlyDataProvider.provide'.
+2024-01-23 16:17:37,869 [DEBUG]  Node 'domain_provider' running 'DomainProvider.provide_inference'.
+2024-01-23 16:17:37,869 [DEBUG]  Node 'run_AugmentedMemoizationPolicy1' running 'AugmentedMemoizationPolicy.predict_action_probabilities'.
+2024-01-23 16:17:37,869 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.predict.actions   [0m [36mtracker_states[0m=[35m[{'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'send_info'}}, {'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'action_reset_all_slots'}}, {'user': {'intent': 'remove_object', 'entities': ('actorName', 'relName')}, 'prev_action': {'action_name': 'action_listen'}}, {'user': {'intent': 'remove_object', 'entities': ('actorName', 'relName')}, 'prev_action': {'action_name': 'utter_remove_object'}}, {'user': {'intent': 'remove_object', 'entities': ('actorName', 'relName')}, 'prev_action': {'action_name': 'send_info'}}, {'user': {'intent': 'remove_object', 'entities': ('actorName', 'relName')}, 'prev_action': {'action_name': 'action_reset_all_slots'}}][0m
+2024-01-23 16:17:37,870 [DEBUG]  Launch DeLorean...
+2024-01-23 16:17:37,871 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.states_recall     [0m [36mold_states[0m=[35m[{}, {'prev_action': {'action_name': 'action_reset_all_slots'}}][0m
+2024-01-23 16:17:37,871 [DEBUG]  There is no memorised next action
+2024-01-23 16:17:37,871 [DEBUG]  Node 'run_RulePolicy0' running 'RulePolicy.predict_action_probabilities'.
+2024-01-23 16:17:37,872 [DEBUG]  [[32m[1mdebug    [0m] [1mrule_policy.actions.find      [0m [36mcurrent_states[0m=[35m
+[state 1] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_listen
+[state 2] user intent: add_object | user entities: ('actorName', 'object') | previous action name: utter_add_object
+[state 3] user intent: add_object | user entities: ('actorName', 'object') | previous action name: send_info
+[state 4] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_reset_all_slots
+[state 5] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_listen
+[state 6] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: utter_add_relative_object
+[state 7] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: send_info
+[state 8] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_reset_all_slots
+[state 9] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_listen
+[state 10] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: utter_add_object
+[state 11] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: send_info
+[state 12] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_reset_all_slots
+[state 13] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_listen
+[state 14] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: utter_add_object
+[state 15] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: send_info
+[state 16] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_reset_all_slots
+[state 17] user intent: remove_object | user entities: ('actorName', 'relName') | previous action name: action_listen
+[state 18] user intent: remove_object | user entities: ('actorName', 'relName') | previous action name: utter_remove_object
+[state 19] user intent: remove_object | user entities: ('actorName', 'relName') | previous action name: send_info
+[state 20] user intent: remove_object | user entities: ('actorName', 'relName') | previous action name: action_reset_all_slots[0m
+2024-01-23 16:17:37,872 [DEBUG]  There is no applicable rule.
+2024-01-23 16:17:37,872 [DEBUG]  Node 'run_TEDPolicy2' running 'TEDPolicy.predict_action_probabilities'.
+2024-01-23 16:17:37,876 [DEBUG]  TED predicted 'action_listen' based on user intent.
+2024-01-23 16:17:37,876 [DEBUG]  Node 'select_prediction' running 'DefaultPolicyPredictionEnsemble.combine_predictions_from_kwargs'.
+2024-01-23 16:17:37,876 [DEBUG]  Predicted next action using TEDPolicy.
+2024-01-23 16:17:37,876 [DEBUG]  Predicted next action 'action_listen' with confidence 1.00.
+2024-01-23 16:17:37,877 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.policy_prediction[0m [36mprediction_events[0m=[35m[][0m
+2024-01-23 16:17:37,877 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.log         [0m [36maction_name[0m=[35maction_listen[0m [36mrasa_events[0m=[35m[][0m
+2024-01-23 16:17:37,877 [DEBUG]  No event broker configured. Skipping streaming events.
+2024-01-23 16:17:37,877 [DEBUG]  Deleted lock for conversation '0883c4f833d94ee99d88c889d315438d'.
+2024-01-23 16:17:40,829 [DEBUG]  Issuing ticket for conversation '0883c4f833d94ee99d88c889d315438d'.
+2024-01-23 16:17:40,830 [DEBUG]  Acquiring lock for conversation '0883c4f833d94ee99d88c889d315438d'.
+2024-01-23 16:17:40,830 [DEBUG]  Acquired lock for conversation '0883c4f833d94ee99d88c889d315438d'.
+2024-01-23 16:17:40,831 [DEBUG]  Recreating tracker for id '0883c4f833d94ee99d88c889d315438d'
+2024-01-23 16:17:40,837 [DEBUG]  Running graph with inputs: {'__message__': [<rasa.core.channels.channel.UserMessage object at 0x7f55d3060700>], '__tracker__': <rasa.shared.core.trackers.DialogueStateTracker object at 0x7f55d3061d50>}, targets: ['run_RegexMessageHandler'] and ExecutionContext(model_id='8e4a254725e44aeaaadcf36ce1b310f3', should_add_diagnostic_data=False, is_finetuning=False, node_name=None).
+2024-01-23 16:17:40,837 [DEBUG]  Node 'nlu_message_converter' running 'NLUMessageConverter.convert_user_message'.
+2024-01-23 16:17:40,837 [DEBUG]  Node 'run_WhitespaceTokenizer0' running 'WhitespaceTokenizer.process'.
+2024-01-23 16:17:40,837 [DEBUG]  Node 'run_RegexFeaturizer1' running 'RegexFeaturizer.process'.
+2024-01-23 16:17:40,838 [DEBUG]  Node 'run_RegexEntityExtractor2' running 'RegexEntityExtractor.process'.
+2024-01-23 16:17:40,838 [DEBUG]  Node 'run_LexicalSyntacticFeaturizer3' running 'LexicalSyntacticFeaturizer.process'.
+2024-01-23 16:17:40,838 [DEBUG]  Node 'run_CountVectorsFeaturizer4' running 'CountVectorsFeaturizer.process'.
+2024-01-23 16:17:40,839 [DEBUG]  Node 'run_CountVectorsFeaturizer5' running 'CountVectorsFeaturizer.process'.
+2024-01-23 16:17:40,839 [DEBUG]  Node 'run_DIETClassifier6' running 'DIETClassifier.process'.
+2024-01-23 16:17:40,845 [DEBUG]  Node 'run_EntitySynonymMapper7' running 'EntitySynonymMapper.process'.
+2024-01-23 16:17:40,845 [DEBUG]  Node 'run_FallbackClassifier8' running 'FallbackClassifier.process'.
+2024-01-23 16:17:40,846 [DEBUG]  Node 'domain_provider' running 'DomainProvider.provide_inference'.
+2024-01-23 16:17:40,846 [DEBUG]  Node 'run_RegexMessageHandler' running 'RegexMessageHandler.process'.
+2024-01-23 16:17:40,846 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.message.parse       [0m [36mparse_data_entities[0m=[35m[{'entity': 'actorName', 'start': 0, 'end': 6, 'value': 'Remove', 'extractor': 'RegexEntityExtractor'}, {'entity': 'actorName', 'start': 7, 'end': 13, 'value': 'robot1', 'extractor': 'RegexEntityExtractor'}, {'entity': 'relName', 'start': 7, 'end': 13, 'value': 'robot1', 'extractor': 'RegexEntityExtractor'}][0m [36mparse_data_intent[0m=[35m{'name': 'remove_object', 'confidence': 0.9784994125366211}[0m [36mparse_data_text[0m=[35mRemove robot1[0m
+2024-01-23 16:17:40,846 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.slots.log           [0m [36mslot_values[0m=[35m	object: None
+	vertical: None
+	horizontal: None
+	relative: None
+	relName: None
+	actorName: None
+	session_started_metadata: None[0m
+2024-01-23 16:17:40,846 [DEBUG]  Logged UserUtterance - tracker now has 61 events.
+2024-01-23 16:17:40,846 [DEBUG]  Validating extracted slots: relName
+actorName
+2024-01-23 16:17:40,847 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.extract.slots       [0m [36maction_extract_slot[0m=[35maction_extract_slots[0m [36mlen_extraction_events[0m=[35m2[0m [36mrasa_events[0m=[35m[SlotSet(key: relName, value: robot1), SlotSet(key: actorName, value: robot1)][0m
+2024-01-23 16:17:40,847 [DEBUG]  Running graph with inputs: {'__tracker__': <rasa.shared.core.trackers.DialogueStateTracker object at 0x7f55d3061d50>}, targets: ['select_prediction'] and ExecutionContext(model_id='8e4a254725e44aeaaadcf36ce1b310f3', should_add_diagnostic_data=False, is_finetuning=False, node_name=None).
+2024-01-23 16:17:40,847 [DEBUG]  Node 'rule_only_data_provider' running 'RuleOnlyDataProvider.provide'.
+2024-01-23 16:17:40,847 [DEBUG]  Node 'domain_provider' running 'DomainProvider.provide_inference'.
+2024-01-23 16:17:40,847 [DEBUG]  Node 'run_AugmentedMemoizationPolicy1' running 'AugmentedMemoizationPolicy.predict_action_probabilities'.
+2024-01-23 16:17:40,848 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.predict.actions   [0m [36mtracker_states[0m=[35m[{'user': {'intent': 'add_object', 'entities': ('actorName', 'horizontal', 'object', 'vertical')}, 'prev_action': {'action_name': 'action_reset_all_slots'}}, {'user': {'intent': 'remove_object', 'entities': ('actorName', 'relName')}, 'prev_action': {'action_name': 'action_listen'}}, {'user': {'intent': 'remove_object', 'entities': ('actorName', 'relName')}, 'prev_action': {'action_name': 'utter_remove_object'}}, {'user': {'intent': 'remove_object', 'entities': ('actorName', 'relName')}, 'prev_action': {'action_name': 'send_info'}}, {'user': {'intent': 'remove_object', 'entities': ('actorName', 'relName')}, 'prev_action': {'action_name': 'action_reset_all_slots'}}, {'user': {'intent': 'remove_object', 'entities': ('actorName', 'relName')}, 'prev_action': {'action_name': 'action_listen'}}][0m
+2024-01-23 16:17:40,848 [DEBUG]  Launch DeLorean...
+2024-01-23 16:17:40,850 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.states_recall     [0m [36mold_states[0m=[35m[{}, {'user': {'intent': 'remove_object', 'entities': ('actorName', 'relName')}, 'prev_action': {'action_name': 'action_listen'}}][0m
+2024-01-23 16:17:40,850 [DEBUG]  There is no memorised next action
+2024-01-23 16:17:40,850 [DEBUG]  Node 'run_RulePolicy0' running 'RulePolicy.predict_action_probabilities'.
+2024-01-23 16:17:40,851 [DEBUG]  [[32m[1mdebug    [0m] [1mrule_policy.actions.find      [0m [36mcurrent_states[0m=[35m
+[state 1] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_listen
+[state 2] user intent: add_object | user entities: ('actorName', 'object') | previous action name: utter_add_object
+[state 3] user intent: add_object | user entities: ('actorName', 'object') | previous action name: send_info
+[state 4] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_reset_all_slots
+[state 5] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_listen
+[state 6] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: utter_add_relative_object
+[state 7] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: send_info
+[state 8] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_reset_all_slots
+[state 9] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_listen
+[state 10] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: utter_add_object
+[state 11] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: send_info
+[state 12] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_reset_all_slots
+[state 13] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_listen
+[state 14] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: utter_add_object
+[state 15] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: send_info
+[state 16] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_reset_all_slots
+[state 17] user intent: remove_object | user entities: ('actorName', 'relName') | previous action name: action_listen
+[state 18] user intent: remove_object | user entities: ('actorName', 'relName') | previous action name: utter_remove_object
+[state 19] user intent: remove_object | user entities: ('actorName', 'relName') | previous action name: send_info
+[state 20] user intent: remove_object | user entities: ('actorName', 'relName') | previous action name: action_reset_all_slots
+[state 21] user text: Remove robot1 | previous action name: action_listen[0m
+2024-01-23 16:17:40,851 [DEBUG]  There is no applicable rule.
+2024-01-23 16:17:40,852 [DEBUG]  [[32m[1mdebug    [0m] [1mrule_policy.actions.find      [0m [36mcurrent_states[0m=[35m
+[state 1] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_listen
+[state 2] user intent: add_object | user entities: ('actorName', 'object') | previous action name: utter_add_object
+[state 3] user intent: add_object | user entities: ('actorName', 'object') | previous action name: send_info
+[state 4] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_reset_all_slots
+[state 5] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_listen
+[state 6] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: utter_add_relative_object
+[state 7] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: send_info
+[state 8] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_reset_all_slots
+[state 9] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_listen
+[state 10] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: utter_add_object
+[state 11] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: send_info
+[state 12] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_reset_all_slots
+[state 13] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_listen
+[state 14] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: utter_add_object
+[state 15] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: send_info
+[state 16] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_reset_all_slots
+[state 17] user intent: remove_object | user entities: ('actorName', 'relName') | previous action name: action_listen
+[state 18] user intent: remove_object | user entities: ('actorName', 'relName') | previous action name: utter_remove_object
+[state 19] user intent: remove_object | user entities: ('actorName', 'relName') | previous action name: send_info
+[state 20] user intent: remove_object | user entities: ('actorName', 'relName') | previous action name: action_reset_all_slots
+[state 21] user intent: remove_object | user entities: ('actorName', 'relName') | previous action name: action_listen[0m
+2024-01-23 16:17:40,852 [DEBUG]  There is no applicable rule.
+2024-01-23 16:17:40,852 [DEBUG]  Node 'run_TEDPolicy2' running 'TEDPolicy.predict_action_probabilities'.
+2024-01-23 16:17:40,856 [DEBUG]  TED predicted 'utter_remove_object' based on user intent.
+2024-01-23 16:17:40,857 [DEBUG]  Node 'select_prediction' running 'DefaultPolicyPredictionEnsemble.combine_predictions_from_kwargs'.
+2024-01-23 16:17:40,857 [DEBUG]  Made prediction using user intent.
+2024-01-23 16:17:40,857 [DEBUG]  Added `DefinePrevUserUtteredFeaturization(False)` event.
+2024-01-23 16:17:40,857 [DEBUG]  Predicted next action using TEDPolicy.
+2024-01-23 16:17:40,857 [DEBUG]  Predicted next action 'utter_remove_object' with confidence 0.99.
+2024-01-23 16:17:40,857 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.policy_prediction[0m [36mprediction_events[0m=[35m[<rasa.shared.core.events.DefinePrevUserUtteredFeaturization object at 0x7f55d3062b60>][0m
+2024-01-23 16:17:40,858 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.log         [0m [36maction_name[0m=[35mutter_remove_object[0m [36mrasa_events[0m=[35m[BotUttered('Remove object intent here, received: robot1', {"elements": null, "quick_replies": null, "buttons": null, "attachment": null, "image": null, "custom": null}, {"utter_action": "utter_remove_object"}, 1706023060.857856)][0m
+2024-01-23 16:17:40,858 [DEBUG]  Running graph with inputs: {'__tracker__': <rasa.shared.core.trackers.DialogueStateTracker object at 0x7f55d3061d50>}, targets: ['select_prediction'] and ExecutionContext(model_id='8e4a254725e44aeaaadcf36ce1b310f3', should_add_diagnostic_data=False, is_finetuning=False, node_name=None).
+2024-01-23 16:17:40,858 [DEBUG]  Node 'rule_only_data_provider' running 'RuleOnlyDataProvider.provide'.
+2024-01-23 16:17:40,858 [DEBUG]  Node 'domain_provider' running 'DomainProvider.provide_inference'.
+2024-01-23 16:17:40,859 [DEBUG]  Node 'run_AugmentedMemoizationPolicy1' running 'AugmentedMemoizationPolicy.predict_action_probabilities'.
+2024-01-23 16:17:40,859 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.predict.actions   [0m [36mtracker_states[0m=[35m[{'user': {'intent': 'remove_object', 'entities': ('actorName', 'relName')}, 'prev_action': {'action_name': 'action_listen'}}, {'user': {'intent': 'remove_object', 'entities': ('actorName', 'relName')}, 'prev_action': {'action_name': 'utter_remove_object'}}, {'user': {'intent': 'remove_object', 'entities': ('actorName', 'relName')}, 'prev_action': {'action_name': 'send_info'}}, {'user': {'intent': 'remove_object', 'entities': ('actorName', 'relName')}, 'prev_action': {'action_name': 'action_reset_all_slots'}}, {'user': {'intent': 'remove_object', 'entities': ('actorName', 'relName')}, 'prev_action': {'action_name': 'action_listen'}}, {'user': {'intent': 'remove_object', 'entities': ('actorName', 'relName')}, 'prev_action': {'action_name': 'utter_remove_object'}}][0m
+2024-01-23 16:17:40,859 [DEBUG]  Launch DeLorean...
+2024-01-23 16:17:40,862 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.states_recall     [0m [36mold_states[0m=[35m[{}, {'prev_action': {'action_name': 'utter_remove_object'}}][0m
+2024-01-23 16:17:40,862 [DEBUG]  There is no memorised next action
+2024-01-23 16:17:40,862 [DEBUG]  Node 'run_RulePolicy0' running 'RulePolicy.predict_action_probabilities'.
+2024-01-23 16:17:40,863 [DEBUG]  [[32m[1mdebug    [0m] [1mrule_policy.actions.find      [0m [36mcurrent_states[0m=[35m
+[state 1] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_listen
+[state 2] user intent: add_object | user entities: ('actorName', 'object') | previous action name: utter_add_object
+[state 3] user intent: add_object | user entities: ('actorName', 'object') | previous action name: send_info
+[state 4] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_reset_all_slots
+[state 5] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_listen
+[state 6] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: utter_add_relative_object
+[state 7] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: send_info
+[state 8] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_reset_all_slots
+[state 9] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_listen
+[state 10] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: utter_add_object
+[state 11] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: send_info
+[state 12] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_reset_all_slots
+[state 13] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_listen
+[state 14] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: utter_add_object
+[state 15] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: send_info
+[state 16] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_reset_all_slots
+[state 17] user intent: remove_object | user entities: ('actorName', 'relName') | previous action name: action_listen
+[state 18] user intent: remove_object | user entities: ('actorName', 'relName') | previous action name: utter_remove_object
+[state 19] user intent: remove_object | user entities: ('actorName', 'relName') | previous action name: send_info
+[state 20] user intent: remove_object | user entities: ('actorName', 'relName') | previous action name: action_reset_all_slots
+[state 21] user intent: remove_object | user entities: ('actorName', 'relName') | previous action name: action_listen
+[state 22] user intent: remove_object | user entities: ('actorName', 'relName') | previous action name: utter_remove_object[0m
+2024-01-23 16:17:40,863 [DEBUG]  There is no applicable rule.
+2024-01-23 16:17:40,863 [DEBUG]  Node 'run_TEDPolicy2' running 'TEDPolicy.predict_action_probabilities'.
+2024-01-23 16:17:40,867 [DEBUG]  TED predicted 'send_info' based on user intent.
+2024-01-23 16:17:40,867 [DEBUG]  Node 'select_prediction' running 'DefaultPolicyPredictionEnsemble.combine_predictions_from_kwargs'.
+2024-01-23 16:17:40,868 [DEBUG]  Predicted next action using TEDPolicy.
+2024-01-23 16:17:40,868 [DEBUG]  Predicted next action 'send_info' with confidence 1.00.
+2024-01-23 16:17:40,868 [DEBUG]  Calling action endpoint to run action 'send_info'.
+2024-01-23 16:17:40,893 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.policy_prediction[0m [36mprediction_events[0m=[35m[][0m
+2024-01-23 16:17:40,893 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.log         [0m [36maction_name[0m=[35msend_info[0m [36mrasa_events[0m=[35m[][0m
+2024-01-23 16:17:40,894 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.slots.log           [0m [36mslot_values[0m=[35m	object: None
+	vertical: None
+	horizontal: None
+	relative: None
+	relName: robot1
+	actorName: robot1
+	session_started_metadata: None[0m
+2024-01-23 16:17:40,894 [DEBUG]  Running graph with inputs: {'__tracker__': <rasa.shared.core.trackers.DialogueStateTracker object at 0x7f55d3061d50>}, targets: ['select_prediction'] and ExecutionContext(model_id='8e4a254725e44aeaaadcf36ce1b310f3', should_add_diagnostic_data=False, is_finetuning=False, node_name=None).
+2024-01-23 16:17:40,894 [DEBUG]  Node 'rule_only_data_provider' running 'RuleOnlyDataProvider.provide'.
+2024-01-23 16:17:40,894 [DEBUG]  Node 'domain_provider' running 'DomainProvider.provide_inference'.
+2024-01-23 16:17:40,894 [DEBUG]  Node 'run_AugmentedMemoizationPolicy1' running 'AugmentedMemoizationPolicy.predict_action_probabilities'.
+2024-01-23 16:17:40,895 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.predict.actions   [0m [36mtracker_states[0m=[35m[{'user': {'intent': 'remove_object', 'entities': ('actorName', 'relName')}, 'prev_action': {'action_name': 'utter_remove_object'}}, {'user': {'intent': 'remove_object', 'entities': ('actorName', 'relName')}, 'prev_action': {'action_name': 'send_info'}}, {'user': {'intent': 'remove_object', 'entities': ('actorName', 'relName')}, 'prev_action': {'action_name': 'action_reset_all_slots'}}, {'user': {'intent': 'remove_object', 'entities': ('actorName', 'relName')}, 'prev_action': {'action_name': 'action_listen'}}, {'user': {'intent': 'remove_object', 'entities': ('actorName', 'relName')}, 'prev_action': {'action_name': 'utter_remove_object'}}, {'user': {'intent': 'remove_object', 'entities': ('actorName', 'relName')}, 'prev_action': {'action_name': 'send_info'}}][0m
+2024-01-23 16:17:40,895 [DEBUG]  Launch DeLorean...
+2024-01-23 16:17:40,897 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.states_recall     [0m [36mold_states[0m=[35m[{}, {'prev_action': {'action_name': 'send_info'}}][0m
+2024-01-23 16:17:40,897 [DEBUG]  There is no memorised next action
+2024-01-23 16:17:40,897 [DEBUG]  Node 'run_RulePolicy0' running 'RulePolicy.predict_action_probabilities'.
+2024-01-23 16:17:40,898 [DEBUG]  [[32m[1mdebug    [0m] [1mrule_policy.actions.find      [0m [36mcurrent_states[0m=[35m
+[state 1] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_listen
+[state 2] user intent: add_object | user entities: ('actorName', 'object') | previous action name: utter_add_object
+[state 3] user intent: add_object | user entities: ('actorName', 'object') | previous action name: send_info
+[state 4] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_reset_all_slots
+[state 5] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_listen
+[state 6] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: utter_add_relative_object
+[state 7] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: send_info
+[state 8] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_reset_all_slots
+[state 9] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_listen
+[state 10] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: utter_add_object
+[state 11] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: send_info
+[state 12] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_reset_all_slots
+[state 13] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_listen
+[state 14] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: utter_add_object
+[state 15] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: send_info
+[state 16] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_reset_all_slots
+[state 17] user intent: remove_object | user entities: ('actorName', 'relName') | previous action name: action_listen
+[state 18] user intent: remove_object | user entities: ('actorName', 'relName') | previous action name: utter_remove_object
+[state 19] user intent: remove_object | user entities: ('actorName', 'relName') | previous action name: send_info
+[state 20] user intent: remove_object | user entities: ('actorName', 'relName') | previous action name: action_reset_all_slots
+[state 21] user intent: remove_object | user entities: ('actorName', 'relName') | previous action name: action_listen
+[state 22] user intent: remove_object | user entities: ('actorName', 'relName') | previous action name: utter_remove_object
+[state 23] user intent: remove_object | user entities: ('actorName', 'relName') | previous action name: send_info[0m
+2024-01-23 16:17:40,898 [DEBUG]  There is no applicable rule.
+2024-01-23 16:17:40,898 [DEBUG]  Node 'run_TEDPolicy2' running 'TEDPolicy.predict_action_probabilities'.
+2024-01-23 16:17:40,903 [DEBUG]  TED predicted 'action_reset_all_slots' based on user intent.
+2024-01-23 16:17:40,903 [DEBUG]  Node 'select_prediction' running 'DefaultPolicyPredictionEnsemble.combine_predictions_from_kwargs'.
+2024-01-23 16:17:40,903 [DEBUG]  Predicted next action using TEDPolicy.
+2024-01-23 16:17:40,903 [DEBUG]  Predicted next action 'action_reset_all_slots' with confidence 1.00.
+2024-01-23 16:17:40,903 [DEBUG]  Calling action endpoint to run action 'action_reset_all_slots'.
+2024-01-23 16:17:40,927 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.policy_prediction[0m [36mprediction_events[0m=[35m[][0m
+2024-01-23 16:17:40,927 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.log         [0m [36maction_name[0m=[35maction_reset_all_slots[0m [36mrasa_events[0m=[35m[<rasa.shared.core.events.AllSlotsReset object at 0x7f55d3063e80>][0m
+2024-01-23 16:17:40,927 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.slots.log           [0m [36mslot_values[0m=[35m	object: None
+	vertical: None
+	horizontal: None
+	relative: None
+	relName: None
+	actorName: None
+	session_started_metadata: None[0m
+2024-01-23 16:17:40,927 [DEBUG]  Running graph with inputs: {'__tracker__': <rasa.shared.core.trackers.DialogueStateTracker object at 0x7f55d3061d50>}, targets: ['select_prediction'] and ExecutionContext(model_id='8e4a254725e44aeaaadcf36ce1b310f3', should_add_diagnostic_data=False, is_finetuning=False, node_name=None).
+2024-01-23 16:17:40,927 [DEBUG]  Node 'rule_only_data_provider' running 'RuleOnlyDataProvider.provide'.
+2024-01-23 16:17:40,927 [DEBUG]  Node 'domain_provider' running 'DomainProvider.provide_inference'.
+2024-01-23 16:17:40,927 [DEBUG]  Node 'run_AugmentedMemoizationPolicy1' running 'AugmentedMemoizationPolicy.predict_action_probabilities'.
+2024-01-23 16:17:40,928 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.predict.actions   [0m [36mtracker_states[0m=[35m[{'user': {'intent': 'remove_object', 'entities': ('actorName', 'relName')}, 'prev_action': {'action_name': 'send_info'}}, {'user': {'intent': 'remove_object', 'entities': ('actorName', 'relName')}, 'prev_action': {'action_name': 'action_reset_all_slots'}}, {'user': {'intent': 'remove_object', 'entities': ('actorName', 'relName')}, 'prev_action': {'action_name': 'action_listen'}}, {'user': {'intent': 'remove_object', 'entities': ('actorName', 'relName')}, 'prev_action': {'action_name': 'utter_remove_object'}}, {'user': {'intent': 'remove_object', 'entities': ('actorName', 'relName')}, 'prev_action': {'action_name': 'send_info'}}, {'user': {'intent': 'remove_object', 'entities': ('actorName', 'relName')}, 'prev_action': {'action_name': 'action_reset_all_slots'}}][0m
+2024-01-23 16:17:40,928 [DEBUG]  Launch DeLorean...
+2024-01-23 16:17:40,930 [DEBUG]  [[32m[1mdebug    [0m] [1mmemoization.states_recall     [0m [36mold_states[0m=[35m[{}, {'prev_action': {'action_name': 'action_reset_all_slots'}}][0m
+2024-01-23 16:17:40,930 [DEBUG]  There is no memorised next action
+2024-01-23 16:17:40,930 [DEBUG]  Node 'run_RulePolicy0' running 'RulePolicy.predict_action_probabilities'.
+2024-01-23 16:17:40,931 [DEBUG]  [[32m[1mdebug    [0m] [1mrule_policy.actions.find      [0m [36mcurrent_states[0m=[35m
+[state 1] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_listen
+[state 2] user intent: add_object | user entities: ('actorName', 'object') | previous action name: utter_add_object
+[state 3] user intent: add_object | user entities: ('actorName', 'object') | previous action name: send_info
+[state 4] user intent: add_object | user entities: ('actorName', 'object') | previous action name: action_reset_all_slots
+[state 5] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_listen
+[state 6] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: utter_add_relative_object
+[state 7] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: send_info
+[state 8] user intent: add_relative_object | user entities: ('actorName', 'horizontal', 'object', 'relName', 'relative') | previous action name: action_reset_all_slots
+[state 9] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_listen
+[state 10] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: utter_add_object
+[state 11] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: send_info
+[state 12] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_reset_all_slots
+[state 13] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_listen
+[state 14] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: utter_add_object
+[state 15] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: send_info
+[state 16] user intent: add_object | user entities: ('actorName', 'horizontal', 'object', 'vertical') | previous action name: action_reset_all_slots
+[state 17] user intent: remove_object | user entities: ('actorName', 'relName') | previous action name: action_listen
+[state 18] user intent: remove_object | user entities: ('actorName', 'relName') | previous action name: utter_remove_object
+[state 19] user intent: remove_object | user entities: ('actorName', 'relName') | previous action name: send_info
+[state 20] user intent: remove_object | user entities: ('actorName', 'relName') | previous action name: action_reset_all_slots
+[state 21] user intent: remove_object | user entities: ('actorName', 'relName') | previous action name: action_listen
+[state 22] user intent: remove_object | user entities: ('actorName', 'relName') | previous action name: utter_remove_object
+[state 23] user intent: remove_object | user entities: ('actorName', 'relName') | previous action name: send_info
+[state 24] user intent: remove_object | user entities: ('actorName', 'relName') | previous action name: action_reset_all_slots[0m
+2024-01-23 16:17:40,931 [DEBUG]  There is no applicable rule.
+2024-01-23 16:17:40,931 [DEBUG]  Node 'run_TEDPolicy2' running 'TEDPolicy.predict_action_probabilities'.
+2024-01-23 16:17:40,935 [DEBUG]  TED predicted 'action_listen' based on user intent.
+2024-01-23 16:17:40,935 [DEBUG]  Node 'select_prediction' running 'DefaultPolicyPredictionEnsemble.combine_predictions_from_kwargs'.
+2024-01-23 16:17:40,935 [DEBUG]  Predicted next action using TEDPolicy.
+2024-01-23 16:17:40,936 [DEBUG]  Predicted next action 'action_listen' with confidence 1.00.
+2024-01-23 16:17:40,936 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.policy_prediction[0m [36mprediction_events[0m=[35m[][0m
+2024-01-23 16:17:40,936 [DEBUG]  [[32m[1mdebug    [0m] [1mprocessor.actions.log         [0m [36maction_name[0m=[35maction_listen[0m [36mrasa_events[0m=[35m[][0m
+2024-01-23 16:17:40,936 [DEBUG]  No event broker configured. Skipping streaming events.
+2024-01-23 16:17:40,937 [DEBUG]  Deleted lock for conversation '0883c4f833d94ee99d88c889d315438d'.
+2024-01-23 16:17:41,693 [INFO ]  Killing Sanic server now.

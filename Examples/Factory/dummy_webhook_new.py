@@ -1,14 +1,26 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import json, requests, argparse, asyncio, websockets, time
 
+# The Factory class implements a factory CAD placeholder.
+# It has four main functions:
+#  - print_factory(): prints the factory situation;
+#  - add_object(obj, h, v): adds an object of type obj in position h horizontally and v vertically
+#  - add_relative_object(obj, relObj, relPos): adds an object of type obj in relPos with respect to relObj
+#  - removeObj(obj): removes the object obj from the factory.
+# An example of use is:
+#   factory = Factory()
+#   factory.add_object('table', 'right', 'front') # adds a table in front on the right
+#   factory.add_relative_object('box', 'table1', 'right of') # adds a box right of table1
+#   factory.remove_object('table1') # removes table1
+
 class Factory():
 
-    # answer = "{\"fulfillmentMessages\":[{\"text\":{\"text\":[\"MESSAGE\"]}}], \"bot_action\": \"EVENT\", \"aux\": {AUX}}"
+    #// answer = "{\"fulfillmentMessages\":[{\"text\":{\"text\":[\"MESSAGE\"]}}], \"bot_action\": \"EVENT\", \"aux\": {AUX}}"
     positions = [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]]
     objects = {}
     counter = {"table": 0, "box": 0, "robot": 0}
     
-    # Relative positions:
+    # * Relative positions:
     # - "behind|center+front"
     # - "left,center.right"
     # Example:
@@ -37,7 +49,6 @@ class Factory():
             print(row_line)
 
             # For 3 times we check each cell:
-            # i. 
             # 0. one for behind objects
             # 1. one for centered objects
             # 2. one for front objects
@@ -188,6 +199,8 @@ class Factory():
                         self.positions[i][j] = column + "+" + obj[0]
         return True
 
+# The FactoryWebHookHttp class implements a listener server in Http.
+# It is used with Dialogflow (to respect the WebHook API).
 class FactoryWebHookHttp(BaseHTTPRequestHandler):
 
     factory = Factory()
@@ -212,8 +225,9 @@ class FactoryWebHookHttp(BaseHTTPRequestHandler):
         intent = message["queryResult"]["intent"]["displayName"]
         entities = {}
         for entity in message["queryResult"]["parameters"]:
-            print(entity, entity.lower())
-            entities[entity.lower()] = message["queryResult"]["parameters"][entity]
+            if entity == "Object":
+                entity = "object"
+            entities[entity] = message["queryResult"]["parameters"][entity]
 
         # Add object intent
         if intent == "add_object":
@@ -229,7 +243,7 @@ class FactoryWebHookHttp(BaseHTTPRequestHandler):
 
         # Remove object intent
         elif intent == "remove_object":
-            if self.factory.remove_object(entities["relname"]):
+            if self.factory.remove_object(entities["relName"]):
                 answer = self.answer.replace("MESSAGE", "Object removed correctly!")
                 answer = answer.replace("EVENT", "utter_remove_object")
                 answer = answer.replace(", \"aux\": {AUX}", "")
@@ -240,8 +254,8 @@ class FactoryWebHookHttp(BaseHTTPRequestHandler):
         
         # Add relative object
         elif intent == "add_relative_object":
-            if self.factory.add_relative_object(entities["Object"], entities["relName"], entities["relPos"]):
-                obj_name = entities["Object"] + str(self.factory.counter[entities["Object"]])
+            if self.factory.add_relative_object(entities["object"], entities["relName"], entities["relPos"]):
+                obj_name = entities["object"] + str(self.factory.counter[entities["object"]])
                 answer = self.answer.replace("MESSAGE", "Object added correctly! You can refer to it as " + obj_name)
                 answer = answer.replace("EVENT", "utter_add_relative_object")
                 answer = answer.replace("AUX", "\"name\": \"" + obj_name + "\"")

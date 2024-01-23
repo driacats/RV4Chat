@@ -34,20 +34,20 @@ stories:
 - story: add object
   steps:
   - intent: add_object
-  - action: get_time
+  # - action: get_time
   - action: utter_add_object
   - action: send_info
   - action: action_reset_all_slots
-  - action: get_time
+  # - action: get_time
 
 - story: add relative object
   steps:
   - intent: add_relative_object
-  - action: get_time
+  # - action: get_time
   - action: utter_add_relative_object
   - action: send_info
   - action: action_reset_all_slots
-  - action: get_time
+  # - action: get_time
 
 # TODO: ask for actor name if not provided
 - story: add actor
@@ -60,8 +60,8 @@ stories:
 - story: remove object
   steps:
   - intent: remove_object
-  - action: get_time
+  # - action: get_time
   - action: utter_remove_object
   - action: send_info
   - action: action_reset_all_slots
-  - action: get_time
+  # - action: get_time

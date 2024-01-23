@@ -32,7 +32,8 @@ policies:
   batch_size:
   - 32
   - 64
-# - name: policies.controllerPolicy.ControllerPolicy
-#   priority: 6
-#   error_action: "utter_error_message"
-assistant_id: 20240118-123205-fixed-mate
+- name: policies.controllerPolicy.ControllerPolicy
+  priority: 6
+  error_action: "utter_error_message"
+# assistant_id: 20240118-123205-fixed-mate
+assistant_id: 20240123-171245-maroon-armory
