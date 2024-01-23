@@ -9,7 +9,7 @@
 
 # IMPORTS
 from http.server import BaseHTTPRequestHandler, HTTPServer
-import json, requests, random, time
+import json, random, time
 import urllib3
 from websocket import create_connection
 
@@ -40,13 +40,19 @@ class WebHookResponder(BaseHTTPRequestHandler):
 		json_obj["intent"] = intent
 		entities = {}
 		for param in message["queryResult"]["parameters"]:
-			entities[param] = message["queryResult"]["parameters"][param]
+			if param == "Object":
+				entities["object"] = message["queryResult"]["parameters"][param]
+			else:
+				entities[param] = message["queryResult"]["parameters"][param]
+			if param in ["posX", "posY"] and message["queryResult"]["parameters"][param] == "":
+				entities[param] = "center"
 		json_obj["entities"] = entities
 		return json.dumps(json_obj)
 
 	def question_oracle(self, event_str):
 		# ws = create_connection(self.MONITOR_URL)
 		# We send it to the monitor and wait for the answer.
+		print("[LOG] " + event_str)
 		self.ws.send(event_str)
 		oracle = json.loads(self.ws.recv())
 		# self.ws.close()

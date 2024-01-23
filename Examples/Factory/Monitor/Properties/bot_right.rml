@@ -1,17 +1,17 @@
 msg_user_to_bot matches { sender:'user', receiver:'bot' };
 msg_bot_to_user matches { sender:'bot', receiver:'user' };
-add_object matches { intent: { name: 'add_object', confidence: _ }};
-add_object_rel(obj) matches { intent: { name: 'add_relative_object', confidence: _ }, entities: {relName: obj} };
-remove_object(obj) matches {intent: { name: 'remove_object', confidence: _ }, entities: {relName: obj} };
+add_object matches { intent: { name: 'add_object', confidence: _ }, entities: { object: _,posX: _, posY: _} };
+add_object_rel(obj) matches { intent: { name: 'add_relative_object', confidence: _ }, entities: {object: _, horizontal: _, vertical: _, relative: _, relName: obj} };
+remove_object(obj) matches {intent: { name: 'remove_object', confidence: _ }, entities: {object: _, horizontal: _, vertical: _, relative: _, relName: obj} };
 object_added(obj) matches { bot_action: 'utter_add_object', aux: {name: obj} };
-object_added_rel(obj) matches { next_action: 'utter_add_relative_object', name: obj };
-object_removed matches { next_action: 'utter_remove_object' };
+object_added_rel(obj) matches { bot_action: 'utter_add_relative_object', aux: {name: obj } };
+object_removed matches { bot_action: 'utter_remove_object' };
 
 irrelevant matches 
-    { next_action: 'send_info' } | 
-    { next_action: 'action_reset_all_slots' } |
-    { next_action: 'send_relative_info' } |
-    { next_action: 'send_remove_info' };
+    { bot_action: 'send_info' } | 
+    { bot_action: 'action_reset_all_slots' } |
+    { bot_action: 'send_relative_info' } |
+    { bot_action: 'send_remove_info' };
 relevant not matches irrelevant;
 
 Main = relevant >> AddObject;

@@ -11,3 +11,4 @@ Examples/Factory/Rasa/models
 Examples/Factory/Rasa/actions/__pycache__
 Examples/Factory/Rasa/policies/__pycache__
 **/.DS_Store
+Examples/Factory/Dialogflow/.venv

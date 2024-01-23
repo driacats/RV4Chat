@@ -212,12 +212,13 @@ class FactoryWebHookHttp(BaseHTTPRequestHandler):
         intent = message["queryResult"]["intent"]["displayName"]
         entities = {}
         for entity in message["queryResult"]["parameters"]:
-            entities[entity] = message["queryResult"]["parameters"][entity]
+            print(entity, entity.lower())
+            entities[entity.lower()] = message["queryResult"]["parameters"][entity]
 
         # Add object intent
         if intent == "add_object":
-            if self.factory.add_object(entities["Object"], entities["posX"], entities["posY"]):
-                obj_name = entities["Object"] + str(self.factory.counter[entities["Object"]])
+            if self.factory.add_object(entities["object"], entities["posX"], entities["posY"]):
+                obj_name = entities["object"] + str(self.factory.counter[entities["object"]])
                 answer = self.answer.replace("MESSAGE", "Object added correctly! You can refer to it as " + obj_name)
                 answer = answer.replace("EVENT", "utter_add_object")
                 answer = answer.replace("AUX", "\"name\": \"" + obj_name + "\"")
