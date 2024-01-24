@@ -226,8 +226,9 @@ class FactoryWebHookHttp(BaseHTTPRequestHandler):
         entities = {}
         for entity in message["queryResult"]["parameters"]:
             if entity == "Object":
-                entity = "object"
-            entities[entity] = message["queryResult"]["parameters"][entity]
+                entities["object"] = message["queryResult"]["parameters"][entity]
+            else:
+                entities[entity] = message["queryResult"]["parameters"][entity]
 
         # Add object intent
         if intent == "add_object":
@@ -243,7 +244,7 @@ class FactoryWebHookHttp(BaseHTTPRequestHandler):
 
         # Remove object intent
         elif intent == "remove_object":
-            if self.factory.remove_object(entities["relName"]):
+            if self.factory.remove_object(entities["relname"]):
                 answer = self.answer.replace("MESSAGE", "Object removed correctly!")
                 answer = answer.replace("EVENT", "utter_remove_object")
                 answer = answer.replace(", \"aux\": {AUX}", "")

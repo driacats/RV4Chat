@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Arch Linux)  (format=lualatex 2024.1.16)  23 JAN 2024 17:26
+This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Arch Linux)  (format=lualatex 2024.1.16)  24 JAN 2024 14:49
  restricted system commands enabled.
 **plot1.tex
 (./plot1.tex
@@ -446,18 +446,18 @@ e
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./plot1.aux))
 
 Here is how much of LuaTeX's memory you used:
- 13039 strings out of 478285
+ 13041 strings out of 478285
  100000,1977958 words of node,token memory allocated
  413 words of node memory still in use:
    3 hlist, 1 vlist, 1 rule, 2 glue, 3 kern, 1 glyph, 5 attribute, 48 glue_spec,
  5 attribute_list, 2 write nodes
-   avail lists: 2:2303,3:1917,4:538,5:28,6:2,7:1103,9:360,11:12
- 32732 multiletter control sequences out of 65536+600000
+   avail lists: 2:2271,3:1890,4:532,5:28,6:2,7:1088,9:360,11:12
+ 32734 multiletter control sequences out of 65536+600000
  18 fonts using 1118495 bytes
  115i,7n,111p,406b,619s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/opentype/public/lm/lmroman9-italic.otf></usr/share/
 texmf-dist/fonts/opentype/public/lm/lmroman8-regular.otf>
-Output written on plot1.pdf (1 page, 10240 bytes).
+Output written on plot1.pdf (1 page, 10130 bytes).
 
 PDF statistics: 25 PDF objects out of 1000 (max. 8388607)
  15 compressed objects within 1 object stream

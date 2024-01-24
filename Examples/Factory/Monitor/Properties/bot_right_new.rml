@@ -1,8 +1,8 @@
 msg_user_to_bot matches { sender:'user', receiver:'bot' };
 msg_bot_to_user matches { sender:'bot', receiver:'user' };
-add_object matches { intent: { name: 'add_object', confidence: _ }, entities: { object: _,posX: _, posY: _} };
-add_object_rel(obj) matches { intent: { name: 'add_relative_object', confidence: _ }, entities: {object: _, relPos: _, relName: obj} };
-remove_object(obj) matches {intent: { name: 'remove_object', confidence: _ }, entities: { relName: obj } };
+add_object matches { intent: { name: 'add_object', confidence: _ }, entities: { object: _,posx: _, posy: _} };
+add_object_rel(obj) matches { intent: { name: 'add_relative_object', confidence: _ }, entities: {object: _, relpos: _, relname: obj} };
+remove_object(obj) matches {intent: { name: 'remove_object', confidence: _ }, entities: { relname: obj } };
 object_added(obj) matches { bot_action: 'utter_add_object', aux: {name: obj} };
 object_added_rel(obj) matches { bot_action: 'utter_add_relative_object', aux: {name: obj } };
 object_removed matches { bot_action: 'utter_remove_object' };

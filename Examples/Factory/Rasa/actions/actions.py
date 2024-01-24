@@ -20,6 +20,9 @@ class ActionResetAllSlots(Action):
         return "action_reset_all_slots"
 
     def run(self, dispatcher, tracker, domain):
+        with open("times.log", 'a') as f:
+            f.write("[RESET]" + str(time.time() * 1000) + "\n")
+        # print("[TIME]", time.time() * 1000)
         return [AllSlotsReset()]
 
 class SendInfo(Action):
@@ -30,6 +33,9 @@ class SendInfo(Action):
         return "send_info"
     
     def run(self, dispatcher, tracker, domain):
+        with open("times.log", 'a') as f:
+            f.write("[SEND]" + str(time.time() * 1000) + "\n")
+        # print("[TIME]", time.time() * 1000)
         instruction = {}
         instruction['intent'] = tracker.latest_message['intent'].get('name')
         instruction['obj'] = tracker.get_slot('object')

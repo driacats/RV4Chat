@@ -19,6 +19,8 @@ class WebHookResponder(BaseHTTPRequestHandler):
 	MONITOR_URL = "ws://localhost:5052"
 	ws = create_connection(MONITOR_URL)
 	http = urllib3.PoolManager()
+	with open('times.csv', 'w') as f:
+		f.write('header,intent,perform,bot,total\n')
 
 	# The function simply sends an error message back to Dialogflow
 	def send_error_message(self):
@@ -40,12 +42,12 @@ class WebHookResponder(BaseHTTPRequestHandler):
 		json_obj["intent"] = intent
 		entities = {}
 		for param in message["queryResult"]["parameters"]:
-			if param == "Object":
-				entities["object"] = message["queryResult"]["parameters"][param]
-			else:
-				entities[param] = message["queryResult"]["parameters"][param]
+			# if param == "Object":
+				# entities["object"] = message["queryResult"]["parameters"][param]
+			# else:
+			entities[param.lower()] = message["queryResult"]["parameters"][param]
 			if param in ["posX", "posY"] and message["queryResult"]["parameters"][param] == "":
-				entities[param] = "center"
+				entities[param.lower()] = "center"
 		json_obj["entities"] = entities
 		return json.dumps(json_obj)
 
@@ -102,6 +104,8 @@ class WebHookResponder(BaseHTTPRequestHandler):
 			# print("[TIME]", round(time.time() * 1000 - start_time, 2))
 			times.append(round(time.time() * 1000 - start_time, 2))
 			print("[TIMES]", times)
+			with open('times.csv', 'a') as f:
+				f.write(str(times).replace("[", "").replace("]", "") + "\n")
 
 
 
