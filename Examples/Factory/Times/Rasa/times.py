@@ -71,13 +71,15 @@ import os
 #     log_times_avg.append((msg + 1, round(sum(log_times[msg]) / len(log_times[msg]) * 1000, 5)))
 # print(log_times_avg)
 # print("\draw[blue] plot [smooth, tension=1] coordinates {", log_times_avg[0], log_times_avg[1], log_times_avg[2], log_times_avg[3], log_times_avg[4], log_times_avg[5], "};") 
-folders = ['./dummy-monitor/', './no-monitor/']
-colors = ['blue', 'red']
+folders = ['./dummy-monitor/', './no-monitor/', './real-monitor/']
+colors = ['blue', 'red', 'teal']
 # folder = './dummy-monitor/'
 for folder, color in zip(folders, colors):
     avg_times = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    counter = 0
     for f in os.listdir(folder):
         if f.endswith('.log'):
+            counter += 1
             send_times = []
             reset_times = []
             ff = open(os.path.join(folder, f))
@@ -99,8 +101,8 @@ for folder, color in zip(folders, colors):
             print("};")
             # print(reset_times - send_times)
 
-    print(avg_times)
+    # print(avg_times)
     print("\draw[" + color + "] plot [smooth, tension=1] coordinates { ", end="")
     for i, t in enumerate(avg_times):
-        print((i+1, round(t/10, 3)), end=" ")
+        print((i+1, round(t/counter, 3)), end=" ")
     print("};")

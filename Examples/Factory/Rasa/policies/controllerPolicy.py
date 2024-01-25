@@ -37,12 +37,22 @@ class ControllerPolicy(Policy):
 		
 		intent = {}
 		intent["name"] = tracker.latest_message.intent["name"]
-		intent["confidence"] = tracker.latest_message.intent["confidence"]
+		if "confidence" in tracker.latest_message.intent:
+			intent["confidence"] = tracker.latest_message.intent["confidence"]
 		msg_obj["intent"] = intent
 		
 		entities = {}
-		for entity in tracker.latest_message.entities:
-			entities[entity["entity"]] = entity["value"]
+		if intent["name"] == "add_object":
+			entities["object"] = next(tracker.get_latest_entity_values("object"), None)
+			entities["posx"] = next(tracker.get_latest_entity_values("horizontal"), None)
+			entities["posy"] = next(tracker.get_latest_entity_values("vertical"), None)
+		if intent["name"] == "add_relative_object":
+			entities["object"] = next(tracker.get_latest_entity_values("object"), None)
+			entities["relname"] = next(tracker.get_latest_entity_values("relName"), None)
+			entities["relpos"] = next(tracker.get_latest_entity_values("relative"), None)
+		if intent["name"] == "remove_object":
+			entities["relname"] = next(tracker.get_latest_entity_values("relName"), None)
+		
 		msg_obj["entities"] = entities
 		
 		return json.dumps(msg_obj)
@@ -55,6 +65,10 @@ class ControllerPolicy(Policy):
 		msg_obj["receiver"] = "user"
 		
 		msg_obj["bot_action"] = str(tracker.latest_action_name)
+
+		aux = {}
+		aux["name"] = tracker.get_slot('webhookResult')
+		msg_obj["aux"] = aux
 		
 		return json.dumps(msg_obj)
 

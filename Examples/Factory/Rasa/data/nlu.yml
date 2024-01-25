@@ -128,9 +128,6 @@ nlu:
   examples: |
     - \w+[0-9]
 
-- regex: actorName
-  examples: |
-    - [A-Z]\w+
 
 - intent: add_object
   examples: |
@@ -145,19 +142,6 @@ nlu:
     - add a [table](object) [left of](relative) [table2](relName)
     - add a [table](object) [behind of](relative) [table7](relName)
     - add a [table](object) [in front of](relative) [table7](relName)
-
-- intent : add_actor
-  examples: |
-    - add an actor
-    - add an actor in [front](vertical) on the [right](horizontal)
-    - add an actor [behind](vertical) on the [left](horizontal)
-    - add an actor on the [left](horizontal)
-    - add an actor called [James](actorName)
-
-- intent: actor_name
-  examples: |
-    - [Andrew](actorName)
-    - The actor name is [John](actorName)
 
 - intent: remove_object
   examples: |

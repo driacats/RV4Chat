@@ -20,7 +20,6 @@ entities:
   - horizontal
   - relative
   - relName
-  - actorName
 
 slots:
   object:
@@ -53,17 +52,15 @@ slots:
     mappings:
       - type: from_entity
         entity: relName
-  actorName:
+  webhookResult:
     type: text
     influence_conversation: False
     mappings:
-      - type: from_entity
-        entity: actorName
+      - type: custom
   
 actions:
   - action_reset_all_slots
   - send_info
-  - get_time
 
 responses:
   utter_greet:

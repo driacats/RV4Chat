@@ -4,11 +4,9 @@
 # See this guide on how to implement these action:
 # https://rasa.com/docs/rasa/custom-actions
 
-# TODO: use the result to give different answers.
-
 #from rasa_sdk import Action, Tracker
 from rasa_sdk import Action
-from rasa_sdk.events import AllSlotsReset
+from rasa_sdk.events import AllSlotsReset, SlotSet
 #from rasa_sdk.executor import CollectingDispatcher
 #import socket
 import json, time
@@ -57,6 +55,7 @@ class SendInfo(Action):
         result = ws.recv()
         print("getting the result: ", result)
         ws.close()
+        return [SlotSet("webhookResult", result.split()[-1])]
 
 # class GetTime(Action):
 
