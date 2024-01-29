@@ -1,0 +1,151 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+
+- intent: mood_great
+  examples: |
+    - perfect
+    - great
+    - amazing
+    - feeling like a king
+    - wonderful
+    - I am feeling very good
+    - I am great
+    - I am amazing
+    - I am going to save the world
+    - super stoked
+    - extremely good
+    - so so perfect
+    - so good
+    - so perfect
+
+- intent: mood_unhappy
+  examples: |
+    - my day was horrible
+    - I am sad
+    - I don't feel very well
+    - I am disappointed
+    - super sad
+    - I'm so sad
+    - sad
+    - very sad
+    - unhappy
+    - not good
+    - not very good
+    - extremly sad
+    - so saad
+    - so sad
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+
+- regex: salary
+  examples: |
+    - [0-9]+
+
+- regex: nsons
+  examples: |
+    - [0-9]
+
+- intent: get_information
+  examples: |
+    - I am afraid
+    - I am victim of violence
+    - I cannot bear this situation any longer
+    - I feel not safe
+    - I need a place to hide
+    - I need to hide
+    - I need to escape
+    - I do not know where to hide
+    - I do not know where to stay
+    - I do not know what to do
+    - I need help
+
+- intent: inform_chatbot_about_salary
+  examples: |
+    - I have no money
+    - I do not work
+    - I earn nothing
+    - My yearly salary is [19000](salary) dollars
+    - My mothly salary is [1350](salary) euros
+    - I earn [18000](salary) dollars per year
+    - I earn [15000](salary) euros per year
+    - I earn [2300](salary) dollars per month
+    - I earn [1200](salary) euros per month
+
+- intent: inform_chatbot_about_children
+  examples: |
+    - I have [1](nsons) son
+    - We have [3](nsons) sons
+    - I have [2](nsons) children
+    - I have no children
+    - No
+    - We have [3](nsons) children
+
+- intent: commit_suicide
+  examples: |
+    - How can I commit suicide
+    - How can I kill myself
+    - I want to come to an end with my life
+    - I want to come to an end with this life
+    - I cannot survive
+    - I will kill me
+
+- intent: help_word
+  examples: |
+    - saales
+
+- intent: undo_word
+  examples: |
+    - stop
