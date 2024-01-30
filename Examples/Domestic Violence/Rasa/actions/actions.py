@@ -30,6 +30,7 @@ from typing import Any, Text, Dict, List
 
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
+from rasa_sdk.events import SlotSet
 import json
 from websocket import create_connection
 
@@ -50,7 +51,8 @@ class send_request(Action):
 
         entities = {}
         for entity in msg["entities"]:
-            entities[entity] = msg["entities"][entity]
+            e_name = entity["entity"]
+            entities[e_name] = entity["value"]
         
         request["entities"] = entities
 
@@ -58,7 +60,8 @@ class send_request(Action):
         print("connection created...")
         ws.send(json.dumps(request))
         print("sending...")
-        result = ws.recv()
-        print("getting the result: ", result)
+        (answer, bot_event) = eval(ws.recv())
+        print("getting the result: ", answer)
         ws.close()
-        dispatcher.utter_message(text=result)
+        dispatcher.utter_message(text=answer)
+        return [SlotSet("bot_event", bot_event)]

@@ -88,7 +88,7 @@ async def handle_msg(msg):
         final_answer = (ask_salary, "utter_ask_salary")
     elif intent == "inform_chatbot_about_salary":
         final_answer = (ask_children, "utter_ask_children")
-    elif intent == "inform_chatbot_about_salary":
+    elif intent == "inform_chatbot_about_children":
         final_answer = ("Ok, stay safe", "utter_normal")
     else:
         final_answer = ("Unknown message.", "utter_unknown")
@@ -123,7 +123,7 @@ async def handle_post(request):
     # Compute the answer and the bot event
     (final_answer, bot_event) = await handle_msg(json.dumps(request))
     # Build the answer for Dialogflow
-    final_answer = answer.replace("MESSAGE", final_answer).replace("BOT_ACTION", bot_event)
+    final_answer = answer.replace("MESSAGE", final_answer).replace("EVENT", bot_event)
 
     # Compute time
     with open("times.csv", "a") as f:
@@ -145,7 +145,7 @@ async def handle_ws(request):
     async for msg in ws:
         if msg.type == web.WSMsgType.TEXT:
             (final_answer, bot_event) = await handle_msg(msg.data)
-            await ws.send_str(final_answer)
+            await ws.send_str(str((final_answer, bot_event)))
             
     return ws
 

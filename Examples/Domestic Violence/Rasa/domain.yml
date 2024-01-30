@@ -1,5 +1,9 @@
 version: "3.1"
 
+entities:
+  - salary
+  - nsons
+
 intents:
   - greet
   - goodbye
@@ -14,6 +18,13 @@ intents:
   - commit_suicide
   - help_word
   - undo_word
+
+slots:
+  bot_event:
+    type: text
+    influence_conversation: False
+    mappings:
+      - type: custom
 
 actions:
   - send_request

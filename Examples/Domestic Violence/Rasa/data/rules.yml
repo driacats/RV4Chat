@@ -11,3 +11,18 @@ rules:
   steps:
   - intent: bot_challenge
   - action: utter_iamabot
+
+- rule: Encourage not committing suicide
+  steps:
+  - intent: commit_suicide
+  - action: send_request
+
+- rule: Start timer for help
+  steps:
+  - intent: help_word
+  - action: send_request
+
+- rule: Stop timer for help
+  steps:
+  - intent: undo_word
+  - action: send_request

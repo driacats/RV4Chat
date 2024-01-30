@@ -33,3 +33,7 @@ stories:
   steps:
   - intent: get_information
   - action: send_request
+  - intent: inform_chatbot_about_salary
+  - action: send_request
+  - intent: inform_chatbot_about_children
+  - action: send_request
