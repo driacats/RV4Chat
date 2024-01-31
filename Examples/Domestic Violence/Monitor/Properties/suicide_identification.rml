@@ -1,0 +1,16 @@
+commit_suicide matches {sender: 'user', receiver: 'bot', intent: {name: 'commit_suicide', confidence: _}, entities: _};
+utter_against_suicide matches {sender: 'bot', receiver: 'user', bot_action: 'utter_against_suicide'};
+help_word matches {sender: 'user', receiver: 'bot', intent: {name: 'help_word', confidence: _}, entities: _};
+undo_word matches {sender: 'user', receiver: 'bot', intent: {name: 'undo_word', confidence: _}, entities: _};
+utter_help matches {sender: 'bot', receiver: 'user', bot_action: 'utter_help'};
+
+relevant matches commit_suicide | utter_against_suicide | help_word | utter_help | undo_word;
+
+Main = relevant >> HelpAgainstSuicide<3>*;
+HelpAgainstSuicide<n> = 
+    if (n > 0) 
+        (Help\/Undo)* commit_suicide utter_against_suicide HelpAgainstSuicide<n-1>
+    else
+        Help;
+Help = help_word utter_help;
+Undo = undo_word utter_help;
