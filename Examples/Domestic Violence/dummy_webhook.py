@@ -31,7 +31,7 @@ timer = Timer(delay) # Timer of delay seconds
 commit_suicide_counter = 0 # counter of times the user wants to commit suicide
 
 # Global answer strings
-answer = "{\"fulfillmentMessages\":[{\"text\":{\"text\":[\"MESSAGE\"]}}], \"bot_action\": \"EVENT\"}"
+answer = "{\"fulfillmentMessages\":[{\"text\":{\"text\":[\"MESSAGE\"]}}], \"bot_action\": \"EVENT\", \"timestamp\": TIMESTAMP}"
 
 against_suicide_1_2 = "Your situation seems very difficult and you need help." +\
     " Many victims of violence want to come to an end with their lives," +\
@@ -123,7 +123,7 @@ async def handle_post(request):
     # Compute the answer and the bot event
     (final_answer, bot_event) = await handle_msg(json.dumps(request))
     # Build the answer for Dialogflow
-    final_answer = answer.replace("MESSAGE", final_answer).replace("EVENT", bot_event)
+    final_answer = answer.replace("MESSAGE", final_answer).replace("EVENT", bot_event).replace("TIMESTAMP", str(time.time()))
 
     # Compute time
     with open("times.csv", "a") as f:

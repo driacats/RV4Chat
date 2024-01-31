@@ -41,6 +41,7 @@ class WebHookResponder(BaseHTTPRequestHandler):
 		for param in message["queryResult"]["parameters"]:
 			entities[param.lower()] = message["queryResult"]["parameters"][param]
 		json_obj["entities"] = entities
+		json_obj["timestamp"] = time.time()
 		return json.dumps(json_obj)
 
 	def question_oracle(self, event_str):
