@@ -11,7 +11,7 @@ real_monitor = 'real-monitor'
 
 def print_welcome():
     print("============ Rv4Chat ============")
-    print("Domestic Violence Chatbot Example")
+    print("     Factory Chatbot Example")
     print("=================================")
 
 def print_start(platform, monitor):
