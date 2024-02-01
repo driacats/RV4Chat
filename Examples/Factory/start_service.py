@@ -1,4 +1,4 @@
-import subprocess, argparse
+import subprocess, argparse, os
 
 kitty = "kitty --hold 2>/dev/null sh -c"
 
@@ -11,7 +11,7 @@ real_monitor = 'real-monitor'
 
 def print_welcome():
     print("============ Rv4Chat ============")
-    print("     Factory Chatbot Example")
+    print("Domestic Violence Chatbot Example")
     print("=================================")
 
 def print_start(platform, monitor):
@@ -61,44 +61,65 @@ def choose_monitor():
             print("Choice not valid, try again.")
 
 def launch_ngrok(port):
-    subprocess.Popen(f"{kitty} 'ngrok http {port}'", shell=True)
+    return subprocess.Popen(f"{kitty} 'ngrok http {port}'", shell=True, preexec_fn=os.setsid).pid
 
 def launch_sample_monitor():
-    subprocess.Popen(f"{kitty} 'python ../../sample_monitor_ws.py'", shell=True)
+    return subprocess.Popen(f"{kitty} 'python ../../sample_monitor_ws.py'", shell=True, preexec_fn=os.setsid).pid
 
 def launch_monitor():
-    print("Not available")
-    # subprocess.Popen(f"kitty --hold Monitor/online_monitor.sh", shell=True)
+    return subprocess.Popen(f"{kitty} Monitor/online_monitor.sh Monitor/Properties/bot_right.pl 5052", shell=True).pid
 
 def launch_webhook(platform):
-    subprocess.Popen(f"{kitty} 'python dummy_webhook.py -p {platform}'", shell=True)
+    return subprocess.Popen(f"{kitty} 'python dummy_webhook.py -p {platform}'", shell=True, preexec_fn=os.setsid).pid
 
 def run_dialogflow(monitor):
+    pids = []
+
     if (monitor == no_monitor):
-        launch_ngrok(8082)
+        pid = launch_ngrok(8082).pid
+        pids.append(pid)
 
     elif (monitor == dummy_monitor):
-        launch_ngrok(8080)
-        launch_sample_monitor()
+        pid = launch_ngrok(8080).pid
+        pids.append(pid)
+        pid = launch_sample_monitor().pid
+        pids.append(pid)
 
     elif (monitor == real_monitor):
-        launch_ngrok(8080)
-        launch_monitor()
+        pid = launch_ngrok(8080).pid
+        pids.append(pid)
+        pid = launch_monitor().pid
+        pids.append(pid)
 
-    launch_webhook("dialogflow")
+    pid = launch_webhook("dialogflow")
+    pids.append(pid)
+    return pids
 
 def run_rasa(monitor):
+
+    pids = []
+
+    rasa_command = 'rasa run -m models/model-no-policy.tar.gz'
     
     if (monitor == dummy_monitor):
-        launch_sample_monitor()
+        pid = launch_sample_monitor()
+        pids.append(pid)
+        rasa_command = 'rasa run -m models/model-with-policy.tar.gz'
         
     elif (monitor == real_monitor):
-        launch_monitor()
+        pid = launch_monitor()
+        pids.append(pid)
+        rasa_command = 'rasa run -m models/model-with-policy.tar.gz'
 
-    launch_webhook("rasa")
+    pid = launch_webhook("rasa")
+    pids.append(pid)
 
-    subprocess.Popen(f"{kitty} 'cd Rasa && source .venv/bin/activate && rasa run'", shell=True)
-    subprocess.Popen(f"{kitty} 'cd Rasa && source .venv/bin/activate && rasa run actions'", shell=True)
+    pid = subprocess.Popen(f"{kitty} 'cd Rasa && source .venv/bin/activate && {rasa_command}'", shell=True, preexec_fn=os.setsid).pid
+    pids.append(pid)
+    pid = subprocess.Popen(f"{kitty} 'cd Rasa && source .venv/bin/activate && rasa run actions'", shell=True, preexec_fn=os.setsid).pid
+    pids.append(pid)
+
+    return pids
 
 def main():
 

@@ -1,13 +1,26 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
-import json, requests
+import json, requests, argparse, asyncio, websockets, time
 
-class FactoryWebHook(BaseHTTPRequestHandler):
+# The Factory class implements a factory CAD placeholder.
+# It has four main functions:
+#  - print_factory(): prints the factory situation;
+#  - add_object(obj, h, v): adds an object of type obj in position h horizontally and v vertically
+#  - add_relative_object(obj, relObj, relPos): adds an object of type obj in relPos with respect to relObj
+#  - removeObj(obj): removes the object obj from the factory.
+# An example of use is:
+#   factory = Factory()
+#   factory.add_object('table', 'right', 'front') # adds a table in front on the right
+#   factory.add_relative_object('box', 'table1', 'right of') # adds a box right of table1
+#   factory.remove_object('table1') # removes table1
 
-    answer = "{\"fulfillmentMessages\":[{\"text\":{\"text\":[\"MESSAGE\"]}}], \"bot_action\": \"EVENT\", \"aux\": {AUX}}"
+class Factory():
+
+    #// answer = "{\"fulfillmentMessages\":[{\"text\":{\"text\":[\"MESSAGE\"]}}], \"bot_action\": \"EVENT\", \"aux\": {AUX}}"
     positions = [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]]
     objects = {}
     counter = {"table": 0, "box": 0, "robot": 0}
-    # Relative positions:
+    
+    # * Relative positions:
     # - "behind|center+front"
     # - "left,center.right"
     # Example:
@@ -36,7 +49,6 @@ class FactoryWebHook(BaseHTTPRequestHandler):
             print(row_line)
 
             # For 3 times we check each cell:
-            # i. 
             # 0. one for behind objects
             # 1. one for centered objects
             # 2. one for front objects
@@ -187,15 +199,23 @@ class FactoryWebHook(BaseHTTPRequestHandler):
                         self.positions[i][j] = column + "+" + obj[0]
         return True
 
-    def do_POST(self):
+# The FactoryWebHookHttp class implements a listener server in Http.
+# It is used with Dialogflow (to respect the WebHook API).
+class FactoryWebHookHttp(BaseHTTPRequestHandler):
 
+    factory = Factory()
+    answer = "{\"fulfillmentMessages\":[{\"text\":{\"text\":[\"MESSAGE\"]}}], \"bot_action\": \"EVENT\", \"aux\": {AUX}}"
+
+    def do_POST(self):
+        start_time = time.time() * 1000
         # Accept the request
         content_length = int(self.headers['Content-Length'])
         post_data = self.rfile.read(content_length)
         message = json.loads(post_data)
-        self.send_response(200)
-        self.send_header('Content-type', 'text/html')
-        self.end_headers()
+        time.sleep(0.02)
+        # self.send_response(200)
+        # self.send_header('Content-type', 'text/html')
+        # self.end_headers()
 
         if not "queryResult" in message:
              print("[LOG] Message not valid.")
@@ -205,12 +225,15 @@ class FactoryWebHook(BaseHTTPRequestHandler):
         intent = message["queryResult"]["intent"]["displayName"]
         entities = {}
         for entity in message["queryResult"]["parameters"]:
-            entities[entity] = message["queryResult"]["parameters"][entity]
+            if entity == "Object":
+                entities["object"] = message["queryResult"]["parameters"][entity]
+            else:
+                entities[entity] = message["queryResult"]["parameters"][entity]
 
         # Add object intent
         if intent == "add_object":
-            if self.add_object(entities["Object"], entities["posX"], entities["posY"]):
-                obj_name = entities["Object"] + str(self.counter[entities["Object"]])
+            if self.factory.add_object(entities["object"], entities["posX"], entities["posY"]):
+                obj_name = entities["object"] + str(self.factory.counter[entities["object"]])
                 answer = self.answer.replace("MESSAGE", "Object added correctly! You can refer to it as " + obj_name)
                 answer = answer.replace("EVENT", "utter_add_object")
                 answer = answer.replace("AUX", "\"name\": \"" + obj_name + "\"")
@@ -221,7 +244,7 @@ class FactoryWebHook(BaseHTTPRequestHandler):
 
         # Remove object intent
         elif intent == "remove_object":
-            if self.remove_object(entities["relname"]):
+            if self.factory.remove_object(entities["relname"]):
                 answer = self.answer.replace("MESSAGE", "Object removed correctly!")
                 answer = answer.replace("EVENT", "utter_remove_object")
                 answer = answer.replace(", \"aux\": {AUX}", "")
@@ -232,8 +255,8 @@ class FactoryWebHook(BaseHTTPRequestHandler):
         
         # Add relative object
         elif intent == "add_relative_object":
-            if self.add_relative_object(entities["Object"], entities["relName"], entities["relPos"]):
-                obj_name = entities["Object"] + str(self.counter[entities["Object"]])
+            if self.factory.add_relative_object(entities["object"], entities["relName"], entities["relPos"]):
+                obj_name = entities["object"] + str(self.factory.counter[entities["object"]])
                 answer = self.answer.replace("MESSAGE", "Object added correctly! You can refer to it as " + obj_name)
                 answer = answer.replace("EVENT", "utter_add_relative_object")
                 answer = answer.replace("AUX", "\"name\": \"" + obj_name + "\"")
@@ -248,13 +271,79 @@ class FactoryWebHook(BaseHTTPRequestHandler):
             answer = answer.replace("EVENT", "error")
 
         # Send the answer
+        self.send_response(200)
+        self.send_header('Content-type', 'text/html')
+        self.end_headers()
         self.wfile.write(bytes(answer, 'utf8'))
         # Print the factory
-        self.print_factory()
+        print("[TIME]", time.time() * 1000 - start_time)
+        self.factory.print_factory()
 
-def run(PORT):
-    print("Server launch...")
-    httpd = HTTPServer(("localhost", PORT), FactoryWebHook)
-    httpd.serve_forever()
+def FactoryWebHookWebSocket():
 
-run(8082)
+    factory = Factory()
+
+    async def echo(websocket, path):
+        # Print a message when a new connection is established
+        print(f"New connection from {websocket.remote_address}")
+
+        try:
+            # Loop to handle messages received from the connection
+            async for message in websocket:
+                # Print the received message
+                print(f"Received message: {message}")
+                message = json.loads(message)
+
+                if message["intent"] == "add_object":
+                    if factory.add_object(message["obj"], message["posX"], message["posY"]):
+                        obj_name = message["obj"] + str(factory.counter[message["obj"]])
+                        answer = "Object added, you can refer to as " + obj_name
+                    else:
+                        answer = "Error in adding object"
+                if message["intent"] == "add_relative_object":
+                    if factory.add_relative_object(message["obj"], message["relName"], message["relPos"]):
+                        obj_name = message["obj"] + str(factory.counter[message["obj"]])
+                        answer = "Object added, you can refer to as " + obj_name
+                    else:
+                        answer = "Error in adding object"
+                if message["intent"] == "remove_object":
+                    if factory.remove_object(message["relName"]):
+                        answer = "Object removed"
+                    else:
+                        answer = "Error in adding object"
+
+                # Respond always with "true"
+                # response = "{\"verdict\": true}"
+
+                factory.print_factory()
+
+                # Send the response back to the client
+                await websocket.send(answer)
+                print(f"Sent response: {answer}")
+
+        except websockets.exceptions.ConnectionClosed:
+            # Handle connection closure
+            print(f"Connection closed by {websocket.remote_address}")
+
+    # Start the WebSocket server
+    start_server = websockets.serve(echo, "localhost", 8082)
+
+    # Run the server in an infinite loop
+    asyncio.get_event_loop().run_until_complete(start_server)
+    asyncio.get_event_loop().run_forever()
+
+def main():
+    parser = argparse.ArgumentParser(prog="Dummy WebHook Server", description="This program simulates a factory CAD service")
+    parser.add_argument("-p", metavar="rasa|dialogflow", help="Platform to be used for connections.", default="rasa")
+    args = parser.parse_args()
+
+    if args.p == "dialogflow":
+        print("Server launch...")
+        httpd = HTTPServer(("localhost", 8082), FactoryWebHookHttp)
+        httpd.serve_forever()
+    elif args.p == "rasa":
+        print("Server launch...")
+        wsd = FactoryWebHookWebSocket()
+
+if __name__ == "__main__":
+    main()

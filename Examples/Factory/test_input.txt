@@ -1,0 +1,12 @@
+Add a table
+Add a box right of table1
+Add a robot in front on the left
+Add a robot in front on the right
+Remove box0
+Remove robot1
+Add a table behind on the left
+Add a robot behind on the right
+Remove table1
+Remove table2
+Remove robot2
+Remove robot3
