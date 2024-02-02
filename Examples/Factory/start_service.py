@@ -1,4 +1,4 @@
-import subprocess, argparse, os
+import subprocess, argparse, os, time
 
 kitty = "kitty --hold 2>/dev/null sh -c"
 
@@ -61,38 +61,65 @@ def choose_monitor():
             print("Choice not valid, try again.")
 
 def launch_ngrok(port):
+    # return subprocess.Popen(f"{kitty} 'ngrok http {port}'", shell=True, preexec_fn=os.setsid).pid
     return subprocess.Popen(f"{kitty} 'ngrok http {port}'", shell=True, preexec_fn=os.setsid).pid
 
+def launch_dummy_dialogflow(port):
+    return subprocess.Popen(f"python dialogflow_local_tester.py -p {port}", shell=True, preexec_fn=os.setsid).pid
+
+def launch_policy():
+    return subprocess.Popen(f"python Dialogflow/policy.py", shell=True, preexec_fn=os.setsid).pid
+
 def launch_sample_monitor():
-    return subprocess.Popen(f"{kitty} 'python ../../sample_monitor_ws.py'", shell=True, preexec_fn=os.setsid).pid
+    # return subprocess.Popen(f"{kitty} 'python ../../sample_monitor_ws.py'", shell=True, preexec_fn=os.setsid).pid
+    return subprocess.Popen(f"python ../../sample_monitor_ws.py", shell=True, preexec_fn=os.setsid).pid
 
 def launch_monitor():
-    return subprocess.Popen(f"{kitty} Monitor/online_monitor.sh Monitor/Properties/bot_right.pl 5052", shell=True).pid
+    # return subprocess.Popen(f"kitty --hold sh Monitor/online_monitor.sh Monitor/Properties/bot_right.pl 5052", shell=True, preexec_fn=os.setsid).pid
+    return subprocess.Popen(f"Monitor/online_monitor.sh Monitor/Properties/bot_right.pl 5052", shell=True, preexec_fn=os.setsid).pid
 
 def launch_webhook(platform):
-    return subprocess.Popen(f"{kitty} 'python dummy_webhook.py -p {platform}'", shell=True, preexec_fn=os.setsid).pid
+    # return subprocess.Popen(f"{kitty} 'python dummy_webhook.py -p {platform}'", shell=True, preexec_fn=os.setsid).pid
+    return subprocess.Popen(f"python dummy_webhook_new.py -p {platform}", shell=True, preexec_fn=os.setsid).pid
 
 def run_dialogflow(monitor):
     pids = []
 
+    # if (monitor == no_monitor):
+        # pid = launch_ngrok(8082)
+        # pids.append(pid)
     if (monitor == no_monitor):
-        pid = launch_ngrok(8082).pid
+        pid = launch_dummy_dialogflow(8082)
+        pids.append(pid)
+        pid = launch_webhook("dialogflow")
         pids.append(pid)
 
     elif (monitor == dummy_monitor):
-        pid = launch_ngrok(8080).pid
+        # pid = launch_ngrok(8080)
+        # pids.append(pid)
+        pid = launch_webhook("dialogflow")
         pids.append(pid)
-        pid = launch_sample_monitor().pid
+        pid = launch_dummy_dialogflow(8080)
+        pids.append(pid)
+        pid = launch_sample_monitor()
+        pids.append(pid)
+        time.sleep(1)
+        pid = launch_policy()
         pids.append(pid)
 
     elif (monitor == real_monitor):
-        pid = launch_ngrok(8080).pid
+        # pid = launch_ngrok(8080)
+        # pids.append(pid)
+        pid = launch_webhook("dialogflow")
         pids.append(pid)
-        pid = launch_monitor().pid
+        pid = launch_dummy_dialogflow(8080)
+        pids.append(pid)
+        pid = launch_monitor()
+        pids.append(pid)
+        time.sleep(1)
+        pid = launch_policy()
         pids.append(pid)
 
-    pid = launch_webhook("dialogflow")
-    pids.append(pid)
     return pids
 
 def run_rasa(monitor):
@@ -114,9 +141,11 @@ def run_rasa(monitor):
     pid = launch_webhook("rasa")
     pids.append(pid)
 
-    pid = subprocess.Popen(f"{kitty} 'cd Rasa && source .venv/bin/activate && {rasa_command}'", shell=True, preexec_fn=os.setsid).pid
+    # pid = subprocess.Popen(f"{kitty} 'cd Rasa && source .venv/bin/activate && {rasa_command}'", shell=True, preexec_fn=os.setsid).pid
+    pid = subprocess.Popen(f"cd Rasa && source .venv/bin/activate && {rasa_command}", shell=True, preexec_fn=os.setsid).pid
     pids.append(pid)
-    pid = subprocess.Popen(f"{kitty} 'cd Rasa && source .venv/bin/activate && rasa run actions'", shell=True, preexec_fn=os.setsid).pid
+    # pid = subprocess.Popen(f"{kitty} 'cd Rasa && source .venv/bin/activate && rasa run actions'", shell=True, preexec_fn=os.setsid).pid
+    pid = subprocess.Popen(f"cd Rasa && source .venv/bin/activate && rasa run actions", shell=True, preexec_fn=os.setsid).pid
     pids.append(pid)
 
     return pids

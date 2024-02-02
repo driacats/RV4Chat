@@ -36,18 +36,23 @@ class SendInfo(Action):
         # print("[TIME]", time.time() * 1000)
         instruction = {}
         instruction['intent'] = tracker.latest_message['intent'].get('name')
-        instruction['obj'] = tracker.get_slot('object')
+        entities = {}
+        entities['object'] = tracker.get_slot('object')
         if instruction['intent'] in ('add_object', 'add_actor') and tracker.get_slot('horizontal') is None:
-            instruction['posX'] = 'center'
+            entities['posX'] = 'center'
         else:
-            instruction['posX'] = tracker.get_slot('horizontal')
+            entities['posX'] = tracker.get_slot('horizontal')
         if instruction['intent'] in ('add_object', 'add_actor') and tracker.get_slot('vertical') is None:
-            instruction['posY'] = 'center'
+            entities['posY'] = 'center'
         else:
-            instruction['posY'] = tracker.get_slot('vertical')
-        instruction['relPos'] = tracker.get_slot('relative')
-        instruction['relName'] = tracker.get_slot('relName')
-        instruction['actorName'] = tracker.get_slot('actorName')
+            entities['posY'] = tracker.get_slot('vertical')
+        entities['relPos'] = tracker.get_slot('relative')
+        if instruction['intent'] == 'remove_object':
+            entities['relname'] = tracker.get_slot('relName')
+        else:
+            entities['relName'] = tracker.get_slot('relName')
+        entities['actorName'] = tracker.get_slot('actorName')
+        instruction['entities'] = entities
         ws = create_connection(self.mas_server)
         print("connection created...")
         ws.send(json.dumps(instruction))
