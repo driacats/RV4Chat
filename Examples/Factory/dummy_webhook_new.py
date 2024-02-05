@@ -107,7 +107,7 @@ class Factory():
     # - v: the vertical position (behind, center, front)
     # It tries to add the object
     def add_object(self, obj, h, v):
-        print("[LOG] called add object")
+        print("[WEBHOOK]\tLOG\t called add object")
         # Get the correct indeces for self.positions
         if h == "right":
             h = 2
@@ -125,7 +125,7 @@ class Factory():
         self.objects[obj[0]] = obj
         # If the position is already took return false
         if self.positions[v][h] != " ":
-            print("[LOG] position already took")
+            print("[WEBHOOK]\tLOG\t position already took")
             return False
         # add in the correct position of the string (if there are already other objects)
         if not len(self.positions[v][h]) == 1:
@@ -153,7 +153,7 @@ class Factory():
     # The function remove_object takes as argument:
     # - obj: the name of the object to be removed
     def remove_object(self, obj):
-        print("[LOG] called remove object")
+        print("[WEBHOOK]\tLOG\t Called remove object")
         # We check each position
         for i, row in enumerate(self.positions):
             for j, column in enumerate(row):
@@ -169,10 +169,10 @@ class Factory():
     # - relObj: the object used as reference
     # - relPos: the position with respect to the relObj one
     def add_relative_object(self, obj, relObj, relPos):
-        print("[LOG] called add relative object")
+        print("[WEBHOOK]\tLOG\t Called add relative object")
         # If the object is not in the objects dictionary exit
         if relObj[0] not in self.objects:
-            print("[LOG] Reference object not found")
+            print("[WEBHOOK]\tLOG\t Reference object not found")
             return False
         # Otherwise look for the object position
         for i, row in enumerate(self.positions):
@@ -201,23 +201,26 @@ class Factory():
 
 async def handle_msg(msg, factory):
     message = json.loads(msg)
-    print(message)
+    print(f"[WEBHOOK]\tLOG\t Received {message}")
 
     if message["intent"] == "add_object":
         if factory.add_object(message['entities']['object'], message['entities']['posX'], message['entities']['posY']):
             obj_name = message['entities']['object'] + str(factory.counter[message['entities']['object']])
             answer = "Object added, you can refer to as " + obj_name
+            event = 'utter_add_object'
         else:
             answer = "Error in adding object"
     if message["intent"] == "add_relative_object":
         if factory.add_relative_object(message['entities']["object"], message['entities']["relName"], message['entities']["relPos"]):
             obj_name = message['entities']["object"] + str(factory.counter[message['entities']["object"]])
             answer = "Object added, you can refer to as " + obj_name
+            event = 'utter_add_relative_object'
         else:
             answer = "Error in adding object"
     if message["intent"] == "remove_object":
         if factory.remove_object(message['entities']["relname"]):
             answer = "Object removed"
+            event = 'utter_remove_object'
         else:
             answer = "Error in adding object"
 
@@ -231,7 +234,7 @@ async def handle_post(request, factory):
     data = await request.json()
     # Check if it is a valid Dialogflow message
     if "queryResult" not in data:
-        print("[LOG] Message not valid.")
+        print("[WEBHOOK]\tERR\t Message not valid.")
         return
 
     # Build the message in the form

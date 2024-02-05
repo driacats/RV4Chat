@@ -9,19 +9,19 @@ async def echo(websocket, path):
         # Loop to handle messages received from the connection
         async for message in websocket:
             # Print the received message
-            print(f"[LOG] {message}")
+            print(f"[MONITOR]\tLOG\t {message}")
 
             # Respond always with "true"
             response = "{\"verdict\": true}"
 
             # Send the response back to the client
             await websocket.send(response)
-            print(f"[TIME] {time.time() * 1000 - start_time}")
-            print(f"[LOG] {response}")
+            print(f"[MONITOR]\tLOG\t Time: {time.time() * 1000 - start_time}")
+            print(f"[MONITOR]\tLOG\t Response: {response}")
 
     except websockets.exceptions.ConnectionClosed:
         # Handle connection closure
-        print(f"Connection closed by {websocket.remote_address}")
+        print(f"[MONITOR]\tLOG\t Connection closed by {websocket.remote_address}")
 
 # Start the WebSocket server
 start_server = websockets.serve(echo, "localhost", 5052)

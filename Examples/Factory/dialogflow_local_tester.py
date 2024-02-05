@@ -65,13 +65,13 @@ def build_msg(msg):
 async def handle_post(request, port):
 
     data = await request.json()
-    print(data)
+    print(f"[DIAG]\tLOG\t{data}")
     data = json.loads(data)
     msg = data["message"]
     webhook_msg = json.loads(build_msg(msg))
-    print(webhook_msg)
+    print(f"[DIAG]\tLOG\t Message to Webhook: {webhook_msg}")
     answer = requests.post('http://localhost:' + port, json=webhook_msg)
-    print(answer.text)
+    print(f"[DIAG]\tLOG\t Webhook answer: {answer.text}")
     return web.Response(text=answer.text)
 
 def main():
