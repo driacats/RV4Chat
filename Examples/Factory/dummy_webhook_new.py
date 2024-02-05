@@ -226,7 +226,7 @@ async def handle_msg(msg, factory):
     return (answer, 'event')
 
 async def handle_post(request, factory):
-    answer = "{\"fulfillmentMessages\":[{\"text\":{\"text\":[\"MESSAGE\"]}}], \"bot_action\": \"EVENT\", \"aux\": {AUX}}"
+    answer = "{\"fulfillmentMessages\":[{\"text\":{\"text\":[\"MESSAGE\"]}}], \"bot_action\": \"EVENT\"}"
     # Load the json message
     data = await request.json()
     # Check if it is a valid Dialogflow message
