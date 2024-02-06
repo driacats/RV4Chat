@@ -8,46 +8,31 @@ The user can perform three actions:
  - add a robot with position related to one of the objects already placed;
  - remove a robot from the factory.
 
-The monitor controls:
- - bot_right: when an object is added with reference to another or removed, the same object must be before inserted on the stage;
+In this folder you find:
+- A script that starts all the services needed to test one specific platform and monitor (`start_service.py`). If you launch it with no argument it will ask you what you want to run. Otherwise you can launch it in `--shell` mode giving it directly platform and monitor. Once launched the service will wait for messages to come via POST requests.
+- A script that enables the user to perform tests (`run_test.py`). You can launch it in two ways:
+  1. Interactive (`--interactive`): you specify platform and monitor and chat on the terminal.
+  2. Test: run the tests and produce the times stored in the Times folder.
+- A dummy WebHook that emulates a more complex webhook service. The Dummy WebHook is contained in the `dummy_webhook.py` script and can be launched both for Rasa and Dialogflow specifying the platform as argument. Rasa is default. For example:
 
-In this folder it is provided:
- - The monitor folder;
- - dummy_webhook.py: a dummy factory CAD from cli to emulate the work of a factory CAD. It listens on localhost:8082;
- - the zip of the Diaogflow agent not monitored.
+```bash
+python dummy_webhook.py -p dialogflow
+```
 
-Tests have been done in this way:
- 1. Testing the plain Dialogflow agent 
-    - upload the AssistantAgent.zip file on Dialogflow;
-    - launch ngrok on port 8082
-        ```bash
-        ngrok http 8082
-        ```
-    - copy the url provided by ngrok on Dialogflow
-    - launch the dummy WebHook server
-        ```bash 
-        python dummy_webhook.py
-        ```
-    - add or remove objects!
+- A Dialogflow server placeholder (`dialogflow_local_tester.py`): it receives messages from the user following the Dialogflow API and creates a Dialogflow JSON message that sends to the webhook if needed.
 
- 2. Testing the instrumented Dialogflow agent
-    - Change the fulfillment to "http://localhost:8082" on the agent
-    - instrument the Dialogflow agent
-        ```bash
-        % From the Dialogflow folder
-        python3 instrumenter.py -i Examples/Factory/AssistantAgent.zip -o AssistantAgentMonitored.zip -url your_policy_url -murl http://localhost:8081 -level 2
-        ```
-    - upload the new version of the Dialogflow agent
-    - launch the policy
-        ```bash
-        python output/policy.py
-        ```
-    - launch the monitor
-        ```bash
-        Examples/Factory/Monitor/online_monitor.sh Properties/wanted_property.pl 8081
-        ```
-    - launch the dummy WebHook server
-        ```bash 
-        python dummy_webhook.py
-        ```
-    - add or remove objects!
+A message follows the path below:
+
+```sequence
+User->Dialogflow: msg
+Dialogflow->Policy: POST {msg}
+Policy->Monitor: WS event
+Monitor->Policy: WS oracle
+Policy->WebHook: POST {action}
+WebHook->Policy: POST {result}
+Policy->Monitor: WS event
+Monitor->Policy: WS oracle
+Policy->Dialogflow: POST {answer}
+Dialogflow->User: answer
+```
+
