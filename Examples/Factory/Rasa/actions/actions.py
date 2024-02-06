@@ -18,9 +18,6 @@ class ActionResetAllSlots(Action):
         return "action_reset_all_slots"
 
     def run(self, dispatcher, tracker, domain):
-        with open("times.log", 'a') as f:
-            f.write("[RESET]" + str(time.time() * 1000) + "\n")
-        # print("[TIME]", time.time() * 1000)
         return [AllSlotsReset()]
 
 class SendInfo(Action):
@@ -31,9 +28,6 @@ class SendInfo(Action):
         return "send_info"
     
     def run(self, dispatcher, tracker, domain):
-        with open("times.log", 'a') as f:
-            f.write("[SEND]" + str(time.time() * 1000) + "\n")
-        # print("[TIME]", time.time() * 1000)
         instruction = {}
         instruction['intent'] = tracker.latest_message['intent'].get('name')
         entities = {}
@@ -61,11 +55,3 @@ class SendInfo(Action):
         print("getting the result: ", result)
         ws.close()
         return [SlotSet("webhookResult", result.split()[-1])]
-
-# class GetTime(Action):
-
-#     def name(self):
-#         return "get_time"
-
-#     def run(self, dispatcher, tracker, domain):
-#         print("[LOG] ", time.time() * 1000)
