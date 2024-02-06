@@ -140,6 +140,7 @@ async def handle_post(request):
         return web.Response(text="{\"answer\": \"Error thrown by the monitor.\"}")
 
 def main():
+
     app = web.Application()
     app.add_routes([web.post('/', handle_post)])
     web.run_app(app, port=8080)

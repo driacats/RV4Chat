@@ -80,7 +80,7 @@ def launch_monitor():
 
 def launch_webhook(platform):
     # return subprocess.Popen(f"{kitty} 'python dummy_webhook.py -p {platform}'", shell=True, preexec_fn=os.setsid).pid
-    return subprocess.Popen(f"python dummy_webhook_new.py -p {platform}", shell=True, preexec_fn=os.setsid).pid
+    return subprocess.Popen(f"python dummy_webhook.py -p {platform}", shell=True, preexec_fn=os.setsid).pid
 
 def run_dialogflow(monitor):
     pids = []
