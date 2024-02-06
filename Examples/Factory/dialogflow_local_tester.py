@@ -1,38 +1,46 @@
 from aiohttp import web
-import json, requests, argparse
+import json, requests, argparse, re
 
 def build_msg(msg):
 
     action = None
     intent_name = None
     parameters = {}
-    if msg in ['Add a table', 'Add a robot in front on the left', 'Add a robot in front on the right', 'Add a table behind on the left', 'Add a robot behind on the right']:
-        action = 'add_object'
-        parameters['posX'] = ''
-        for posx in ['left', 'right', 'center']:
-            if posx in msg:
-                parameters['posX'] = posx
-        parameters['posY'] = ''
-        for posy in ['front', 'behind', 'center']:
-            if posy in msg:
-                parameters['posY'] = posy
-        for obj in ['table', 'box', 'robot']:
-            if obj in msg:
-                parameters['object'] = obj
-        intent_name = 'add_object'
-    elif msg == 'Add a box right of table1':
-        action = 'add_rel_object'
-        parameters['relPos'] = 'right of'
-        parameters['relName'] = 'table1'
-        parameters['object'] = 'box'
-        intent_name = 'add_relative_object'
-    elif msg in ['Remove box0', 'Remove robot1', 'Remove table1', 'Remove table2', 'Remove robot2', 'Remove robot3']:
-        action = 'remove_object'
-        for obj in ['box0', 'robot1', 'table1', 'table2', 'robot2', 'robot3']:
-            if obj in msg:
-                parameters['relname'] = obj
-        intent_name = 'remove_object'
 
+    if 'Remove' in msg:
+        intent_name = 'remove_object'
+        action = 'remove_object'
+        obj = msg.split()[-1]
+        parameters['relname'] = obj
+    else:
+        if 'of' in msg:
+            intent_name = 'add_relative_object'
+            action = 'add_relative_object'
+            pattern = r'Add a (\w+) (right of|left of|behind of|in front of) (\w+)'
+            match = re.match(pattern, msg)
+            if match:
+                parameters['object'] = match.group(1)
+                parameters['relName'] = match.group(3)
+                parameters['relPos'] = match.group(2)
+        else:
+            intent_name = 'add_object'
+            action = 'add_object'
+            pattern = r'Add a (\w+) ?(:?in )?(behind|front)? ?(:?on the )?(left|right)?'
+            match = re.match(pattern, msg)
+            print(f'[DIALOG]\tLOG\tmatch[1] {match.group(1)} match[2] {match.group(3)} match[3] {match.group(5)}')
+            if match:
+                if match.group(1):
+                    parameters['object'] = match.group(1)
+                if match.group(5):
+                    parameters['posX'] = match.group(5)
+                else:
+                    parameters['posX'] = ''
+                if match.group(3):
+                    parameters['posY'] = match.group(3)
+                else:
+                    parameters['posY'] = ''
+
+    print(f'[DIALOG]\tLOG\tFound in message. Intent:{intent_name}, Entities:{parameters}')
 
     answer = {}
     answer['responseId'] = 'XXXX'
@@ -65,13 +73,13 @@ def build_msg(msg):
 async def handle_post(request, port):
 
     data = await request.json()
-    print(f"[DIAG]\tLOG\t{data}")
+    print(f"[DIALOG]\tLOG\t{data}")
     data = json.loads(data)
     msg = data["message"]
     webhook_msg = json.loads(build_msg(msg))
-    print(f"[DIAG]\tLOG\t Message to Webhook: {webhook_msg}")
+    print(f"[DIALOG]\tLOG\t Message to Webhook: {webhook_msg}")
     answer = requests.post('http://localhost:' + port, json=webhook_msg)
-    print(f"[DIAG]\tLOG\t Webhook answer: {answer.text}")
+    print(f"[DIALOG]\tLOG\t Webhook answer: {answer.text}")
     return web.Response(text=answer.text)
 
 def main():
