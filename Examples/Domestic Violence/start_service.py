@@ -78,19 +78,19 @@ def run_dialogflow(monitor):
     pids = []
 
     if (monitor == no_monitor):
-        pid = launch_ngrok(8082).pid
+        pid = launch_ngrok(8082)
         pids.append(pid)
 
     elif (monitor == dummy_monitor):
-        pid = launch_ngrok(8080).pid
+        pid = launch_ngrok(8080)
         pids.append(pid)
-        pid = launch_sample_monitor().pid
+        pid = launch_sample_monitor()
         pids.append(pid)
 
     elif (monitor == real_monitor):
-        pid = launch_ngrok(8080).pid
+        pid = launch_ngrok(8080)
         pids.append(pid)
-        pid = launch_monitor().pid
+        pid = launch_monitor()
         pids.append(pid)
 
     pid = launch_webhook("dialogflow")
