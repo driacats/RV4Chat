@@ -1,9 +1,11 @@
 from aiohttp import web
-import json, argparse, asyncio, websockets, time
+import json, argparse, asyncio, websockets, time, urllib3
 
 # The Timer class is able to start and stop a timer of a given time
 class Timer():
 
+    SERVER_URL = 'http://localhost:8080'
+    chat = urllib3.PoolManager()
     # The init function takes as argument the duration of the timer
     def __init__(self, duration):
         self.duration = duration
@@ -13,6 +15,20 @@ class Timer():
     async def wait(self):
         await asyncio.sleep(self.duration)
         print("Sending Help Message to Saved contacts.")
+
+    def call_help(self):
+        done_msg = {}
+        done_msg['fulfillmentMessages'] = [{'text': {'text': 'The sun shines!'}}]
+        done_msg['bot_action'] = 'utter_help_called'
+        done_msg['timestamp'] = time.time()
+        chat.request('POST', SERVER_URL, body=json.dumps(done_msg))
+
+    def undo_help(self):
+        done_msg = {}
+        done_msg['fulfillmentMessages'] = [{'text': {'text': 'The sky is dark!'}}]
+        done_msg['bot_action'] = 'utter_help_called'
+        done_msg['timestamp'] = time.time()
+        chat.request('POST', SERVER_URL, body=json.dumps(done_msg))
 
     # start function makes the counter start
     def start(self):
