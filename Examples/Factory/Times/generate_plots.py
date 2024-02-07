@@ -1,6 +1,7 @@
 import os
 
-engines = ['rasa']
+engines = ['dialogflow', 'rasa']
+markers = ['*', 'triangle*']
 
 folders = ['no-monitor', 'dummy-monitor', 'real-monitor']
 colors = ['red', 'blue', 'green']
@@ -11,11 +12,12 @@ tikz.write("\\documentclass[tikz]{standalone}\n")
 tikz.write("\\usepackage{pgfplots}")
 tikz.write("\n\\begin{document}\n")
 tikz.write("\n\n\\begin{tikzpicture}\n")
-tikz.write("\\begin{axis}[axis lines=middle, grid=both, ymin=0, ymax=40]")
+tikz.write("\\begin{axis}[axis lines=middle, grid=both, ymin=0, ymax=30]")
 
-for engine in engines:
+for engine, marker in zip(engines, markers):
     for color, folder in zip(colors, folders):
         times_dict = {}
+        print(f'Engine: {engine}\nColor: {color}\nFolder: {folder}')
         for f in os.listdir(os.path.join(engine, folder)):
             f_read = open(os.path.join(engine, os.path.join(folder, f)))
             for i, line in enumerate(f_read.readlines()):
@@ -24,7 +26,7 @@ for engine in engines:
                 times_dict[i].append(float(line))
 
         # tikz.write("\draw [" + color + "] plot [smooth, tension=1, mark=*] coordinates {")
-        tikz.write("\\addplot [" + color + ", smooth, tension=1, mark=*] coordinates {")
+        tikz.write("\\addplot [" + color + ", smooth, tension=1, mark=" + marker + "] coordinates {")
         times_avg = []
         for i in times_dict:
             avg = round(sum(times_dict[i]) / len(times_dict[i]) / 10, 3)
