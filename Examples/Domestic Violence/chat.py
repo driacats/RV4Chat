@@ -1,113 +1,128 @@
-import threading, queue, curses
+#/bin/python
+# Author: Andrea Gatti
+
 from aiohttp import web
+import curses, threading, requests, asyncio, time, json
 
-class Chat:
+# The function creates two window:
+# - chat_win: a window that displays the conversation
+# - input_win: a window that takes user input
+def create_windows():
+    chat_win = curses.newwin(curses.LINES - 3, curses.COLS, 0, 0)
+    chat_win.box()
+    chat_win.refresh()
 
-    PORT = 8888
+    input_win = curses.newwin(3, curses.COLS, curses.LINES - 3, 0)
+    input_win.box()
+    input_win.refresh()
 
-    def init_curses(self):
-        stdscr = curses.initscr()
-        curses.cbreak()
-        stdscr.keypad(True)
-        curses.echo()
-        return stdscr
+    return chat_win, input_win
 
-    def create_windows(self):
-        # self.stdscr = self.init_curses()
+# The function frees n lines at the bottom of the conversation
+# creating the space for the new message.
+def free_lines(win, n):
+    max_y, max_x = win.getmaxyx()
+    # Move each line n lines above
+    for y in range(n+1, max_y-1):
+        line = win.instr(y, 1, max_x-2).decode('utf-8')
+        win.addstr(y, 1, ' ' * (max_x-2))
+        win.addstr(y-n, 1, line)
+    # Empty the n bottom lines
+    for y in range(max_y-n, max_y-1):
+        win.addstr(y, 1, ' ' * (max_x-2))
 
-        self.chat_win = curses.newwin(curses.LINES - 3, curses.COLS, 0, 0)
-        self.chat_win.box()
-        self.chat_win.refresh()
-
-        self.input_win = curses.newwin(3, curses.COLS, curses.LINES - 3, 0)
-        self.input_win.box()
-        self.input_win.refresh()
-
-    def get_window_strings(self):
-        max_y, max_x = self.chat_win.getmaxyx()
-        strings = []
-
-        for y in range(6, max_y-1):
-            line = self.chat_win.instr(y, 1, max_x-2).decode('utf-8')
-            if not line.isspace():
-                strings.append(line.rstrip('\n'))
-
-        strings.reverse()
-
-        return strings
-
-    def user_msg(self, msg):
-        max_y, max_x = self.chat_win.getmaxyx()
-        msgs = self.get_window_strings()
-        for i, m in enumerate(msgs):
-            self.chat_win.addstr(max_y - i - 3, 1, m)
-        self.chat_win.addstr(max_y - 2, 1, ' ' * (max_x - 2))
-        self.chat_win.addstr(max_y - 2, 1, 'USER: ' + msg)
-        self.chat_win.refresh()
-
-    def bot_msg(self, msg):
-        max_y, max_x = self.chat_win.getmaxyx()
-        msgs = self.get_window_strings(self.chat_win)
-        if len(msg) > max_x:
-            msg_1 = msg[:max_x-9]
-            msg_2 = msg[max_x-9:]
-            for i, m in enumerate(msgs):
-                self.chat_win.addstr(max_y - i - 3 - 1, 1, m)
-            self.chat_win.addstr(max_y - 2 - 1, 1, 'BOT: ' + str(msg_1))
-            self.chat_win.addstr(max_y - 2, 1, '    ' + str(msg_2))
-        else:
-            for i, m in enumerate(msgs):
-                self.chat_win.addstr(max_y - i - 3, 1, m)
-            self.chat_win.addstr(max_y - 2, 1, ' ' * (max_x - 2))
-            self.chat_win.addstr(max_y - 2, 1, 'BOT: ' + msg)
-        self.chat_win.refresh()
-
-    def handle_bot_input(self, msg):
-        self.bot_msg(self.chat_win, msg)
-
-    def get_user_input(self):
-        user_input = ''
-        while True:
-            ch = self.input_win.getch()
-            if ch == ord('\n'):
-                return user_input
-            elif ch == curses.KEY_BACKSPACE or ch == 127:
-                if user_input:
-                    user_input = user_input[:-1]
-                    self.input_win.delch(1, self.input_win.getyx()[1] - 1)
-            elif len(user_input) < curses.COLS - 9:
-                user_input += chr(ch)
-                self.input_win.addch(1, self.input_win.getyx()[1], ch)
+# The function handles the user input
+def user_msg(win, msg):
+    max_y, max_x = win.getmaxyx()
+    free_lines(win, 1)
+    # Add the message to the chat
+    win.addstr(max_y - 2, 1, 'USER: ' + msg)
+    win.refresh()
     
-    def run(self, stdscr):
-        self.create_windows()
-        try:
-            while True:
-                self.input_win.addstr(1, 2, "> ")
-                self.input_win.refresh()
-                user_input = self.get_user_input()
-                self.user_msg(user_input)
-                self.input_win.addstr(1, 2, " " * (curses.COLS - 5))  # Pulisce la riga dell'input
-                self.input_win.refresh()
-                # answer = self.listener.handle_user_input(user_input)
-                # self.bot_msg(answer)
-        except KeyboardInterrupt:
-            pass
-        finally:
-            curses.nocbreak()
-            stdscr.keypad(False)
-            curses.echo()
-            curses.endwin()
+    # Make the request at the chatbot for the answer and it handles it
+    service_url = "http://0.0.0.0:5005/webhooks/rest/webhook"
+    req = {}
+    req['sender'] = 'user'
+    req['message'] = msg
+    answer = requests.post(service_url, json=req)
+    answer = json.loads(answer.text)
+    bot_msg(win, answer[0]['text'])
 
-def run_chat(chat):
-    curses.wrapper(chat.run)
+# The function handles bot messages
+def bot_msg(win, msg):
+    max_y, max_x = win.getmaxyx()
+    # If the message is longer than one line it trims it and frees n lines
+    msgs = trim_msg(msg, max_x - 9)
+    msgs[0] = 'BOT: ' + msgs[0]
+    free_lines(win, len(msgs))
+    # Add the message on the chat
+    for i, ms in enumerate(msgs):
+        win.addstr(max_y - 1 - (len(msgs) - i), 1, ms)
 
-def main():
-    # print('Welcome to the chat.')
-    chat = Chat()
-    # curses.wrapper(chat.run)
-    threading.Thread(target=run_chat(chat)).start()
-    # threading.Thread(target=visualize).start()
+    win.refresh()
+
+# Creates a list of strings all with max length n
+def trim_msg(msg, n):
+    return [msg[i:i+n] for i in range(0, len(msg), n)]
+
+# The function allows the user input capture.
+def get_user_input(win):
+    user_input = ''
+    while True:
+        ch = win.getch()
+        if ch == ord('\n'):
+            return user_input
+        elif ch == curses.KEY_BACKSPACE or ch == 127:
+            if user_input:
+                user_input = user_input[:-1]
+                win.delch(1, win.getyx()[1] - 1)
+                win.box()
+                win.refresh()
+        elif len(user_input) < curses.COLS - 9:
+            user_input += chr(ch)
+            win.addch(1, win.getyx()[1], ch)
+
+# Handle POST is the callback function for POST requests
+# It simply calls the correct msg handler function
+# and sends back a 200 OK
+async def handle_post(chat_win, request):
+    data = await request.json()
+    if (data['sender'] == 'user'):
+        user_msg(chat_win, data['msg'])
+    elif (data['sender'] == 'bot'):
+        bot_msg(chat_win, data['msg'])
+    return web.Response(status=200)
+
+# The function loops on the user input
+# Gets the message and makes a POST request to the chat_win
+def handle_user_input(stdscr, input_win):
+    try:
+        while True:
+            input_win.addstr(1, 2, "> ")
+            input_win.refresh()
+            user_input = get_user_input(input_win)
+            requests.post('http://localhost:8888', json={'sender': 'user', 'msg': user_input})
+            input_win.addstr(1, 2, " " * (curses.COLS - 5))
+            input_win.refresh()
+            
+    except KeyboardInterrupt:
+        pass
+    finally:
+        curses.nocbreak()
+        stdscr.keypad(False)
+        curses.echo()
+        curses.endwin()
+
+def main(stdscr):
+    chat_win, input_win = create_windows()
+    
+    # The user input is handled in a subthread
+    threading.Thread(target=handle_user_input, args=(stdscr, input_win)).start()
+
+    # Launch the POST server
+    app = web.Application()
+    app.add_routes([(web.post('/', lambda request : handle_post(chat_win, request)))])
+    web.run_app(app, port=8888, print=False)
 
 if __name__ == '__main__':
-    main()
+    curses.wrapper(main)

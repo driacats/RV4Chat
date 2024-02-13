@@ -1,3 +1,6 @@
+#/bin/python
+# Author: Andrea Gatti
+
 import subprocess, argparse, os
 
 kitty = "kitty --hold 2>/dev/null sh -c"
