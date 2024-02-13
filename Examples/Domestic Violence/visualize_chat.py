@@ -43,31 +43,23 @@ def user_msg(win, msg):
     answer = json.loads(answer.text)
     bot_msg(win, answer[0]['text'])
 
+# def free_lines(win, n):
+#     max_y, max_x = win.getmaxyx()
+#     for i in range(5+n, max_y-1-n):
+#         i_line = win.instr(i, 1, max_x-2).decode('utf-8')
+#         win.addstr(i-1, 1, i_line)
+#     for i in range(max_y-1-n, max_y-1):
+#         win.addstr(i, 1, ' ' * (max_x - 6))
+
+
 def free_lines(win, n):
     max_y, max_x = win.getmaxyx()
-    for i in range(5+n, max_y-1-n):
-        i_line = win.instr(i, 1, max_x-2).decode('utf-8')
-        win.addstr(i-1, 1, i_line)
-    for i in range(max_y-1-n, max_y-1):
-        win.addstr(i, 1, ' ' * (max_x - 6))
-
-# def bot_msg(self, win, msg):
-#     max_y, max_x = win.getmaxyx()
-#     # msgs = self.get_window_strings(win)
-
-#     if len(msg) > max_x:
-#         msg_1 = msg[:max_x-9]
-#         msg_2 = msg[max_x-9:]
-#         for i, m in enumerate(msgs):
-#             win.addstr(max_y - i - 3 - 1, 1, m)
-#         win.addstr(max_y - 2 - 1, 1, 'BOT: ' + str(msg_1))
-#         win.addstr(max_y - 2, 1, '    ' + str(msg_2))
-#     else:
-#         for i, m in enumerate(msgs):
-#             win.addstr(max_y - i - 3, 1, m)
-#         win.addstr(max_y - 2, 1, ' ' * (max_x - 2))
-#         win.addstr(max_y - 2, 1, 'BOT: ' + msg)
-#     win.refresh()
+    for y in range(n+1, max_y-1):
+        line = win.instr(y, 1, max_x-2).decode('utf-8')
+        win.addstr(y, 1, ' ' * (max_x-2))
+        win.addstr(y-n, 1, line)
+    for y in range(max_y-n, max_y-1):
+        win.addstr(y, 1, ' ' * (max_x-2))
 
 def bot_msg(win, msg):
     max_y, max_x = win.getmaxyx()
@@ -92,6 +84,8 @@ def get_user_input(win):
             if user_input:
                 user_input = user_input[:-1]
                 win.delch(1, win.getyx()[1] - 1)
+                win.box()
+                win.refresh()
         elif len(user_input) < curses.COLS - 9:
             user_input += chr(ch)
             win.addch(1, win.getyx()[1], ch)
