@@ -86,11 +86,13 @@ def get_user_input(win):
 # It simply calls the correct msg handler function
 # and sends back a 200 OK
 async def handle_post(chat_win, request):
-    data = await request.json()
-    if (data['sender'] == 'user'):
-        user_msg(chat_win, data['msg'])
-    elif (data['sender'] == 'bot'):
-        bot_msg(chat_win, data['msg'])
+    request = await request.json()
+    # print('[HANDLE]', request)
+    if (request['sender'] == 'user'):
+        user_msg(chat_win, request['msg'])
+    elif (request['sender'] == 'bot'):
+        # print(f'[HANDLE] sending bot_msg with {request["msg"]}')
+        bot_msg(chat_win, request['msg'])
     return web.Response(status=200)
 
 # The function loops on the user input

@@ -18,6 +18,7 @@ intents:
   - commit_suicide
   - help_word
   - undo_word
+  - help_called
 
 slots:
   bot_event:
@@ -25,11 +26,15 @@ slots:
     influence_conversation: False
     mappings:
       - type: custom
+  help_called:
+    type: bool
+    influence_conversation: False
+    mappings:
+      - type: custom
 
 actions:
   - send_request
-  - wait
-  # - send_bot_msg
+  - send_sun_shines
 
 responses:
   utter_greet:
@@ -55,7 +60,7 @@ responses:
   - text: 'The sun is bright today!'
 
   utter_cloudy:
-  - text: 'Today is cloudy!'
+  - text: 'Today is cloudy!!!'
 
 session_config:
   session_expiration_time: 60

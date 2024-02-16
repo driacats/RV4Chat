@@ -9,7 +9,7 @@ from rasa.engine.training.fingerprinting import Fingerprintable
 from rasa.engine.storage.storage import ModelStorage
 from rasa.engine.storage.resource import Resource
 from rasa.engine.graph import ExecutionContext
-import json
+import json, time
 from websocket import create_connection
 
 @DefaultV1Recipe.register([DefaultV1Recipe.ComponentType.POLICY_WITHOUT_END_TO_END_SUPPORT], is_trainable=False)
@@ -47,6 +47,8 @@ class MonitorPolicy(Policy):
 			entities[e_name] = next(tracker.get_latest_entity_values(e_name), None)
 		
 		msg_obj["entities"] = entities
+
+		msg_obj['timestamp'] = time.time()
 		
 		return json.dumps(msg_obj)
 
@@ -58,6 +60,8 @@ class MonitorPolicy(Policy):
 		msg_obj["receiver"] = "user"
 		
 		msg_obj["bot_action"] = tracker.get_slot('bot_event')
+
+		msg_obj['timestamp'] = time.time()
 
 		# aux = {}
 		# aux["name"] = tracker.get_slot('webhookResult')

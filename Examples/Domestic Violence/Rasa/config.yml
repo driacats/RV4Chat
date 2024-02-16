@@ -42,6 +42,6 @@ policies:
     max_history: 5
     epochs: 100
     constrain_similarities: true
-  # - name: policies.monitorPolicy.MonitorPolicy
-  #   priority: 6
-  #   error_action: "utter_error_message"
+  - name: policies.monitorPolicy.MonitorPolicy
+    priority: 6
+    error_action: "utter_error_message"

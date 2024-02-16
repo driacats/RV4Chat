@@ -21,7 +21,11 @@ rules:
   steps:
   - intent: help_word
   - action: send_request
-  - action: wait
+
+- rule: Send Help messages
+  steps:
+  - intent: help_called
+  - action: send_sun_shines
 
 - rule: Stop timer for help
   steps:

@@ -1,0 +1,4 @@
+{"sender": "user", "receiver": "bot", "intent": {"name": "help_word", "confidence": 0.9701808094978333}, "entities": {}, "timestamp": 1708082312.3711333}
+{"sender": "bot", "receiver": "user", "bot_action": "utter_help", "timestamp": 1708082312.423921}
+{"sender": "user", "receiver": "bot", "intent": {"name": "help_called", "confidence": 0.934701144695282}, "entities": {}, "timestamp": 1708082322.4201598}
+{"sender": "bot", "receiver": "user", "bot_action": "help_called", "timestamp": 1708082322.4492846}

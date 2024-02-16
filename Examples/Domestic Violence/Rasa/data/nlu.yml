@@ -149,3 +149,7 @@ nlu:
 - intent: undo_word
   examples: |
     - stop
+
+- intent: help_called
+  examples: |
+    - help_called
