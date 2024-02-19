@@ -1,0 +1,8 @@
+{"sender": "user", "receiver": "bot", "intent": {"name": "help_word", "confidence": 0.9701808094978333}, "entities": {}, "timestamp": 1708333815}
+{"sender": "bot", "receiver": "user", "bot_action": "utter_help", "timestamp": 1708333815}
+{"sender": "user", "receiver": "bot", "intent": {"name": "undo_word", "confidence": 0.9291964173316956}, "entities": {}, "timestamp": 1708333817}
+{"sender": "bot", "receiver": "user", "bot_action": "utter_stop_help", "timestamp": 1708333817}
+{"sender": "user", "receiver": "bot", "intent": {"name": "help_word", "confidence": 0.9701808094978333}, "entities": {}, "timestamp": 1708333823}
+{"sender": "bot", "receiver": "user", "bot_action": "utter_help", "timestamp": 1708333823}
+{"sender": "user", "receiver": "bot", "intent": {"name": "help_called", "confidence": 0.934701144695282}, "entities": {}, "timestamp": 1708333828}
+{"sender": "bot", "receiver": "user", "bot_action": "help_called", "timestamp": 1708333828}

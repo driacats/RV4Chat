@@ -1,0 +1,20 @@
+{"sender": "user", "receiver": "bot", "intent": {"name": "get_information", "confidence": 0.9996316432952881}, "entities": {}}
+{"sender": "bot", "receiver": "user", "bot_action": "utter_ask_salary"}
+{"sender": "user", "receiver": "bot", "intent": {"name": "inform_chatbot_about_salary", "confidence": 0.9996902942657471}, "entities": {"salary": "200"}}
+{"sender": "bot", "receiver": "user", "bot_action": "utter_ask_children"}
+{"sender": "user", "receiver": "bot", "intent": {"name": "inform_chatbot_about_children", "confidence": 0.9977160692214966}, "entities": {"nsons": "3"}}
+{"sender": "bot", "receiver": "user", "bot_action": "utter_normal"}
+{"sender": "user", "receiver": "bot", "intent": {"name": "help_word", "confidence": 0.9871183633804321}, "entities": {}}
+{"sender": "bot", "receiver": "user", "bot_action": "utter_help"}
+{"sender": "user", "receiver": "bot", "intent": {"name": "help_word", "confidence": 0.9871183633804321}, "entities": {}}
+{"sender": "bot", "receiver": "user", "bot_action": "utter_help"}
+{"sender": "user", "receiver": "bot", "intent": {"name": "undo_word", "confidence": 0.9866877198219299}, "entities": {}}
+{"sender": "bot", "receiver": "user", "bot_action": "utter_help"}
+{"sender": "user", "receiver": "bot", "intent": {"name": "commit_suicide", "confidence": 0.9983863830566406}, "entities": {}}
+{"sender": "bot", "receiver": "user", "bot_action": "utter_against_suicide"}
+{"sender": "user", "receiver": "bot", "intent": {"name": "commit_suicide", "confidence": 0.9983863830566406}, "entities": {}}
+{"sender": "bot", "receiver": "user", "bot_action": "utter_against_suicide"}
+{"sender": "user", "receiver": "bot", "intent": {"name": "commit_suicide", "confidence": 0.9983863830566406}, "entities": {}}
+{"sender": "bot", "receiver": "user", "bot_action": "utter_against_suicide"}
+{"sender": "user", "receiver": "bot", "intent": {"name": "help_word", "confidence": 0.9871183633804321}, "entities": {}}
+{"sender": "bot", "receiver": "user", "bot_action": "utter_help"}

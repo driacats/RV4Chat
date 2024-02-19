@@ -1,0 +1,15 @@
+help_word matches {sender: 'user', receiver: 'bot', intent: {name: 'help_word', confidence: _}};
+help_word(t) matches {sender: 'user', receiver: 'bot', intent: {name: 'help_word', confidence: _}, entities: _, timestamp: t};
+undo_word matches {sender: 'user', receiver: 'bot', intent: {name: 'undo_word', confidence: _}, entities: _, timestamp: _};
+help_called_on_time(helpt) matches {sender: 'bot', receiver: 'user', bot_action: 'help_called', timestamp: t} with (t-helpt)>4; 
+help_called matches {sender: 'bot', receiver: 'user', bot_action: 'help_called'};
+utter_stop_help matches {sender: 'bot', receiver: 'user', bot_action: 'utter_stop_help'};
+utter_help matches {sender: 'bot', receiver: 'user', bot_action: 'utter_help', timestamp: _};
+// let us assume 4 time steps is the timeout
+
+relevant matches help_word | utter_help | undo_word | help_called | utter_stop_help;
+
+Main = relevant >> Contact*;
+Contact = { let time; (help_word(time) utter_help (Undo\/Help)) };
+Undo = undo_word utter_stop_help;
+Help = help_called_on_time(time);
