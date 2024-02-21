@@ -7,38 +7,20 @@ def build_msg(msg):
     intent_name = None
     parameters = {}
 
-    if 'Remove' in msg:
-        intent_name = 'remove_object'
-        action = 'remove_object'
-        obj = msg.split()[-1]
-        parameters['relname'] = obj
-    else:
-        if 'of' in msg:
-            intent_name = 'add_relative_object'
-            action = 'add_relative_object'
-            pattern = r'Add a (\w+) (right of|left of|behind of|in front of) (\w+)'
-            match = re.match(pattern, msg)
-            if match:
-                parameters['object'] = match.group(1)
-                parameters['relName'] = match.group(3)
-                parameters['relPos'] = match.group(2)
-        else:
-            intent_name = 'add_object'
-            action = 'add_object'
-            pattern = r'Add a (\w+) ?(:?in )?(behind|front)? ?(:?on the )?(left|right)?'
-            match = re.match(pattern, msg)
-            print(f'[DIALOG]\tLOG\tmatch[1] {match.group(1)} match[2] {match.group(3)} match[3] {match.group(5)}')
-            if match:
-                if match.group(1):
-                    parameters['object'] = match.group(1)
-                if match.group(5):
-                    parameters['posX'] = match.group(5)
-                else:
-                    parameters['posX'] = ''
-                if match.group(3):
-                    parameters['posY'] = match.group(3)
-                else:
-                    parameters['posY'] = ''
+    if (msg == 'I need help'):
+        intent_name = 'get_information'
+    elif (msg == 'I earn 200 dollars per month'):
+        intent_name = 'inform_chatbot_about_salary'
+    elif (msg == 'We have 2 children'):
+        intent_name = 'inform_chatbot_about_children'
+    elif (msg == 'saales'):
+        intent_name = 'help_word'
+    elif (msg == 'stop'):
+        intent_name = 'undo_word'
+    elif (msg == 'help_called'):
+        intent_name = 'help_called'
+    elif (msg == 'I will kill me'):
+        intent_name = 'commit_suicide'
 
     print(f'[DIALOG]\tLOG\tFound in message. Intent:{intent_name}, Entities:{parameters}')
 
@@ -74,17 +56,29 @@ async def handle_post(request, port):
 
     data = await request.json()
     print(f"[DIALOG]\tLOG\t{data}")
-    data = json.loads(data)
+    if type(data) != dict:
+        data = json.loads(data)
+
+    # if (data['sender'] == 'bot'):
+    #     m = {'sender': 'bot', 'msg': data['message']}
+    #     requests.post('http://localhost:8888', json=m)
+    #     return web.Response(status=200)
     msg = data["message"]
-    webhook_msg = json.loads(build_msg(msg))
-    print(f"[DIALOG]\tLOG\t Message to Webhook: {webhook_msg}")
-    answer = requests.post('http://localhost:' + port, json=webhook_msg)
-    print(f"[DIALOG]\tLOG\t Webhook answer: {answer.text}")
-    return web.Response(text=answer.text)
+    if (data['sender'] == 'user'):
+        webhook_msg = json.loads(build_msg(msg))
+        print(f"[DIALOG]\tLOG\t Message to Webhook: {webhook_msg}")
+        answer = requests.post('http://localhost:' + port, json=webhook_msg)
+        print(f"[DIALOG]\tLOG\t Message got: {answer.text}")
+        print(f"[DIALOG]\tLOG\t Webhook answer: {answer.text}")
+        return web.Response(text=answer.text)
+    if (data['message'] == 'help_called'):
+        m = {'sender': 'bot', 'msg': 'The sun shines today!'}
+        requests.post('http://localhost:8888', json=m)
+        return web.Response(status=200)
 
 def main():
     parser = argparse.ArgumentParser(prog="Dummy Dialogflow Tester", description="This program simulates a Dialogflow API.")
-    parser.add_argument("-p", "--port", metavar="PORT", help="Port on which send messages", default="8080")
+    parser.add_argument("-p", "--port", metavar="PORT", help="Port on which send messages", default=8080)
     args = parser.parse_args()
 
     app = web.Application()
