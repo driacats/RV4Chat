@@ -11,6 +11,9 @@ class Timer():
     def __init__(self, duration):
         self.duration = duration
         self.task = None
+
+    def set_platform(self, platform):
+        self.platform = platform
         #// self.help_called = False
         #// self.stopped = False
 
@@ -19,8 +22,13 @@ class Timer():
         await asyncio.sleep(self.duration)
         print('Sending Help Message to Saved contacts.')
         #// self.help_called = True
-        
-        service_url = 'http://0.0.0.0:5005/webhooks/rest/webhook'
+        if self.platform == 'rasa':
+            service_url = 'http://0.0.0.0:5005/webhooks/rest/webhook'
+        elif self.platform == 'dialogflow':
+            service_url = 'http://0.0.0.0:8084'
+        else:
+            print('[WEBHOOK]\tERROR\tUnknown Platform for Timer')
+            return
         
         req = {}
         req['sender'] = 'bot'
@@ -140,6 +148,9 @@ async def handle_msg(msg):
     
     elif intent == 'inform_chatbot_about_children':
         final_answer = ('Ok, stay safe', 'utter_normal')
+
+    elif intent == 'help_called':
+        final_answer = ('The sun shines today!', 'help_called')
     
     else:
         final_answer = ('Unknown message.', 'utter_unknown')
@@ -150,6 +161,8 @@ async def handle_msg(msg):
 async def handle_post(request):
 
     start_time = time.time() * 1000
+
+    timer.set_platform('dialogflow')
 
     # Load the json message
     data = await request.json()
@@ -178,8 +191,8 @@ async def handle_post(request):
     final_answer = answer.replace('MESSAGE', final_answer).replace('EVENT', bot_event).replace('TIMESTAMP', str(time.time()))
 
     # Compute time
-    with open('times.csv', 'a') as f:
-        f.write(str(time.time() * 1000 - start_time) + "\n")
+    # with open('times.csv', 'a') as f:
+    #     f.write(str(time.time() * 1000 - start_time) + "\n")
 
     # Send back the message to be displayed
     return web.Response(text=final_answer)
@@ -189,6 +202,7 @@ async def handle_post(request):
 async def handle_ws(request):
 
     # Create a server that waits for messages
+    timer.set_platform('rasa')
     ws = web.WebSocketResponse()
     await ws.prepare(request)
 
