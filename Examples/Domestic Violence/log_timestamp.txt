@@ -1,4 +1,8 @@
-{"sender": "user", "receiver": "bot", "intent": {"name": "help_word", "confidence": 0.9701808094978333}, "entities": {}, "timestamp": 1708082312.3711333}
-{"sender": "bot", "receiver": "user", "bot_action": "utter_help", "timestamp": 1708082312.423921}
-{"sender": "user", "receiver": "bot", "intent": {"name": "help_called", "confidence": 0.934701144695282}, "entities": {}, "timestamp": 1708082322.4201598}
-{"sender": "bot", "receiver": "user", "bot_action": "help_called", "timestamp": 1708082322.4492846}
+[MONITOR]	LOG	{"sender": "user", "receiver": "bot", "intent": {"name": "help_word", "confidence": 0.9701808094978333}, "entities": {}, "timestamp": 1708333815.3915613}
+[MONITOR]	LOG	{"sender": "bot", "receiver": "user", "bot_action": "utter_help", "timestamp": 1708333815.424195}
+[MONITOR]	LOG	{"sender": "user", "receiver": "bot", "intent": {"name": "undo_word", "confidence": 0.9291964173316956}, "entities": {}, "timestamp": 1708333817.1306686}
+[MONITOR]	LOG	{"sender": "bot", "receiver": "user", "bot_action": "utter_stop_help", "timestamp": 1708333817.1584415}
+[MONITOR]	LOG	{"sender": "user", "receiver": "bot", "intent": {"name": "help_word", "confidence": 0.9701808094978333}, "entities": {}, "timestamp": 1708333823.5190961}
+[MONITOR]	LOG	{"sender": "bot", "receiver": "user", "bot_action": "utter_help", "timestamp": 1708333823.546189}
+[MONITOR]	LOG	{"sender": "user", "receiver": "bot", "intent": {"name": "help_called", "confidence": 0.934701144695282}, "entities": {}, "timestamp": 1708333828.5483801}
+[MONITOR]	LOG	{"sender": "bot", "receiver": "user", "bot_action": "help_called", "timestamp": 1708333828.576653}

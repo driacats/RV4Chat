@@ -2,8 +2,8 @@
 :- use_module(monitor('deep_subdict')).
 match(_event, msg_user_to_bot) :- deep_subdict(_{'receiver':"bot",'sender':"user"}, _event).
 match(_event, msg_bot_to_user) :- deep_subdict(_{'receiver':"user",'sender':"bot"}, _event).
-match(_event, add_object) :- deep_subdict(_{'entities':_{'posY':_,'posX':_,'object':_},'intent':_{'confidence':_,'name':"add_object"}}, _event).
-match(_event, add_object_rel(Obj)) :- deep_subdict(_{'entities':_{'relName':Obj,'relPos':_,'object':_},'intent':_{'confidence':_,'name':"add_relative_object"}}, _event).
+match(_event, add_object) :- deep_subdict(_{'entities':_{'posy':_,'posx':_,'object':_},'intent':_{'confidence':_,'name':"add_object"}}, _event).
+match(_event, add_object_rel(Obj)) :- deep_subdict(_{'entities':_{'relname':Obj,'relpos':_,'object':_},'intent':_{'confidence':_,'name':"add_relative_object"}}, _event).
 match(_event, remove_object(Obj)) :- deep_subdict(_{'entities':_{'relname':Obj},'intent':_{'confidence':_,'name':"remove_object"}}, _event).
 match(_event, object_added(Obj)) :- deep_subdict(_{'aux':_{'name':Obj},'bot_action':"utter_add_object"}, _event).
 match(_event, object_added_rel(Obj)) :- deep_subdict(_{'aux':_{'name':Obj},'bot_action':"utter_add_relative_object"}, _event).
