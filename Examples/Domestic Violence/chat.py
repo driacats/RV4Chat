@@ -40,13 +40,15 @@ def user_msg(win, msg):
     win.refresh()
     
     # Make the request at the chatbot for the answer and it handles it
-    service_url = "http://0.0.0.0:5005/webhooks/rest/webhook"
+    # service_url = "http://0.0.0.0:5005/webhooks/rest/webhook"
+    service_url = 'http://localhost:8084'
     req = {}
     req['sender'] = 'user'
     req['message'] = msg
     answer = requests.post(service_url, json=req)
     answer = json.loads(answer.text)
-    bot_msg(win, answer[0]['text'])
+    bot_msg(win, answer['fulfillmentMessages'][0]['text']['text'][0])
+    # bot_msg(win, answer[0]['text'])
 
 # The function handles bot messages
 def bot_msg(win, msg):
