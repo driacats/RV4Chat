@@ -62,9 +62,11 @@ def launch_interactive(args):
 
 def launch_tests():
     # platforms = ['dialogflow']
-    platforms = ['rasa','dialogflow']
+    # platforms = ['rasa','dialogflow']
+    platforms = ['rasa']
     # monitors = ['no-monitor', 'dummy-monitor']
-    monitors = ['no-monitor', 'dummy-monitor', 'real-monitor']
+    # monitors = ['no-monitor', 'dummy-monitor', 'real-monitor']
+    monitors = ['real-monitor']
     N = 200
 
     for platform in platforms:

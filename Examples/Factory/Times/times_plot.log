@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Arch Linux)  (format=lualatex 2024.1.16)  7 FEB 2024 11:11
+This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Arch Linux)  (format=lualatex 2024.1.16)  20 FEB 2024 09:39
  restricted system commands enabled.
 **times_plot.tex
 (./times_plot.tex
@@ -557,28 +557,30 @@ your preamble.
  on input line 3.
 
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 13.
+(Font)              <7> on input line 15.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 13.
+(Font)              <5> on input line 15.
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./times_plot.aux))
 
 Here is how much of LuaTeX's memory you used:
- 23844 strings out of 478285
+ 23888 strings out of 478285
  100000,1977958 words of node,token memory allocated
  413 words of node memory still in use:
    3 hlist, 1 vlist, 1 rule, 2 glue, 3 kern, 1 glyph, 5 attribute, 48 glue_spec,
  5 attribute_list, 2 write nodes
-   avail lists: 2:2281,3:2349,4:154,5:22,6:2,7:1145,8:2,9:258
- 43284 multiletter control sequences out of 65536+600000
- 25 fonts using 1345055 bytes
- 115i,10n,111p,721b,1976s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-Output written on times_plot.pdf (1 page, 15425 bytes).
+   avail lists: 2:3031,3:2961,4:190,5:34,6:2,7:2186,8:2,9:609,11:45
+ 43328 multiletter control sequences out of 65536+600000
+ 26 fonts using 1476743 bytes
+ 115i,18n,111p,721b,2277s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texmf-dist/fonts/opentype/public/lm/lmroman8-regular.otf></usr/share
+/texmf-dist/fonts/opentype/public/lm/lmroman10-regular.otf></usr/share/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmr10.pfb>
+Output written on times_plot.pdf (1 page, 21567 bytes).
 
-PDF statistics: 15 PDF objects out of 1000 (max. 8388607)
- 10 compressed objects within 1 object stream
+PDF statistics: 29 PDF objects out of 1000 (max. 8388607)
+ 18 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 
