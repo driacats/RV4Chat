@@ -1,0 +1,191 @@
+[DIALOG]	LOG	{'sender': 'user', 'message': 'I need help'}
+[DIALOG]	LOG	Found in message. Intent:get_information, Entities:{}
+[DIALOG]	LOG	Message to Webhook: {'responseId': 'XXXX', 'queryResult': {'queryText': 'I need help', 'action': None, 'parameters': {}, 'allRequiredParamsPresent': True, 'fulfillmentText': 'No answer from the server', 'fulfillmentMessages': [{'text': {'text': ['No answer from the server.']}}], 'intent': {'name': 'XXXX', 'displayName': 'get_information'}, 'intentDetectionConfidence': 1, 'diagnosticInfo': {'webhook_latency_ms': 100}, 'languageCode': 'en', 'sentimentAnalysisResult': {'queryTextSentiment': {}}}, 'agentId': 'XXXX'}
+[POLICY]	LOG	Event generated: {'sender': 'user', 'receiver': 'bot', 'intent': {'name': 'get_information', 'confidence': 1}, 'entities': {}}
+[POLICY]	LOG	Connecting to ws://localhost:5052
+[POLICY]	LOG	Connection created
+[POLICY]	LOG	Message sent.
+Message data: 
+_21062{entities:_21058{},intent:_21030{confidence:1,name:get_information},receiver:bot,sender:user}
+@((relevant>>star(app(S_1,[3]));1),[S_1=gen([n],guarded(var(n)>0,star((help_word:eps)*(utter_help:eps)\/(undo_word:eps)*(utter_help:eps))*((commit_suicide:eps)*((utter_against_suicide:eps)*app(S_1,[var(n)-1]))),(help_word:eps)*(utter_help:eps)))])
+verdict = ?_True
+[POLICY]	LOG	Verdict: currently_true
+[POLICY]	LOG	Computed next event: ask_webhook
+[POLICY]	LOG	Connecting to ws://localhost:5052
+[POLICY]	LOG	Connection created
+[POLICY]	LOG	Message sent.
+Message data: 
+_8946{bot_action:utter_ask_salary,fulfillmentMessages:[_8902{text:_8894{text:[Your situation seems very difficult and you might need help. There are many anti-violence centers in your city, for example .... Are you independent from an economical point of view?]}}],receiver:user,sender:bot}
+@(relevant>>star(app(S_1,[3])),[S_1=gen([n],guarded(var(n)>0,star((help_word:eps)*(utter_help:eps)\/(undo_word:eps)*(utter_help:eps))*((commit_suicide:eps)*((utter_against_suicide:eps)*app(S_1,[var(n)-1]))),(help_word:eps)*(utter_help:eps)))])
+verdict = ?_True
+[POLICY]	LOG	Verdict: currently_true
+[POLICY]	LOG	Computed next event: None
+[POLICY]	LOG	Answer: {"fulfillmentMessages": [{"text": {"text": ["Your situation seems very difficult and you might need help. There are many anti-violence centers in your city, for example .... Are you independent from an economical point of view?"]}}], "bot_action": "utter_ask_salary", "sender": "bot", "receiver": "user"}
+[DIALOG]	LOG	Message got: {"fulfillmentMessages": [{"text": {"text": ["Your situation seems very difficult and you might need help. There are many anti-violence centers in your city, for example .... Are you independent from an economical point of view?"]}}], "bot_action": "utter_ask_salary", "sender": "bot", "receiver": "user"}
+[DIALOG]	LOG	Webhook answer: {"fulfillmentMessages": [{"text": {"text": ["Your situation seems very difficult and you might need help. There are many anti-violence centers in your city, for example .... Are you independent from an economical point of view?"]}}], "bot_action": "utter_ask_salary", "sender": "bot", "receiver": "user"}
+[DIALOG]	LOG	{'sender': 'user', 'message': 'I earn 200 dollars per month'}
+[DIALOG]	LOG	Found in message. Intent:inform_chatbot_about_salary, Entities:{}
+[DIALOG]	LOG	Message to Webhook: {'responseId': 'XXXX', 'queryResult': {'queryText': 'I earn 200 dollars per month', 'action': None, 'parameters': {}, 'allRequiredParamsPresent': True, 'fulfillmentText': 'No answer from the server', 'fulfillmentMessages': [{'text': {'text': ['No answer from the server.']}}], 'intent': {'name': 'XXXX', 'displayName': 'inform_chatbot_about_salary'}, 'intentDetectionConfidence': 1, 'diagnosticInfo': {'webhook_latency_ms': 100}, 'languageCode': 'en', 'sentimentAnalysisResult': {'queryTextSentiment': {}}}, 'agentId': 'XXXX'}
+[POLICY]	LOG	Event generated: {'sender': 'user', 'receiver': 'bot', 'intent': {'name': 'inform_chatbot_about_salary', 'confidence': 1}, 'entities': {}}
+[POLICY]	LOG	Connecting to ws://localhost:5052
+[POLICY]	LOG	Connection created
+[POLICY]	LOG	Message sent.
+Message data: 
+_7416{entities:_7412{},intent:_7384{confidence:1,name:inform_chatbot_about_salary},receiver:bot,sender:user}
+@(relevant>>star(app(S_1,[3])),[S_1=gen([n],guarded(var(n)>0,star((help_word:eps)*(utter_help:eps)\/(undo_word:eps)*(utter_help:eps))*((commit_suicide:eps)*((utter_against_suicide:eps)*app(S_1,[var(n)-1]))),(help_word:eps)*(utter_help:eps)))])
+verdict = ?_True
+[POLICY]	LOG	Verdict: currently_true
+[POLICY]	LOG	Computed next event: ask_webhook
+[POLICY]	LOG	Connecting to ws://localhost:5052
+[POLICY]	LOG	Connection created
+[POLICY]	LOG	Message sent.
+Message data: 
+_7676{bot_action:utter_ask_children,fulfillmentMessages:[_7632{text:_7624{text:[Have you children at home?]}}],receiver:user,sender:bot}
+@(relevant>>star(app(S_1,[3])),[S_1=gen([n],guarded(var(n)>0,star((help_word:eps)*(utter_help:eps)\/(undo_word:eps)*(utter_help:eps))*((commit_suicide:eps)*((utter_against_suicide:eps)*app(S_1,[var(n)-1]))),(help_word:eps)*(utter_help:eps)))])
+verdict = ?_True
+[POLICY]	LOG	Verdict: currently_true
+[POLICY]	LOG	Computed next event: None
+[POLICY]	LOG	Answer: {"fulfillmentMessages": [{"text": {"text": ["Have you children at home?"]}}], "bot_action": "utter_ask_children", "sender": "bot", "receiver": "user"}
+[DIALOG]	LOG	Message got: {"fulfillmentMessages": [{"text": {"text": ["Have you children at home?"]}}], "bot_action": "utter_ask_children", "sender": "bot", "receiver": "user"}
+[DIALOG]	LOG	Webhook answer: {"fulfillmentMessages": [{"text": {"text": ["Have you children at home?"]}}], "bot_action": "utter_ask_children", "sender": "bot", "receiver": "user"}
+[DIALOG]	LOG	{'sender': 'user', 'message': 'We have 2 children'}
+[DIALOG]	LOG	Found in message. Intent:inform_chatbot_about_children, Entities:{}
+[DIALOG]	LOG	Message to Webhook: {'responseId': 'XXXX', 'queryResult': {'queryText': 'We have 2 children', 'action': None, 'parameters': {}, 'allRequiredParamsPresent': True, 'fulfillmentText': 'No answer from the server', 'fulfillmentMessages': [{'text': {'text': ['No answer from the server.']}}], 'intent': {'name': 'XXXX', 'displayName': 'inform_chatbot_about_children'}, 'intentDetectionConfidence': 1, 'diagnosticInfo': {'webhook_latency_ms': 100}, 'languageCode': 'en', 'sentimentAnalysisResult': {'queryTextSentiment': {}}}, 'agentId': 'XXXX'}
+[POLICY]	LOG	Event generated: {'sender': 'user', 'receiver': 'bot', 'intent': {'name': 'inform_chatbot_about_children', 'confidence': 1}, 'entities': {}}
+[POLICY]	LOG	Connecting to ws://localhost:5052
+[POLICY]	LOG	Connection created
+[POLICY]	LOG	Message sent.
+Message data: 
+_7432{entities:_7428{},intent:_7400{confidence:1,name:inform_chatbot_about_children},receiver:bot,sender:user}
+@(relevant>>star(app(S_1,[3])),[S_1=gen([n],guarded(var(n)>0,star((help_word:eps)*(utter_help:eps)\/(undo_word:eps)*(utter_help:eps))*((commit_suicide:eps)*((utter_against_suicide:eps)*app(S_1,[var(n)-1]))),(help_word:eps)*(utter_help:eps)))])
+verdict = ?_True
+[POLICY]	LOG	Verdict: currently_true
+[POLICY]	LOG	Computed next event: ask_webhook
+[POLICY]	LOG	Connecting to ws://localhost:5052
+[POLICY]	LOG	Connection created
+[POLICY]	LOG	Message sent.
+Message data: 
+_7518{bot_action:utter_normal,fulfillmentMessages:[_7474{text:_7466{text:[Ok, stay safe]}}],receiver:user,sender:bot}
+@(relevant>>star(app(S_1,[3])),[S_1=gen([n],guarded(var(n)>0,star((help_word:eps)*(utter_help:eps)\/(undo_word:eps)*(utter_help:eps))*((commit_suicide:eps)*((utter_against_suicide:eps)*app(S_1,[var(n)-1]))),(help_word:eps)*(utter_help:eps)))])
+verdict = ?_True
+[POLICY]	LOG	Verdict: currently_true
+[POLICY]	LOG	Computed next event: None
+[POLICY]	LOG	Answer: {"fulfillmentMessages": [{"text": {"text": ["Ok, stay safe"]}}], "bot_action": "utter_normal", "sender": "bot", "receiver": "user"}
+[DIALOG]	LOG	Message got: {"fulfillmentMessages": [{"text": {"text": ["Ok, stay safe"]}}], "bot_action": "utter_normal", "sender": "bot", "receiver": "user"}
+[DIALOG]	LOG	Webhook answer: {"fulfillmentMessages": [{"text": {"text": ["Ok, stay safe"]}}], "bot_action": "utter_normal", "sender": "bot", "receiver": "user"}
+[DIALOG]	LOG	{'sender': 'user', 'message': 'I will kill me'}
+[DIALOG]	LOG	Found in message. Intent:commit_suicide, Entities:{}
+[DIALOG]	LOG	Message to Webhook: {'responseId': 'XXXX', 'queryResult': {'queryText': 'I will kill me', 'action': None, 'parameters': {}, 'allRequiredParamsPresent': True, 'fulfillmentText': 'No answer from the server', 'fulfillmentMessages': [{'text': {'text': ['No answer from the server.']}}], 'intent': {'name': 'XXXX', 'displayName': 'commit_suicide'}, 'intentDetectionConfidence': 1, 'diagnosticInfo': {'webhook_latency_ms': 100}, 'languageCode': 'en', 'sentimentAnalysisResult': {'queryTextSentiment': {}}}, 'agentId': 'XXXX'}
+[POLICY]	LOG	Event generated: {'sender': 'user', 'receiver': 'bot', 'intent': {'name': 'commit_suicide', 'confidence': 1}, 'entities': {}}
+[POLICY]	LOG	Connecting to ws://localhost:5052
+[POLICY]	LOG	Connection created
+[POLICY]	LOG	Message sent.
+Message data: 
+_7308{entities:_7304{},intent:_7276{confidence:1,name:commit_suicide},receiver:bot,sender:user}
+@(relevant>>star(app(S_1,[3])),[S_1=gen([n],guarded(var(n)>0,star((help_word:eps)*(utter_help:eps)\/(undo_word:eps)*(utter_help:eps))*((commit_suicide:eps)*((utter_against_suicide:eps)*app(S_1,[var(n)-1]))),(help_word:eps)*(utter_help:eps)))])
+verdict = ?_False
+[POLICY]	LOG	Verdict: currently_false
+[POLICY]	LOG	Computed next event: ask_webhook
+[POLICY]	LOG	Connecting to ws://localhost:5052
+[POLICY]	LOG	Connection created
+[POLICY]	LOG	Message sent.
+Message data: 
+_9912{bot_action:utter_against_suicide,fulfillmentMessages:[_9868{text:_9860{text:[Your situation seems very difficult and you need help. Many victims of violence want to come to an end with their lives, and a terribly large share of them do it. Please consider to talk with a specialist. You can obtain immediate help, in an anonymous way, by calling this help line: ....]}}],receiver:user,sender:bot}
+@(relevant>>((utter_against_suicide:eps)*app(gen([n],guarded(var(n)>0,star((help_word:eps)*(utter_help:eps)\/(undo_word:eps)*(utter_help:eps))*((commit_suicide:eps)*((utter_against_suicide:eps)*app(S_1,[var(n)-1]))),(help_word:eps)*(utter_help:eps))),[3-1])*star(app(S_1,[3]))),[S_1=gen([n],guarded(var(n)>0,star((help_word:eps)*(utter_help:eps)\/(undo_word:eps)*(utter_help:eps))*((commit_suicide:eps)*((utter_against_suicide:eps)*app(S_1,[var(n)-1]))),(help_word:eps)*(utter_help:eps)))])
+verdict = ?_False
+[POLICY]	LOG	Verdict: currently_false
+[POLICY]	LOG	Computed next event: None
+[POLICY]	LOG	Answer: {"fulfillmentMessages": [{"text": {"text": ["Your situation seems very difficult and you need help. Many victims of violence want to come to an end with their lives, and a terribly large share of them do it. Please consider to talk with a specialist. You can obtain immediate help, in an anonymous way, by calling this help line: ...."]}}], "bot_action": "utter_against_suicide", "sender": "bot", "receiver": "user"}
+[DIALOG]	LOG	Message got: {"fulfillmentMessages": [{"text": {"text": ["Your situation seems very difficult and you need help. Many victims of violence want to come to an end with their lives, and a terribly large share of them do it. Please consider to talk with a specialist. You can obtain immediate help, in an anonymous way, by calling this help line: ...."]}}], "bot_action": "utter_against_suicide", "sender": "bot", "receiver": "user"}
+[DIALOG]	LOG	Webhook answer: {"fulfillmentMessages": [{"text": {"text": ["Your situation seems very difficult and you need help. Many victims of violence want to come to an end with their lives, and a terribly large share of them do it. Please consider to talk with a specialist. You can obtain immediate help, in an anonymous way, by calling this help line: ...."]}}], "bot_action": "utter_against_suicide", "sender": "bot", "receiver": "user"}
+[DIALOG]	LOG	{'sender': 'user', 'message': 'I will kill me'}
+[DIALOG]	LOG	Found in message. Intent:commit_suicide, Entities:{}
+[DIALOG]	LOG	Message to Webhook: {'responseId': 'XXXX', 'queryResult': {'queryText': 'I will kill me', 'action': None, 'parameters': {}, 'allRequiredParamsPresent': True, 'fulfillmentText': 'No answer from the server', 'fulfillmentMessages': [{'text': {'text': ['No answer from the server.']}}], 'intent': {'name': 'XXXX', 'displayName': 'commit_suicide'}, 'intentDetectionConfidence': 1, 'diagnosticInfo': {'webhook_latency_ms': 100}, 'languageCode': 'en', 'sentimentAnalysisResult': {'queryTextSentiment': {}}}, 'agentId': 'XXXX'}
+[POLICY]	LOG	Event generated: {'sender': 'user', 'receiver': 'bot', 'intent': {'name': 'commit_suicide', 'confidence': 1}, 'entities': {}}
+[POLICY]	LOG	Connecting to ws://localhost:5052
+[POLICY]	LOG	Connection created
+[POLICY]	LOG	Message sent.
+Message data: 
+_7338{entities:_7334{},intent:_7306{confidence:1,name:commit_suicide},receiver:bot,sender:user}
+@(relevant>>(app(gen([n],guarded(var(n)>0,star((help_word:eps)*(utter_help:eps)\/(undo_word:eps)*(utter_help:eps))*((commit_suicide:eps)*((utter_against_suicide:eps)*app(S_1,[var(n)-1]))),(help_word:eps)*(utter_help:eps))),[3-1])*star(app(S_1,[3]))),[S_1=gen([n],guarded(var(n)>0,star((help_word:eps)*(utter_help:eps)\/(undo_word:eps)*(utter_help:eps))*((commit_suicide:eps)*((utter_against_suicide:eps)*app(S_1,[var(n)-1]))),(help_word:eps)*(utter_help:eps)))])
+verdict = ?_False
+[POLICY]	LOG	Verdict: currently_false
+[POLICY]	LOG	Computed next event: ask_webhook
+[POLICY]	LOG	Connecting to ws://localhost:5052
+[POLICY]	LOG	Connection created
+[POLICY]	LOG	Message sent.
+Message data: 
+_9912{bot_action:utter_against_suicide,fulfillmentMessages:[_9868{text:_9860{text:[Your situation seems very difficult and you need help. Many victims of violence want to come to an end with their lives, and a terribly large share of them do it. Please consider to talk with a specialist. You can obtain immediate help, in an anonymous way, by calling this help line: ....]}}],receiver:user,sender:bot}
+@(relevant>>((utter_against_suicide:eps)*(app(gen([n],guarded(var(n)>0,star((help_word:eps)*(utter_help:eps)\/(undo_word:eps)*(utter_help:eps))*((commit_suicide:eps)*((utter_against_suicide:eps)*app(S_1,[var(n)-1]))),(help_word:eps)*(utter_help:eps))),[2-1])*star(app(S_1,[3])))),[S_1=gen([n],guarded(var(n)>0,star((help_word:eps)*(utter_help:eps)\/(undo_word:eps)*(utter_help:eps))*((commit_suicide:eps)*((utter_against_suicide:eps)*app(S_1,[var(n)-1]))),(help_word:eps)*(utter_help:eps)))])
+verdict = ?_False
+[POLICY]	LOG	Verdict: currently_false
+[POLICY]	LOG	Computed next event: None
+[POLICY]	LOG	Answer: {"fulfillmentMessages": [{"text": {"text": ["Your situation seems very difficult and you need help. Many victims of violence want to come to an end with their lives, and a terribly large share of them do it. Please consider to talk with a specialist. You can obtain immediate help, in an anonymous way, by calling this help line: ...."]}}], "bot_action": "utter_against_suicide", "sender": "bot", "receiver": "user"}
+[DIALOG]	LOG	Message got: {"fulfillmentMessages": [{"text": {"text": ["Your situation seems very difficult and you need help. Many victims of violence want to come to an end with their lives, and a terribly large share of them do it. Please consider to talk with a specialist. You can obtain immediate help, in an anonymous way, by calling this help line: ...."]}}], "bot_action": "utter_against_suicide", "sender": "bot", "receiver": "user"}
+[DIALOG]	LOG	Webhook answer: {"fulfillmentMessages": [{"text": {"text": ["Your situation seems very difficult and you need help. Many victims of violence want to come to an end with their lives, and a terribly large share of them do it. Please consider to talk with a specialist. You can obtain immediate help, in an anonymous way, by calling this help line: ...."]}}], "bot_action": "utter_against_suicide", "sender": "bot", "receiver": "user"}
+[DIALOG]	LOG	{'sender': 'user', 'message': 'saales'}
+[DIALOG]	LOG	Found in message. Intent:help_word, Entities:{}
+[DIALOG]	LOG	Message to Webhook: {'responseId': 'XXXX', 'queryResult': {'queryText': 'saales', 'action': None, 'parameters': {}, 'allRequiredParamsPresent': True, 'fulfillmentText': 'No answer from the server', 'fulfillmentMessages': [{'text': {'text': ['No answer from the server.']}}], 'intent': {'name': 'XXXX', 'displayName': 'help_word'}, 'intentDetectionConfidence': 1, 'diagnosticInfo': {'webhook_latency_ms': 100}, 'languageCode': 'en', 'sentimentAnalysisResult': {'queryTextSentiment': {}}}, 'agentId': 'XXXX'}
+[POLICY]	LOG	Event generated: {'sender': 'user', 'receiver': 'bot', 'intent': {'name': 'help_word', 'confidence': 1}, 'entities': {}}
+[POLICY]	LOG	Connecting to ws://localhost:5052
+[POLICY]	LOG	Connection created
+[POLICY]	LOG	Message sent.
+Message data: 
+_7298{entities:_7294{},intent:_7266{confidence:1,name:help_word},receiver:bot,sender:user}
+@(relevant>>(app(gen([n],guarded(var(n)>0,star((help_word:eps)*(utter_help:eps)\/(undo_word:eps)*(utter_help:eps))*((commit_suicide:eps)*((utter_against_suicide:eps)*app(S_1,[var(n)-1]))),(help_word:eps)*(utter_help:eps))),[2-1])*star(app(S_1,[3]))),[S_1=gen([n],guarded(var(n)>0,star((help_word:eps)*(utter_help:eps)\/(undo_word:eps)*(utter_help:eps))*((commit_suicide:eps)*((utter_against_suicide:eps)*app(S_1,[var(n)-1]))),(help_word:eps)*(utter_help:eps)))])
+verdict = ?_False
+[POLICY]	LOG	Verdict: currently_false
+[POLICY]	LOG	Computed next event: ask_webhook
+[POLICY]	LOG	Connecting to ws://localhost:5052
+[POLICY]	LOG	Connection created
+[POLICY]	LOG	Message sent.
+Message data: 
+_7566{bot_action:utter_help,fulfillmentMessages:[_7522{text:_7514{text:[Got it.]}}],receiver:user,sender:bot}
+@(relevant>>((utter_help:eps)*(star((help_word:eps)*(utter_help:eps)\/(undo_word:eps)*(utter_help:eps))*((commit_suicide:eps)*((utter_against_suicide:eps)*app(gen([n],guarded(var(n)>0,star((help_word:eps)*(utter_help:eps)\/(undo_word:eps)*(utter_help:eps))*((commit_suicide:eps)*((utter_against_suicide:eps)*app(S_1,[var(n)-1]))),(help_word:eps)*(utter_help:eps))),[1-1])))*star(app(S_1,[3])))),[S_1=gen([n],guarded(var(n)>0,star((help_word:eps)*(utter_help:eps)\/(undo_word:eps)*(utter_help:eps))*((commit_suicide:eps)*((utter_against_suicide:eps)*app(S_1,[var(n)-1]))),(help_word:eps)*(utter_help:eps)))])
+verdict = ?_False
+[POLICY]	LOG	Verdict: currently_false
+[POLICY]	LOG	Computed next event: None
+[POLICY]	LOG	Answer: {"fulfillmentMessages": [{"text": {"text": ["Got it."]}}], "bot_action": "utter_help", "sender": "bot", "receiver": "user"}
+[DIALOG]	LOG	Message got: {"fulfillmentMessages": [{"text": {"text": ["Got it."]}}], "bot_action": "utter_help", "sender": "bot", "receiver": "user"}
+[DIALOG]	LOG	Webhook answer: {"fulfillmentMessages": [{"text": {"text": ["Got it."]}}], "bot_action": "utter_help", "sender": "bot", "receiver": "user"}
+[DIALOG]	LOG	{'sender': 'user', 'message': 'stop'}
+[DIALOG]	LOG	Found in message. Intent:undo_word, Entities:{}
+[DIALOG]	LOG	Message to Webhook: {'responseId': 'XXXX', 'queryResult': {'queryText': 'stop', 'action': None, 'parameters': {}, 'allRequiredParamsPresent': True, 'fulfillmentText': 'No answer from the server', 'fulfillmentMessages': [{'text': {'text': ['No answer from the server.']}}], 'intent': {'name': 'XXXX', 'displayName': 'undo_word'}, 'intentDetectionConfidence': 1, 'diagnosticInfo': {'webhook_latency_ms': 100}, 'languageCode': 'en', 'sentimentAnalysisResult': {'queryTextSentiment': {}}}, 'agentId': 'XXXX'}
+[POLICY]	LOG	Event generated: {'sender': 'user', 'receiver': 'bot', 'intent': {'name': 'undo_word', 'confidence': 1}, 'entities': {}}
+[POLICY]	LOG	Connecting to ws://localhost:5052
+[POLICY]	LOG	Connection created
+[POLICY]	LOG	Message sent.
+Message data: 
+_7374{entities:_7370{},intent:_7342{confidence:1,name:undo_word},receiver:bot,sender:user}
+@(relevant>>(star((help_word:eps)*(utter_help:eps)\/(undo_word:eps)*(utter_help:eps))*((commit_suicide:eps)*((utter_against_suicide:eps)*app(gen([n],guarded(var(n)>0,star((help_word:eps)*(utter_help:eps)\/(undo_word:eps)*(utter_help:eps))*((commit_suicide:eps)*((utter_against_suicide:eps)*app(S_1,[var(n)-1]))),(help_word:eps)*(utter_help:eps))),[1-1])))*star(app(S_1,[3]))),[S_1=gen([n],guarded(var(n)>0,star((help_word:eps)*(utter_help:eps)\/(undo_word:eps)*(utter_help:eps))*((commit_suicide:eps)*((utter_against_suicide:eps)*app(S_1,[var(n)-1]))),(help_word:eps)*(utter_help:eps)))])
+verdict = ?_False
+[POLICY]	LOG	Verdict: currently_false
+[POLICY]	LOG	Computed next event: ask_webhook
+[POLICY]	LOG	Connecting to ws://localhost:5052
+[POLICY]	LOG	Connection created
+[POLICY]	LOG	Message sent.
+Message data: 
+_7682{bot_action:utter_stop_help,fulfillmentMessages:[_7638{text:_7630{text:[Today is cloudy!]}}],receiver:user,sender:bot}
+@(relevant>>((utter_help:eps)*(star((help_word:eps)*(utter_help:eps)\/(undo_word:eps)*(utter_help:eps))*((commit_suicide:eps)*((utter_against_suicide:eps)*app(gen([n],guarded(var(n)>0,star((help_word:eps)*(utter_help:eps)\/(undo_word:eps)*(utter_help:eps))*((commit_suicide:eps)*((utter_against_suicide:eps)*app(S_1,[var(n)-1]))),(help_word:eps)*(utter_help:eps))),[1-1])))*star(app(S_1,[3])))),[S_1=gen([n],guarded(var(n)>0,star((help_word:eps)*(utter_help:eps)\/(undo_word:eps)*(utter_help:eps))*((commit_suicide:eps)*((utter_against_suicide:eps)*app(S_1,[var(n)-1]))),(help_word:eps)*(utter_help:eps)))])
+verdict = ?_False
+[POLICY]	LOG	Verdict: currently_false
+[POLICY]	LOG	Computed next event: None
+[POLICY]	LOG	Answer: {"fulfillmentMessages": [{"text": {"text": ["Today is cloudy!"]}}], "bot_action": "utter_stop_help", "sender": "bot", "receiver": "user"}
+[DIALOG]	LOG	Message got: {"fulfillmentMessages": [{"text": {"text": ["Today is cloudy!"]}}], "bot_action": "utter_stop_help", "sender": "bot", "receiver": "user"}
+[DIALOG]	LOG	Webhook answer: {"fulfillmentMessages": [{"text": {"text": ["Today is cloudy!"]}}], "bot_action": "utter_stop_help", "sender": "bot", "receiver": "user"}
+[DIALOG]	LOG	{'sender': 'user', 'message': 'I will kill me'}
+[DIALOG]	LOG	Found in message. Intent:commit_suicide, Entities:{}
+[DIALOG]	LOG	Message to Webhook: {'responseId': 'XXXX', 'queryResult': {'queryText': 'I will kill me', 'action': None, 'parameters': {}, 'allRequiredParamsPresent': True, 'fulfillmentText': 'No answer from the server', 'fulfillmentMessages': [{'text': {'text': ['No answer from the server.']}}], 'intent': {'name': 'XXXX', 'displayName': 'commit_suicide'}, 'intentDetectionConfidence': 1, 'diagnosticInfo': {'webhook_latency_ms': 100}, 'languageCode': 'en', 'sentimentAnalysisResult': {'queryTextSentiment': {}}}, 'agentId': 'XXXX'}
+[POLICY]	LOG	Event generated: {'sender': 'user', 'receiver': 'bot', 'intent': {'name': 'commit_suicide', 'confidence': 1}, 'entities': {}}
+[POLICY]	LOG	Connecting to ws://localhost:5052
+[POLICY]	LOG	Connection created
+[POLICY]	LOG	Message sent.
+Message data: 
+_7420{entities:_7416{},intent:_7388{confidence:1,name:commit_suicide},receiver:bot,sender:user}
+@(relevant>>((utter_help:eps)*(star((help_word:eps)*(utter_help:eps)\/(undo_word:eps)*(utter_help:eps))*((commit_suicide:eps)*((utter_against_suicide:eps)*app(gen([n],guarded(var(n)>0,star((help_word:eps)*(utter_help:eps)\/(undo_word:eps)*(utter_help:eps))*((commit_suicide:eps)*((utter_against_suicide:eps)*app(S_1,[var(n)-1]))),(help_word:eps)*(utter_help:eps))),[1-1])))*star(app(S_1,[3])))),[S_1=gen([n],guarded(var(n)>0,star((help_word:eps)*(utter_help:eps)\/(undo_word:eps)*(utter_help:eps))*((commit_suicide:eps)*((utter_against_suicide:eps)*app(S_1,[var(n)-1]))),(help_word:eps)*(utter_help:eps)))])
+verdict = False
+[POLICY]	LOG	Verdict: False
+[POLICY]	ERR	Error consuming event:
+{'sender': 'user', 'receiver': 'bot', 'intent': {'name': 'commit_suicide', 'confidence': 1}, 'entities': {}}
+[DIALOG]	LOG	Message got: {"answer": "Error thrown by the monitor."}
+[DIALOG]	LOG	Webhook answer: {"answer": "Error thrown by the monitor."}

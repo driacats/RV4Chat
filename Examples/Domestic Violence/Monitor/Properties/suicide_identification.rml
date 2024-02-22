@@ -3,8 +3,9 @@ utter_against_suicide matches {sender: 'bot', receiver: 'user', bot_action: 'utt
 help_word matches {sender: 'user', receiver: 'bot', intent: {name: 'help_word', confidence: _}, entities: _};
 undo_word matches {sender: 'user', receiver: 'bot', intent: {name: 'undo_word', confidence: _}, entities: _};
 utter_help matches {sender: 'bot', receiver: 'user', bot_action: 'utter_help'};
+utter_stop_help matches {sender: 'bot', receiver: 'user', bot_action: 'utter_stop_help'};
 
-relevant matches commit_suicide | utter_against_suicide | help_word | utter_help | undo_word;
+relevant matches commit_suicide | utter_against_suicide | help_word | utter_help | undo_word | utter_stop_help;
 
 Main = relevant >> HelpAgainstSuicide<3>*;
 HelpAgainstSuicide<n> = 
@@ -13,4 +14,4 @@ HelpAgainstSuicide<n> =
     else
         Help;
 Help = help_word utter_help;
-Undo = undo_word utter_help;
+Undo = undo_word utter_stop_help;
