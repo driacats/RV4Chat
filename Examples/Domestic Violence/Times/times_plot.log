@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Arch Linux)  (format=lualatex 2024.1.16)  1 FEB 2024 17:25
+This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Arch Linux)  (format=lualatex 2024.2.22)  23 FEB 2024 11:46
  restricted system commands enabled.
 **times_plot.tex
 (./times_plot.tex
@@ -556,24 +556,31 @@ ick labels; missing features). Consider writing \pgfplotsset{compat=1.18} into
 your preamble.
  on input line 3.
 
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 15.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 15.
 [1
 
-] (./times_plot.aux))
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./times_plot.aux))
 
 Here is how much of LuaTeX's memory you used:
- 23351 strings out of 478285
+ 23882 strings out of 478285
  100000,1977958 words of node,token memory allocated
  413 words of node memory still in use:
    3 hlist, 1 vlist, 1 rule, 2 glue, 3 kern, 1 glyph, 5 attribute, 48 glue_spec,
  5 attribute_list, 2 write nodes
-   avail lists: 2:531,3:651,4:34,5:22,6:2,7:104,9:51
- 42791 multiletter control sequences out of 65536+600000
- 15 fonts using 723367 bytes
- 115i,5n,111p,721b,495s stack positions out of 10000i,1000n,20000p,200000b,200000s
-Output written on times_plot.pdf (1 page, 3277 bytes).
+   avail lists: 2:3001,3:2916,4:190,5:34,6:2,7:2186,8:2,9:609,11:45
+ 43322 multiletter control sequences out of 65536+600000
+ 26 fonts using 1476743 bytes
+ 115i,18n,111p,721b,2277s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texmf-dist/fonts/opentype/public/lm/lmroman8-regular.otf></usr/share
+/texmf-dist/fonts/opentype/public/lm/lmroman10-regular.otf></usr/share/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmr10.pfb>
+Output written on times_plot.pdf (1 page, 21351 bytes).
 
-PDF statistics: 11 PDF objects out of 1000 (max. 8388607)
- 7 compressed objects within 1 object stream
+PDF statistics: 29 PDF objects out of 1000 (max. 8388607)
+ 18 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 
