@@ -72,15 +72,15 @@ def get_user_input(win):
     user_input = ''
     while True:
         ch = win.getch()
-        if ch == ord('\n'):
+        if (ch == ord('\n')):
             return user_input
-        elif ch == curses.KEY_BACKSPACE or ch == 127:
-            if user_input:
+        elif (ch == curses.KEY_BACKSPACE or ch == 127):
+            if (user_input):
                 user_input = user_input[:-1]
                 win.delch(1, win.getyx()[1] - 1)
                 win.box()
                 win.refresh()
-        elif len(user_input) < curses.COLS - 9:
+        elif (len(user_input) < curses.COLS - 9):
             user_input += chr(ch)
             win.addch(1, win.getyx()[1], ch)
 
@@ -101,7 +101,7 @@ async def handle_post(chat_win, request):
 # Gets the message and makes a POST request to the chat_win
 def handle_user_input(stdscr, input_win):
     try:
-        while True:
+        while (True):
             input_win.addstr(1, 2, "> ")
             input_win.refresh()
             user_input = get_user_input(input_win)
@@ -128,5 +128,5 @@ def main(stdscr):
     app.add_routes([(web.post('/', lambda request : handle_post(chat_win, request)))])
     web.run_app(app, port=8888, print=False)
 
-if __name__ == '__main__':
+if (__name__ == '__main__'):
     curses.wrapper(main)

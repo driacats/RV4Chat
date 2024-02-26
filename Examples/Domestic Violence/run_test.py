@@ -12,7 +12,7 @@ def test_conversation(url, i):
         print(f'[TESTING]\tUSER\t {msg}')
         data = {'sender': 'user', 'message': msg}
         start_time = time.time() * 1000
-        if url == rasa_url:
+        if (url == rasa_url):
             answer = json.loads(requests.post(url, json=data).text)
         else:
             answer = json.loads(requests.post(url, json=json.dumps(data)).text)
@@ -25,11 +25,11 @@ def interactive(url):
     while(True):
         msg = input('\033[1;36;40m> ')
         print('\033[0m')
-        if msg == 'exit':
+        if (msg == 'exit'):
             print('\033[1;34;40mBOT: Goodbye!')
             return
         data = {'sender': 'user', 'message': msg}
-        if url == rasa_url:
+        if (url == rasa_url):
             answer = json.loads(requests.post(url, json=data).text)
             answer = answer[0]['text']
         else:
@@ -38,16 +38,16 @@ def interactive(url):
         print('\033[1;34;40mBOT:', answer, '\033[0m')
 
 def launch_interactive(args):
-    if not args.platform or not args.monitor:
+    if (not args.platform or not args.monitor):
         print('You have to specify the platform and the monitor.')
         return
     print('Launching Service...')
-    if args.platform == 'rasa':
+    if (args.platform == 'rasa'):
         # pids = service.run_rasa(args.monitor)
         terminal = subprocess.Popen('kitty --hold 2>/dev/null sh -c \'python start_service.py -s -p rasa -m ' + args.monitor + '\'', shell=True, preexec_fn=os.setsid)
         time.sleep(40)
         interactive(rasa_url)
-    elif args.platform == 'dialogflow':
+    elif (args.platform == 'dialogflow'):
         terminal = subprocess.Popen('kitty --hold 2>/dev/null sh -c \'python start_service.py -s -p dialogflow -m ' + args.monitor + '\'', shell=True, preexec_fn=os.setsid)
         # pids = service.run_dialogflow(args.monitor)
         time.sleep(2)
@@ -61,19 +61,20 @@ def launch_interactive(args):
     # os.killpg(os.getpgid(pid), signal.SIGTERM)
 
 def launch_tests():
-    platforms = ['dialogflow']
+    # platforms = ['dialogflow']
     # platforms = ['rasa','dialogflow']
-    # platforms = ['rasa']
+    platforms = ['rasa']
     # monitors = ['no-monitor', 'dummy-monitor']
-    monitors = ['no-monitor', 'dummy-monitor', 'real-monitor']
-    # monitors = ['real-monitor']
-    N = 1
+    # monitors = ['no-monitor', 'dummy-monitor', 'real-monitor']
+    # monitors = ['dummy-monitor', 'real-monitor']
+    monitors = ['no-monitor']
+    N = 200
 
     for platform in platforms:
-        if not os.path.exists('Times/' + platform + '/'):
+        if (not os.path.exists('Times/' + platform + '/')):
             os.makedirs('Times/' + platform + '/')
         for monitor in monitors:
-            if os.path.exists('Times/' + platform + '/' + monitor + '/'):
+            if (os.path.exists('Times/' + platform + '/' + monitor + '/')):
                 shutil.rmtree('Times/' + platform + '/' + monitor + '/')
             os.makedirs('Times/' + platform + '/' + monitor + '/')
             print('==== Testing', platform, monitor, '====')
@@ -101,10 +102,10 @@ def main():
     parser.add_argument('-m', '--monitor', metavar='monitor', help='monitor to be used. Monitors available: no-monitor, dummy-monitor, real-monitor')
     args = parser.parse_args()
 
-    if args.interactive:
+    if (args.interactive):
         launch_interactive(args)
     else:
         launch_tests()
 
-if __name__ == '__main__':
+if (__name__ == '__main__'):
     main()

@@ -21,6 +21,10 @@ def build_msg(msg):
         intent_name = 'help_called'
     elif (msg == 'I will kill me'):
         intent_name = 'commit_suicide'
+    elif (msg == 'Hello'):
+        intent_name = 'Default Welcome Intent'
+    else:
+        intent_name = 'Default Fallback Intent'
 
     print(f'[DIALOG]\tLOG\tFound in message. Intent:{intent_name}, Entities:{parameters}')
 
@@ -55,21 +59,21 @@ def build_msg(msg):
 async def handle_post(request, port):
 
     data = await request.json()
-    print(f"[DIALOG]\tLOG\t{data}")
-    if type(data) != dict:
+    print(f'[DIALOG]\tLOG\t{data}')
+    if (type(data) is not dict):
         data = json.loads(data)
 
     # if (data['sender'] == 'bot'):
     #     m = {'sender': 'bot', 'msg': data['message']}
     #     requests.post('http://localhost:8888', json=m)
     #     return web.Response(status=200)
-    msg = data["message"]
+    msg = data['message']
     if (data['sender'] == 'user'):
         webhook_msg = json.loads(build_msg(msg))
-        print(f"[DIALOG]\tLOG\t Message to Webhook: {webhook_msg}")
-        answer = requests.post('http://localhost:' + port, json=webhook_msg)
-        print(f"[DIALOG]\tLOG\t Message got: {answer.text}")
-        print(f"[DIALOG]\tLOG\t Webhook answer: {answer.text}")
+        print(f'[DIALOG]\tLOG\t Message to Webhook: {webhook_msg}')
+        answer = requests.post(f'http://localhost:{port}', json=webhook_msg)
+        print(f'[DIALOG]\tLOG\t Message got: {answer.text}')
+        print(f'[DIALOG]\tLOG\t Webhook answer: {answer.text}')
         return web.Response(text=answer.text)
     if (data['message'] == 'help_called'):
         m = {'sender': 'bot', 'msg': 'The sun shines today!'}
@@ -77,13 +81,13 @@ async def handle_post(request, port):
         return web.Response(status=200)
 
 def main():
-    parser = argparse.ArgumentParser(prog="Dummy Dialogflow Tester", description="This program simulates a Dialogflow API.")
-    parser.add_argument("-p", "--port", metavar="PORT", help="Port on which send messages", default=8080)
+    parser = argparse.ArgumentParser(prog='Dummy Dialogflow Tester', description='This program simulates a Dialogflow API.')
+    parser.add_argument('-p', '--port', metavar='PORT', help='Port on which send messages', default=8080)
     args = parser.parse_args()
 
     app = web.Application()
     app.add_routes([web.post('/', lambda request: handle_post(request, args.port))])
     web.run_app(app, port=8084)
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

@@ -4,9 +4,6 @@ import json, argparse, asyncio, websockets, time, urllib3, requests
 # The Timer class is able to start and stop a timer of a given time
 class Timer():
 
-    #// SERVER_URL = 'http://localhost:8080'
-    #// chat = urllib3.PoolManager()
-
     # The init function takes as argument the duration of the timer
     def __init__(self, duration):
         self.duration = duration
@@ -14,17 +11,14 @@ class Timer():
 
     def set_platform(self, platform):
         self.platform = platform
-        #// self.help_called = False
-        #// self.stopped = False
 
     # Wait duration seconds, than send a message to the chatbot
     async def wait(self):
         await asyncio.sleep(self.duration)
         print('Sending Help Message to Saved contacts.')
-        #// self.help_called = True
-        if self.platform == 'rasa':
+        if (self.platform == 'rasa'):
             service_url = 'http://0.0.0.0:5005/webhooks/rest/webhook'
-        elif self.platform == 'dialogflow':
+        elif (self.platform == 'dialogflow'):
             service_url = 'http://0.0.0.0:8084'
         else:
             print('[WEBHOOK]\tERROR\tUnknown Platform for Timer')
@@ -36,37 +30,15 @@ class Timer():
         
         answer = requests.post(service_url, json=req)
 
-    #// def call_help(self):
-    #//     
-    #//     done_msg = {}
-    #//     done_msg['fulfillmentMessages'] = [{'text': {'text': 'The sun shines!'}}]
-    #//     done_msg['bot_action'] = 'utter_help_called'
-    #//     
-    #//     chat.request('POST', SERVER_URL, body=json.dumps(done_msg))
-
-    #// def undo_help(self):
-    #//     
-    #//     done_msg = {}
-    #//     done_msg['fulfillmentMessages'] = [{'text': {'text': 'The sky is dark!'}}]
-    #//     done_msg['bot_action'] = 'utter_help_called'
-    #//     
-    #//     chat.request('POST', SERVER_URL, body=json.dumps(done_msg))
-
-    #//def check_wait(self):
-    #//    return self.help_called
-
-    #//def check_stop(self):
-    #//    return self.stopped
-
     # start function makes the counter start
     def start(self):
-        if self.task is None:
+        if (self.task is None):
             self.task = asyncio.create_task(self.wait())
 
     # stop function stops the function
     def stop(self):
         print('[STOP] stopping the timer')
-        if self.task:
+        if (self.task):
             self.task.cancel()
             self.task = None
             print('[STOP] done.')
@@ -106,13 +78,6 @@ async def handle_msg(msg):
     # Loads the json message
     msg = json.loads(msg)
 
-    #// if (msg['sender'] == 'bot'):
-    #//     if (msg['action'] == 'check_wait'):
-    #//         toggles = {}
-    #//         toggles['wait'] = timer.check_wait()
-    #//         toggles['stop'] = timer.check_stop()
-    #//         return (toggles, 'waiting')
-
     # Load intent and entities
     intent = msg['intent']
     entities = msg['entities']
@@ -120,36 +85,33 @@ async def handle_msg(msg):
     print('[LOG] INTENT:', intent)
     print('[LOG] ENTITIES:', entities)
 
-    #// Wait 20 milliseconds
-    #//time.sleep(0.02)
-
     # Choose action depending on intent
-    if intent == 'help_word':
+    if (intent == 'help_word'):
         timer.start()
         final_answer = ('Got it.', 'utter_help')
     
-    elif intent == 'undo_word':
+    elif (intent == 'undo_word'):
         timer.stop()
         final_answer = ('Today is cloudy!', 'utter_stop_help')
         print('[HANDLE] timer stopped, answer set.')
 
-    elif intent == 'commit_suicide':
+    elif (intent == 'commit_suicide'):
         commit_suicide_counter += 1
-        if commit_suicide_counter < 3:
+        if (commit_suicide_counter < 3):
             final_answer = (against_suicide_1_2, 'utter_against_suicide')
         else:
             final_answer = (against_suicide_3, 'utter_against_suicide')
     
-    elif intent == 'get_information':
+    elif (intent == 'get_information'):
         final_answer = (ask_salary, 'utter_ask_salary')
     
-    elif intent == 'inform_chatbot_about_salary':
+    elif (intent == 'inform_chatbot_about_salary'):
         final_answer = (ask_children, 'utter_ask_children')
     
-    elif intent == 'inform_chatbot_about_children':
+    elif (intent == 'inform_chatbot_about_children'):
         final_answer = ('Ok, stay safe', 'utter_normal')
 
-    elif intent == 'help_called':
+    elif (intent == 'help_called'):
         final_answer = ('The sun shines today!', 'help_called')
     
     else:
@@ -167,7 +129,7 @@ async def handle_post(request):
     # Load the json message
     data = await request.json()
     # Check if it is a valid Dialogflow message
-    if 'queryResult' not in data:
+    if ('queryResult' not in data):
         print('[LOG] Message not valid.')
         return
 
@@ -190,10 +152,6 @@ async def handle_post(request):
     # Build the answer for Dialogflow
     final_answer = answer.replace('MESSAGE', final_answer).replace('EVENT', bot_event).replace('TIMESTAMP', str(time.time()))
 
-    # Compute time
-    # with open('times.csv', 'a') as f:
-    #     f.write(str(time.time() * 1000 - start_time) + "\n")
-
     # Send back the message to be displayed
     return web.Response(text=final_answer)
 
@@ -209,7 +167,7 @@ async def handle_ws(request):
     # For each message received handle
     # the message and compute the answer
     async for msg in ws:
-        if msg.type == web.WSMsgType.TEXT:
+        if (msg.type == web.WSMsgType.TEXT):
             (final_answer, bot_event) = await handle_msg(msg.data)
             await ws.send_str(str((final_answer, bot_event)))
             
@@ -220,15 +178,15 @@ def main():
     parser.add_argument('-p', metavar='rasa|dialogflow', help='Platform to be used for connections.', default='rasa')
     args = parser.parse_args()
 
-    if args.p == 'dialogflow':
+    if (args.p == 'dialogflow'):
         app = web.Application()
         app.add_routes([web.post('/', handle_post)])
         web.run_app(app, port=8082)
 
-    if args.p == 'rasa':
+    if (args.p == 'rasa'):
         app = web.Application()
         app.add_routes([web.get('/', handle_ws)])
         web.run_app(app, port=8082)
 
-if __name__ == "__main__":
+if (__name__ == '__main__'):
     main()
