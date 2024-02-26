@@ -1,2 +1,2 @@
-		if message["queryResult"]["intent"]["displayName"] == "INTENT":
-			self.NEXT_ACTION()
+	if msg['queryResult']['intent']['displayName'] == 'INTENT':
+		return NEXT_ACTION()

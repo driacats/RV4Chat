@@ -1,9 +1,18 @@
+# File generated automatically on 2024-02-26 17:28 by instrumenter.py
+#  - Agent: DomesticViolenceHelper
+#  - Input zip: ../Examples/Domestic Violence/Dialogflow/DomesticViolenceHelper.zip
+#  - Output zip: output/DomesticViolenceHelperMonitored.zip
+#  - WebHook URL: https://163e-130-251-61-251.ngrok-free.app
+#  - Monitor URL: ws://localhost:5052
+#  - Monitoring Level: 2
+
+
 from aiohttp import web
 from websocket import create_connection
 import urllib3, json, random
 
-MONITOR_URL = MONITOR_URL_PLACEHOLDER
-WEBHOOK_URL = WEBHOOK_URL_PLACEHOLDER
+MONITOR_URL = "ws://localhost:5052"
+WEBHOOK_URL = "http://localhost:8082"
 
 webhook = urllib3.PoolManager()
 
@@ -81,15 +90,31 @@ def ask_webhook(msg):
     return create_event(next_event)
 
 def choose_answer(msg):
-CALL_ANSWER_FUNCTIONS_PLACEHOLDER
+	if msg['queryResult']['intent']['displayName'] == 'Default Welcome Intent':
+		return input_welcome()
+	if msg['queryResult']['intent']['displayName'] == 'Default Fallback Intent':
+		return input_unknown()
 
-ANSWER_FUNCTIONS_PLACEHOLDER
+
+def input_welcome():
+	available_answers = ['Hi! How are you doing?', 'Hello! How can I help you?', 'Good day! What can I do for you today?', 'Greetings! How can I assist?']
+	msg = {}
+	msg['fulfillmentMessages'] = [{'text': {'text': [random.choice(available_answers)]}}]
+	return msg
+
+def input_unknown():
+	available_answers = ["I didn't get that. Can you say it again?", 'I missed what you said. What was that?', 'Sorry, could you say that again?', 'Sorry, can you say that again?', 'Can you say that again?', "Sorry, I didn't get that. Can you rephrase?", 'Sorry, what was that?', 'One more time?', 'What was that?', 'Say that one more time?', "I didn't get that. Can you repeat?", 'I missed that, say that again?']
+	msg = {}
+	msg['fulfillmentMessages'] = [{'text': {'text': [random.choice(available_answers)]}}]
+	return msg
+
+
 # If the event is a bot event it returns None.
 # ask_webhhok if needed, plain_answer else.
 def next_event(event):
     if (event['sender'] == 'bot'):
         return None
-    if (event['intent']['name'] in INTENT_LIST_PLACEHOLDER):
+    if (event['intent']['name'] in ['inform_chatbot_about_salary', 'commit_suicide', 'inform_chatbot_about_children', 'undo_word', 'get_information', 'help_word']):
         return 'ask_webhook'
     return 'plain_answer'
 
