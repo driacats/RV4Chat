@@ -66,8 +66,8 @@ def launch_tests():
     platforms = ['rasa']
     # monitors = ['no-monitor', 'dummy-monitor']
     # monitors = ['no-monitor', 'dummy-monitor', 'real-monitor']
-    # monitors = ['dummy-monitor', 'real-monitor']
-    monitors = ['no-monitor']
+    monitors = ['dummy-monitor', 'real-monitor']
+    # monitors = ['no-monitor']
     N = 200
 
     for platform in platforms:
@@ -81,7 +81,7 @@ def launch_tests():
             if (platform == 'rasa'):
                 for i in range(N):
                     pids = service.run_rasa(monitor)
-                    time.sleep(40)
+                    time.sleep(45)
                     test_conversation(rasa_url, i)
                     shutil.move('time' + str(i) + '.txt', 'Times/' + platform + '/' + monitor + '/')
                     for pid in pids:
