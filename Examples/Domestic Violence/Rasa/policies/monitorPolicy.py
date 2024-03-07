@@ -14,6 +14,7 @@ from websocket import create_connection
 
 @DefaultV1Recipe.register([DefaultV1Recipe.ComponentType.POLICY_WITHOUT_END_TO_END_SUPPORT], is_trainable=False)
 class MonitorPolicy(Policy):
+	"""Policy that puts a monitor in the flow."""
 
 	# The function __init__ initializes the class.
 	# With respect to the super class it is initialized the socket client that will connect to the monitor.
@@ -117,7 +118,7 @@ class MonitorPolicy(Policy):
 		}
 
 
-class ControllerFingerprintable(Fingerprintable):
+class MonitorFingerprintable(Fingerprintable):
 	def fingerprint(self) -> Text:
 		# Implement the fingerprint method as needed
 		# This method should return a string that uniquely identifies the state of the object
