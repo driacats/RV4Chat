@@ -1,41 +1,21 @@
-## RV4Dialogflow
+## Dialogflow
 
-Dialogflow answers can be of two types:
-    1. Plain answers;
-    1. Webhook answers.
+To instantiate RV4Chatbot in Dialogflow a new component is needed: the **policy**.
 
-The first ones are managed internally simply picking up randomly from the answer set provided, the second ones are asked to an external service and once received are only forwarded to che chat.
+![Dialogflo Architecture](../.images/DialogflowArchitecture.png)
 
-To build a Runtime Verification system for Dialogflow it is needed an additional level, that we will call **Policy** that will manage the flow of the chat, receiving the user inputs and the answers before they are sent on the chat, both the plain and the webhook ones.
+To make a Dialogflow agent monitorable you should follow this guide:
 
-If for example the user writes "Hello" on the chat the flow should follow this sequence:
+1. Create your own agent and test it (also with webhook!);
 
-```sequence
-User->Dialogflow: "Hello!"
-Dialogflow->Policy: "{user: "Hello!"}"
-Policy->Monitor: "{user: utter_hello}"
-Monitor->Policy: Ok
-Policy->Policy: answer_choice()
-Policy->Monitor: "{bot: utter_how_are_you}"
-Monitor->Policy: Ok
-Policy->Dialogflow: "{bot:"Hello, how are you?"}"
-Dialogflow->User: "Hello, how are you?"
-```
+2. Export as zip file;
 
+3. Call the instrumenter script on the exported agent with the monitor URL and the URL on which the policy will listen;
+   ```bash
+   python instrumenter.py -i ExampleAgent.zip -o ExampleAgentMonitored.zip -url POLICY_URL -murl MONITOR_URL -level N
+   ```
 
+4. Create a new Dialogflow agent and restore the agent monitorable present in the `output` folder;
 
-
-
-```sequence
-User->Dialogflow: "What's the weather?"
-Dialogflow->Policy: "{user: "What's the weather?"}"
-Policy->Monitor: "{user: ask_weather}"
-Monitor->Policy: Ok
-Policy->WebHook: "{user: weather, position: XYZ, time: 00:00}"
-WebHook->Policy: "{weather: sunny, event: sun_answer, text"Today is sunny!"}"
-Policy->Monitor: "{bot: sun_answer}"
-Monitor->Policy: Ok
-Policy->Dialogflow: "{bot:"Today is sunny!"}"
-Dialogflow->User: "Today is sunny!"
-```
+5. Launch the policy, you are all set!
 
