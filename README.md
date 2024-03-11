@@ -2,7 +2,7 @@
 
 RV4Chatbot aims to make modern intent-based chatbots monitorable at runtime adding only a policy component to the original architecture.
 
-![RV4Chatbot architecture](/home/andrea/GitHub/RV4Chat/.images/RV4ChatbotArchitecture.png)
+![RV4Chatbot architecture](.images/RV4ChatbotArchitecture.png)
 
 The RV4Chatbot high level architecture is presented in the figure. The flow is:
 
