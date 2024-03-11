@@ -18,3 +18,8 @@ The RV4Chatbot high level architecture is presented in the figure. The flow is:
 In case of error at any time of the execution the action is set to an error action and a message of error is sent to the user.
 
 In this repository are present two possible instantiation of RV4Chatbot using **Dialogflow** and **Rasa**.
+
+You can also find two working scenarios:
+
+1. One chatbot in the domestic violence domain;
+2. One chatbot in the factory robot placement domain.
