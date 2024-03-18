@@ -16,8 +16,8 @@ def test_conversation(url, i):
             answer = json.loads(requests.post(url, json=data).text)
         else:
             answer = json.loads(requests.post(url, json=json.dumps(data)).text)
-        with open('time' + str(i) + '.txt', 'a') as f:
-            f.write(str((time.time() * 1000) - start_time) + '\n')
+        # with open('time' + str(i) + '.txt', 'a') as f:
+            # f.write(str((time.time() * 1000) - start_time) + '\n')
         print(f'[TESTING]\tBOT\t {answer}')
 
 def interactive(url):
@@ -60,15 +60,8 @@ def launch_interactive(args):
     terminal.kill()
     # os.killpg(os.getpgid(pid), signal.SIGTERM)
 
-def launch_tests():
-    # platforms = ['dialogflow']
-    # platforms = ['rasa','dialogflow']
-    platforms = ['rasa']
-    # monitors = ['no-monitor', 'dummy-monitor']
-    # monitors = ['no-monitor', 'dummy-monitor', 'real-monitor']
-    monitors = ['dummy-monitor', 'real-monitor']
-    # monitors = ['no-monitor']
-    N = 200
+def launch_tests(platforms, monitors, N):
+    # N = 200
 
     for platform in platforms:
         if (not os.path.exists('Times/' + platform + '/')):
@@ -83,7 +76,7 @@ def launch_tests():
                     pids = service.run_rasa(monitor)
                     time.sleep(45)
                     test_conversation(rasa_url, i)
-                    shutil.move('time' + str(i) + '.txt', 'Times/' + platform + '/' + monitor + '/')
+                    # shutil.move('time' + str(i) + '.txt', 'Times/' + platform + '/' + monitor + '/')
                     for pid in pids:
                         os.killpg(os.getpgid(pid), signal.SIGTERM)
             else:
@@ -91,7 +84,7 @@ def launch_tests():
                     pids = service.run_dialogflow(monitor)
                     time.sleep(2)
                     test_conversation(dialogflow_url, i)
-                    shutil.move('time' + str(i) + '.txt', 'Times/' + platform + '/' + monitor + '/')
+                    # shutil.move('time' + str(i) + '.txt', 'Times/' + platform + '/' + monitor + '/')
                     for pid in pids:
                         os.killpg(os.getpgid(pid), signal.SIGTERM)
 
@@ -100,12 +93,29 @@ def main():
     parser.add_argument('-i', '--interactive', action='store_true', help='launch the script in interactive mode.')
     parser.add_argument('-p', '--platform', metavar='chatbot', help='platform to be used as backend.Platforms available: rasa, dialogflow')
     parser.add_argument('-m', '--monitor', metavar='monitor', help='monitor to be used. Monitors available: no-monitor, dummy-monitor, real-monitor')
+    parser.add_argument('-n', '--number', metavar='number', help='number of trials for the test')
     args = parser.parse_args()
 
     if (args.interactive):
         launch_interactive(args)
     else:
-        launch_tests()
+        if (args.platform):
+            platforms = [args.platform]
+        else:
+            platforms = ['dialogflow']
+            # platforms = ['rasa','dialogflow']
+            # platforms = ['rasa']
+        if (args.monitor):
+            monitors = [args.monitor]
+        else:
+            # monitors = ['no-monitor', 'dummy-monitor']
+            # monitors = ['no-monitor', 'dummy-monitor', 'real-monitor']
+            monitors = ['no-monitor']
+        if (args.number):
+            n = args.number
+        else:
+            n = 200
+        launch_tests(platforms, monitors, n)
 
 if (__name__ == '__main__'):
     main()

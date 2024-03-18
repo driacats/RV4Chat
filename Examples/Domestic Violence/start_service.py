@@ -4,6 +4,7 @@
 import subprocess, argparse, os, time
 
 kitty = 'kitty --hold 2>/dev/null sh -c'
+# kitty = 'gnome-terminal -- 2>/dev/null sh -c'
 
 dialogflow = 'dialogflow'
 rasa = 'rasa'
@@ -64,7 +65,7 @@ def launch_ngrok(port):
     return subprocess.Popen(f'{kitty} \'ngrok http {port}\'', shell=True, preexec_fn=os.setsid).pid
 
 def launch_dummy_dialogflow(port):
-    return subprocess.Popen(f'python dialogflow_local_tester.py -p {port}', shell=True, preexec_fn=os.setsid).pid
+    return subprocess.Popen(f'{kitty} \'python dialogflow_local_tester.py -p {port}\'', shell=True, preexec_fn=os.setsid).pid
 
 def launch_policy():
     return subprocess.Popen(f'python Dialogflow/new_policy.py', shell=True, preexec_fn=os.setsid).pid
@@ -163,6 +164,13 @@ def main():
 
     if (not args.shell):
         print_start(platform, monitor)
+
+    print('[INFO] PRESS CTRL+C TO EXIT.')
+    try:
+        while (True):
+            pass
+    except KeyboardInterrupt:
+        print("Goodbye.")
 
 if (__name__ == '__main__'):
     main()

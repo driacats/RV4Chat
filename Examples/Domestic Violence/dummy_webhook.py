@@ -97,7 +97,7 @@ async def handle_msg(msg):
 
     elif (intent == 'commit_suicide'):
         commit_suicide_counter += 1
-        if (commit_suicide_counter < 3):
+        if (commit_suicide_counter < 4):
             final_answer = (against_suicide_1_2, 'utter_against_suicide')
         else:
             final_answer = (against_suicide_3, 'utter_against_suicide')
