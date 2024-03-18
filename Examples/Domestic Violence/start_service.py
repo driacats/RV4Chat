@@ -68,7 +68,7 @@ def launch_dummy_dialogflow(port):
     return subprocess.Popen(f'{kitty} \'python dialogflow_local_tester.py -p {port}\'', shell=True, preexec_fn=os.setsid).pid
 
 def launch_policy():
-    return subprocess.Popen(f'python Dialogflow/new_policy.py', shell=True, preexec_fn=os.setsid).pid
+    return subprocess.Popen(f'python Dialogflow/policy.py', shell=True, preexec_fn=os.setsid).pid
 
 def launch_sample_monitor():
     return subprocess.Popen(f'{kitty} \'python ../../sample_monitor_ws.py\'', shell=True, preexec_fn=os.setsid).pid

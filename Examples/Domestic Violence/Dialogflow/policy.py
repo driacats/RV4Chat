@@ -1,122 +1,160 @@
-# File generated automatically on 2024-01-30 15:44 by instrumenter.py
-#  - Agent: DomesticViolenceHelper
-#  - Input zip: ../Examples/Domestic Violence/Dialogflow/DomesticViolenceHelper.zip
-#  - Output zip: output/DomesticViolenceHelperMonitored.zip
-#  - WebHook URL: https://163e-130-251-61-251.ngrok-free.app
-#  - Monitor URL: ws://localhost:5052
-#  - Monitoring Level: 2
-
-
-# IMPORTS
-from http.server import BaseHTTPRequestHandler, HTTPServer
-import json, requests, random, urllib3
+from aiohttp import web
 from websocket import create_connection
+import urllib3, json
 
-class WebHookResponder(BaseHTTPRequestHandler):
+MONITOR_URL = 'ws://localhost:5052'
+WEBHOOK_URL = 'http://localhost:8082'
 
-	# The url on which the monitor is listening
-	MONITOR_URL = "ws://localhost:5052"
-	ws = create_connection(MONITOR_URL)
-	http = urllib3.PoolManager()
+webhook = urllib3.PoolManager()
 
-	# The function simply sends an error message back to Dialogflow
-	def send_error_message(self):
-		message = "{\"fulfillmentMessages\":[{\"text\":{\"text\":[\"Error thrwon from the monitor!\"]}}]}"
-		self.wfile.write(bytes(message, 'utf8'))
+# Create User Event takes a Dialogflow message
+# and creates the corresponding event.
+# A user event has this format:
+#   sender: user, 
+#   receiver:bot, 
+#   intent: {name: _, confidence: _}
+#   entities: {e1: _, e2: _, ..., eN: _}
+# The function returns a dict.
+def create_user_event(msg):
+    queryResult = msg['queryResult']
+    event = {}
+    
+    # Header
+    event['sender'] = 'user'
+    event['receiver'] = 'bot'
 
-	# The function builds a message following the monitor protocol:
-	# 	- sender		[bot|user]
-	#	- receiver		[user|bot]
-	#	- intent
-	#	- entities
-	def msg2json(self, message):
-		json_obj = {}
-		json_obj["sender"] = "user"
-		json_obj["receiver"] = "bot"
-		intent = {}
-		intent["name"] = message["queryResult"]["intent"]["displayName"]
-		intent["confidence"] = message["queryResult"]["intentDetectionConfidence"]
-		json_obj["intent"] = intent
-		entities = {}
-		for param in message["queryResult"]["parameters"]:
-			entities[param.lower()] = message["queryResult"]["parameters"][param]
-		json_obj["entities"] = entities
-		json_obj["timestamp"] = time.time()
-		return json.dumps(json_obj)
+    # Intent
+    intent = {}
+    intent['name'] = queryResult['intent']['displayName']
+    intent['confidence'] = queryResult['intentDetectionConfidence']
 
-	def question_oracle(self, event_str):
-		# // ws = create_connection(self.MONITOR_URL)
-		# We send it to the monitor and wait for the answer.
-		self.ws.send(event_str)
-		oracle = json.loads(self.ws.recv())
-		# self.ws.close()
-		print("[EVENT]", event_str)
-		print("[ORACLE]", oracle)
-		if not oracle["verdict"]:
-			self.send_error_message()
-			return False
-		return True
+    event['intent'] = intent
+    
+    # Entities
+    entities = {}
+    for entity in queryResult['parameters']:
+        print(f'[POLICY]\tLOG\t entity {entity} has value \"{queryResult["parameters"][entity]}\"')
+        entities[entity] = queryResult['parameters'][entity]
 
-	def do_POST(self):
-		# Accept the request
-		content_length = int(self.headers['Content-Length'])
-		post_data = self.rfile.read(content_length)
-		message = json.loads(post_data)
-		user_event = self.msg2json(message)
+    event['entities'] = entities
 
-		self.send_response(200)
-		self.send_header('Content-type', 'text/html')
-		self.end_headers()
-		# Send the user input event to the monitor
-		if not self.question_oracle(user_event):
-			print("[LOG] Monitor Error.")
-			return
-		if message["queryResult"]["intent"]["displayName"] == "Default Welcome Intent":
-			self.input_welcome()
-		if message["queryResult"]["intent"]["displayName"] == "Default Fallback Intent":
-			self.input_unknown()
+    print(f'[POLICY]\tLOG\t Event generated: {event}')
 
-		# If the intent needs a webhook answer the request is performed
-		if message["queryResult"]["intent"]["displayName"] in ["inform_chatbot_about_salary", "commit_suicide", "inform_chatbot_about_children", "undo_word", "get_information", "help_word"]:
-			webhook_answer = requests.post("http://localhost:8082", json=message)
-			webhook_answer = self.http.request('POST', "http://localhost:8082", body=json.dumps(message))
-			webhook_answer = json.loads(webhook_answer.data)
-			webhook_answer["sender"] = "bot"
-			webhook_answer["receiver"] = "user"
-			if not self.question_oracle(json.dumps(webhook_answer)):
-				print("[LOG] Monitor error")
-				return
-			self.wfile.write(bytes(json.dumps(webhook_answer), 'utf8'))
+    return event
 
-	def input_welcome(self):
-		available_answers = ['Hi! How are you doing?', 'Hello! How can I help you?', 'Good day! What can I do for you today?', 'Greetings! How can I assist?']
-		message = "{\"fulfillmentMessages\": [{\"text\": [\"" + random.choice(available_answers)+ "\"]}]}"
-		oracle_message = {}
-		oracle_message["sender"] = "bot"
-		oracle_message["receiver"] = "user"
-		oracle_message["bot_action"] = "input_welcome"
-		oracle_message = json.dumps(oracle_message)
-		if not self.question_oracle(oracle_message):
-			return
-		self.wfile.write(bytes(message, 'utf8')) 
+def create_bot_event(msg):
+    # In the case of bot event the msg comes from the bot
+    # and not from Dialogflow. In this case we assume that
+    # the message is already formatted in a monitorizable way
+    # and that we have only to add sender, receiver and event if needed.
+    # Other parameters can change a lot depending on the action.
+    event = msg
+    if 'sender' not in event:
+        event['sender'] = 'bot'
+    if 'receiver' not in event:
+        event['receiver'] = 'user'
+    if 'bot_action' not in event:
+        event['bot_action'] = 'unknown_event'
 
-	def input_unknown(self):
-		available_answers = ["I didn't get that. Can you say it again?", 'I missed what you said. What was that?', 'Sorry, could you say that again?', 'Sorry, can you say that again?', 'Can you say that again?', "Sorry, I didn't get that. Can you rephrase?", 'Sorry, what was that?', 'One more time?', 'What was that?', 'Say that one more time?', "I didn't get that. Can you repeat?", 'I missed that, say that again?']
-		message = "{\"fulfillmentMessages\": [{\"text\": [\"" + random.choice(available_answers)+ "\"]}]}"
-		oracle_message = {}
-		oracle_message["sender"] = "bot"
-		oracle_message["receiver"] = "user"
-		oracle_message["bot_action"] = "input_unknown"
-		oracle_message = json.dumps(oracle_message)
-		if not self.question_oracle(oracle_message):
-			return
-		self.wfile.write(bytes(message, 'utf8')) 
+    return event
 
+def create_event(msg):
+    if 'queryResult' in msg:
+        return create_user_event(msg)
+    return create_bot_event(msg)
 
+def ask_monitor(event):
+    print(f'[POLICY]\tLOG\t Connecting to {MONITOR_URL}')
+    ws = create_connection(MONITOR_URL)
+    print('[POLICY]\tLOG\t Connection created')
+    ws.send(json.dumps(event))
+    print('[POLICY]\tLOG\t Message sent.')
+    oracle = json.loads(ws.recv())
+    # print(f'[POLICY]\tLOG\t Oracle raw value is {oracle}')
+    ws.close()
+    print(f'[POLICY]\tLOG\t Verdict: {oracle["verdict"]}')
+    return oracle['verdict']
 
-def run(PORT):
-	print("Server launch...")
-	httpd = HTTPServer(("", PORT), WebHookResponder)
-	httpd.serve_forever()
+def ask_webhook(msg):
+    next_event = webhook.request('POST', WEBHOOK_URL, body=json.dumps(msg))
+    next_event = load_json_post(next_event.data)
+    return create_event(next_event)
 
-run(8080)
+def choose_answer(msg):
+    pass
+
+def error_answer():
+    text = {'text': {'text': ['Error thrown from the monitor']}}
+    answer = {'fulfillmentMessages': [text], 'bot_action': 'error'}
+    return json.dumps(answer)
+
+# If the event is a bot event it returns None.
+# ask_webhhok if needed, plain_answer else.
+def next_event(event):
+    if (event['sender'] == 'bot'):
+        return None
+    if (event['sender'] == 'monitor'):
+        if (event['status'] == 'error'):
+            return 'error_answer'
+    if (event['intent']['name'] in ['inform_chatbot_about_salary', 'commit_suicide', 'inform_chatbot_about_children', 'undo_word', 'get_information', 'help_word']):
+        return 'ask_webhook'
+    return 'plain_answer'
+
+# Given an event the consume_event passes it to the monitor.
+# If the monitor returns True it computes the next event to be performed
+# If the next event is None it is the final action -> answer returned.
+# If the next event is ask_webhook it asks the webhook an answer.
+# If the next event is plain_answer it returns the correct one.
+def consume_event(event, msg):
+    oracle = ask_monitor(event)
+    if not oracle:
+        # raise RuntimeError('[POLICY]\tERR\t Error raised by the monitor.')
+        event = {'sender': 'monitor', 'status': 'error'}
+    nevent = next_event(event)
+    print(f'[POLICY]\tLOG\t Computed next event: {nevent}')
+    if nevent is None:
+        return json.dumps(msg)
+    if nevent == 'ask_webhook':
+        msg = ask_webhook(msg)
+        nevent = create_event(msg)
+        answer = consume_event(nevent, msg)
+        print(f'[POLICY]\tLOG\t Answer: {answer}')
+        return answer
+    if nevent == 'plain_answer':
+        return choose_answer(msg)
+    if nevent == 'error_answer':
+        return error_answer()
+
+# A function that simply returns a dict from a JSON message
+# if not already correctly loaded.
+def load_json_post(msg):
+    if type(msg) is not dict:
+        try:
+            msg = json.loads(msg)
+        except:
+            print('[POLICY]\tERR\t Cannot load message as json.')
+    return msg
+
+# When a POST request arrives it is handled by the handle_post.
+# The message is loaded in a dict from the load_json_post,
+# An event is created from the create_event and passed to the
+# consume_event. The consume event will return the response.
+async def handle_post(request):
+    msg = await request.json()
+    msg = load_json_post(msg)
+    event = create_event(msg)
+    try:
+        return web.Response(text=consume_event(event, msg))
+    except:
+        print('[POLICY]\tERR\t Error consuming event:')
+        print(event)
+        return web.Response(text="{\"answer\": \"Error thrown by the monitor.\"}")
+
+def main():
+
+    app = web.Application()
+    app.add_routes([web.post('/', handle_post)])
+    web.run_app(app, port=8080)
+
+if __name__ == '__main__':
+    main()
