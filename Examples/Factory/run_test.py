@@ -60,14 +60,8 @@ def launch_interactive(args):
     terminal.kill()
     # os.killpg(os.getpgid(pid), signal.SIGTERM)
 
-def launch_tests():
-    # platforms = ['dialogflow']
-    # platforms = ['rasa','dialogflow']
-    platforms = ['rasa']
-    # monitors = ['no-monitor', 'dummy-monitor']
-    # monitors = ['no-monitor', 'dummy-monitor', 'real-monitor']
-    monitors = ['real-monitor']
-    N = 200
+def launch_tests(platforms, monitors, N):
+    # N = 200
 
     for platform in platforms:
         if (not os.path.exists('Times/' + platform + '/')):
@@ -99,12 +93,29 @@ def main():
     parser.add_argument('-i', '--interactive', action='store_true', help='launch the script in interactive mode.')
     parser.add_argument('-p', '--platform', metavar='chatbot', help='platform to be used as backend.Platforms available: rasa, dialogflow')
     parser.add_argument('-m', '--monitor', metavar='monitor', help='monitor to be used. Monitors available: no-monitor, dummy-monitor, real-monitor')
+    parser.add_argument('-n', '--number', metavar='number', help='number of trials for the test')
     args = parser.parse_args()
 
     if (args.interactive):
         launch_interactive(args)
     else:
-        launch_tests()
+        if (args.platform):
+            platforms = [args.platform]
+        else:
+            # platforms = ['dialogflow']
+            # platforms = ['rasa','dialogflow']
+            platforms = ['rasa']
+        if (args.monitor):
+            monitors = [args.monitor]
+        else:
+            # monitors = ['no-monitor', 'dummy-monitor']
+            # monitors = ['no-monitor', 'dummy-monitor', 'real-monitor']
+            monitors = ['real-monitor']
+        if (args.number):
+            n = args.number
+        else:
+            n = 200
+        launch_tests(platforms, monitors, n)
 
 if (__name__ == '__main__'):
     main()
